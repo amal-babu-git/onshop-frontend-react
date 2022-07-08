@@ -17,7 +17,7 @@ import {
   MDBCollapse,
   MDBNavbarLink,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
@@ -25,11 +25,9 @@ export default function App() {
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
       <MDBContainer fluid>
-        <MDBNavbarBrand>
-          <Link className="fs-4 fw-bolder" to="/">
-            OnShop
-          </Link>
-        </MDBNavbarBrand>
+        <NavLink className="fs-4 fw-bolder" to="/">
+          OnShop
+        </NavLink>
 
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
@@ -43,30 +41,24 @@ export default function App() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page">
-                <Link to="/products" className="nav-link">
-                  Products
-                </Link>
-              </MDBNavbarLink>
+              <Link to="/products" className="nav-link">
+                Products
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink>
-                <Link to="/profile" className="nav-link">
-                  Profile
-                </Link>
-              </MDBNavbarLink>
+              <Link to="/profile" className="nav-link">
+                Profile
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink>
-                <Link to="/cart" className="nav-link">
-                  Cart
-                </Link>
-              </MDBNavbarLink>
+              <Link to="/cart" className="nav-link">
+                Cart
+              </Link>
             </MDBNavbarItem>
 
             <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle tag="a" className="nav-link mt-2">
+                <MDBDropdownToggle tag="a" className="nav-link">
                   Collection
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="pt-4">
@@ -88,14 +80,14 @@ export default function App() {
             <input
               type="search"
               className="form-control"
-              placeholder="Type query"
+              placeholder="Search"
               aria-label="Search"
             />
-            <MDBBtn outline>Search</MDBBtn>
+            <MDBBtn  rounded>Search</MDBBtn>
           </form>
           <form className="d-flex input-group w-auto ms-1">
             <Link to="/signin">
-              <MDBBtn outline>Login</MDBBtn>
+              <MDBBtn >Login</MDBBtn>
             </Link>
           </form>
         </MDBCollapse>

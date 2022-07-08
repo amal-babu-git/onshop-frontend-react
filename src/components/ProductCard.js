@@ -8,21 +8,35 @@ import {
   MDBBtn,
   MDBRipple,
 } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
-export default function ProductCard() {
+export default function ProductCard({ data }) {
+
+  const product_image_url = data.images[0]
+
+
   return (
-    <div className="col-sm col-md-4 col-xl-3 m-1">
+    <div className="col-sm-12 col-md-4  col-xl-3  m-1">
       <MDBCard style={{ maxWidth: "22rem" }}>
         <MDBRipple
           rippleColor="light"
           rippleTag="div"
           className="bg-image hover-overlay"
         >
-          <MDBCardImage
-            src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
-            fluid
-            alt="..."
-          />
+          {product_image_url ? (
+            <MDBCardImage
+              src={product_image_url.image}
+              fluid
+              alt="..."
+            />
+          ) : (
+            <MDBCardImage
+              src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+              fluid
+              alt="..."
+            />
+          )}
+
           <a>
             <div
               className="mask"
@@ -31,16 +45,20 @@ export default function ProductCard() {
           </a>
         </MDBRipple>
         <MDBCardBody>
-          <MDBCardTitle>Product title</MDBCardTitle>
-          <p className="text-dark"> $ Price</p>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-         
-            <MDBBtn className="me-1 mt-1">Add to cart</MDBBtn>
-            <MDBBtn className="mt-1">Add to cart</MDBBtn>
-          
+          <MDBCardTitle>{data.title}</MDBCardTitle>
+          <p className="text-dark"> ₹ {data.unit_price}</p>
+          <MDBCardText>{data.collection}</MDBCardText>
+
+          <Link to="/cart">
+            <MDBBtn rounded outline className="me-4 mt-1 ">
+              Add to cart
+            </MDBBtn>
+          </Link>
+          <Link to="/product-detail">
+            <MDBBtn rounded outline className="mt-1 ">
+              View
+            </MDBBtn>
+          </Link>
         </MDBCardBody>
       </MDBCard>
     </div>
