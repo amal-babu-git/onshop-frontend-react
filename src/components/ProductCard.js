@@ -8,24 +8,26 @@ import {
   MDBBtn,
   MDBRipple,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProductCard({ data }) {
 
-  const product_image_url = data.images[0]
+  const navigate=useNavigate()
+
+  const product_image = data.images[0]
 
 
   return (
-    <div className="col-sm-12 col-md-4  col-xl-3  m-1">
+    <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
       <MDBCard style={{ maxWidth: "22rem" }}>
         <MDBRipple
           rippleColor="light"
           rippleTag="div"
           className="bg-image hover-overlay"
         >
-          {product_image_url ? (
+          {product_image ? (
             <MDBCardImage
-              src={product_image_url.image}
+              src={product_image.image}
               fluid
               alt="..."
             />
@@ -54,11 +56,14 @@ export default function ProductCard({ data }) {
               Add to cart
             </MDBBtn>
           </Link>
-          <Link to="/product-detail">
-            <MDBBtn rounded outline className="mt-1 ">
+          
+            <MDBBtn rounded outline className="mt-1 "
+            onClick={()=>{
+              navigate("/product-detail", { state: data });
+            }}>
               View
             </MDBBtn>
-          </Link>
+          
         </MDBCardBody>
       </MDBCard>
     </div>
