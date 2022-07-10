@@ -8,20 +8,13 @@ const initialState = {
     products: [],
     status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
-    next_page: STORE_PRODUCTS_API,
-    previous_page: STORE_PRODUCTS_API,
+    nextPage: STORE_PRODUCTS_API,
+    previousPage: STORE_PRODUCTS_API,
    
 
 }
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async (page) => {
-    console.log(page)
-
-    const response = await axios.get(`${STORE_PRODUCTS_API}?page=${page.page}`)
-    return response.data
-})
-
-export const fetchNextPageProducts = createAsyncThunk("products/fetchProducts", async (page) => {
     console.log(page)
 
     const response = await axios.get(page.page)
@@ -44,8 +37,8 @@ const productSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = "succeeded"
                 state.products = action.payload
-                state.next_page = action.payload.next
-                state.previous_page = action.payload.previous
+                state.nextPage = action.payload.next
+                state.previousPage = action.payload.previous
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = "failed"
@@ -61,6 +54,7 @@ export const getProductsStatus = (state) => state.products.status;
 export const getProductsError = (state) => state.products.error;
 
 
-export const getNextProductPageLink = (state) => state.products.next_page;
+export const getNextProductPageLink = (state) => state.products.nextPage;
+export const getPreviousProductPageLink = (state) => state.products.previousPage;
 
 export default productSlice.reducer
