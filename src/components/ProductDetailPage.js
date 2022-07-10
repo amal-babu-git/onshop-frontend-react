@@ -21,14 +21,12 @@ export default function ProductCard() {
               src={product_image.image}
               className="img-fluid hover-shadow"
               alt="Wild Landscape"
-              style={{ maxWidth: "600px" }}
             />
           ) : (
             <img
               src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
               className="img-fluid hover-shadow"
               alt="Wild Landscape"
-              style={{ maxWidth: "600px" }}
             />
           )}
         </div>
