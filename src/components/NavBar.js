@@ -18,6 +18,7 @@ import {
   MDBNavbarLink,
 } from "mdb-react-ui-kit";
 import { Link, NavLink } from "react-router-dom";
+import SearchBox from "./subComponents/SearchBox";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
@@ -76,15 +77,7 @@ export default function App() {
             </MDBNavbarItem>
           </MDBNavbarNav>
 
-          <form className="d-flex input-group w-auto">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <MDBBtn  rounded>Search</MDBBtn>
-          </form>
+         <SearchBox/>
           <form className="d-flex input-group w-auto ms-1">
             <Link to="/signin">
               <MDBBtn >Login</MDBBtn>

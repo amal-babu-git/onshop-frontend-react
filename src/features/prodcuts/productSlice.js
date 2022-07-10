@@ -10,13 +10,11 @@ const initialState = {
     error: null,
     nextPage: STORE_PRODUCTS_API,
     previousPage: STORE_PRODUCTS_API,
-   
+
 
 }
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async (page) => {
-    console.log(page)
-
     const response = await axios.get(page.page)
     return response.data
 })

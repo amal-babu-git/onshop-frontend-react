@@ -18,7 +18,7 @@ export default function Pagination({ page }) {
 
     return (
         <nav aria-label='...'>
-            <MDBPagination className='mb-0'>
+            <MDBPagination className='mb-0 mt-2'>
                 <MDBPaginationItem disabled>
                     
                         {previousPageApi ? (

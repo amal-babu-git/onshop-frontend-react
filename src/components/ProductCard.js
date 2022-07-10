@@ -19,6 +19,7 @@ export default function ProductCard({ data }) {
 
   return (
     <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
+     
       <MDBCard style={{ maxWidth: "22rem" }}>
         <MDBRipple
           rippleColor="light"
@@ -26,11 +27,7 @@ export default function ProductCard({ data }) {
           className="bg-image hover-overlay"
         >
           {product_image ? (
-            <MDBCardImage
-              src={product_image.image}
-              fluid
-              alt="..."
-            />
+            <MDBCardImage src={product_image.image} fluid alt="..." />
           ) : (
             <MDBCardImage
               src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
@@ -56,14 +53,17 @@ export default function ProductCard({ data }) {
               Add to cart
             </MDBBtn>
           </Link>
-          
-            <MDBBtn rounded outline className="mt-1 "
-            onClick={()=>{
+
+          <MDBBtn
+            rounded
+            outline
+            className="mt-1 "
+            onClick={() => {
               navigate("/product-detail", { state: data });
-            }}>
-              View
-            </MDBBtn>
-          
+            }}
+          >
+            View
+          </MDBBtn>
         </MDBCardBody>
       </MDBCard>
     </div>
