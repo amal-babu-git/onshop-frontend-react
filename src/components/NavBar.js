@@ -2,26 +2,22 @@ import React, { useState } from "react";
 import {
   MDBContainer,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarToggler,
   MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
-  di,
   MDBBtn,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBDropdownLink,
   MDBCollapse,
-  MDBNavbarLink,
 } from "mdb-react-ui-kit";
 import { Link, NavLink } from "react-router-dom";
 import SearchBox from "./subComponents/SearchBox";
+import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
+import ProductNavLinkItem from "./products/ProductNavLinkItem";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
+
+  
 
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
@@ -42,9 +38,7 @@ export default function App() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <Link to="/products" className="nav-link">
-                Products
-              </Link>
+              <ProductNavLinkItem/>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <Link to="/profile" className="nav-link">
@@ -58,22 +52,7 @@ export default function App() {
             </MDBNavbarItem>
 
             <MDBNavbarItem>
-              <MDBDropdown>
-                <MDBDropdownToggle tag="a" className="nav-link">
-                  Collection
-                </MDBDropdownToggle>
-                <MDBDropdownMenu className="pt-4">
-                  <MDBDropdownItem>
-                    <MDBDropdownLink>Action</MDBDropdownLink>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <MDBDropdownLink>Another action</MDBDropdownLink>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <MDBDropdownLink>Something else here</MDBDropdownLink>
-                  </MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
+              <CollectionOptionForNavBar/>
             </MDBNavbarItem>
           </MDBNavbarNav>
 

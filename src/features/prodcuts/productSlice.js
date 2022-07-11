@@ -14,8 +14,9 @@ const initialState = {
 
 }
 
-export const fetchProducts = createAsyncThunk("products/fetchProducts", async (page) => {
+export const fetchProducts = createAsyncThunk("products/fetchProducts", async (page = STORE_PRODUCTS_API) => {
     const response = await axios.get(page.page)
+    console.log("fetch slice response products",response)
     return response.data
 })
 
@@ -45,7 +46,7 @@ const productSlice = createSlice({
     }
 });
 
-export const { incrementPagination, decrementPagination } = productSlice.actions
+export const {  } = productSlice.actions
 
 export const selectAllProducts = (state) => state.products.products;
 export const getProductsStatus = (state) => state.products.status;

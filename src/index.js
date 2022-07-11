@@ -6,6 +6,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import { extendCollectionApiSlice } from './features/collections/collectionsSlice';
+
+store.dispatch(extendCollectionApiSlice.endpoints.getCollections.initiate())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
