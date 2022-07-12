@@ -4,17 +4,32 @@ import {
     MDBDropdownLink,
 } from "mdb-react-ui-kit";
 import { useDispatch } from 'react-redux';
-import { fetchProducts } from '../../features/prodcuts/productSlice';
+import { fetchProducts, setPaginationNumber } from '../../features/prodcuts/productSlice';
+import { NavLink } from 'react-router-dom';
+import { selectPaginationNum } from '../../features/prodcuts/productSlice';
 
-const CollectionLinkItem = ({ id,title }) => {
+const CollectionLinkItem = ({ id, title }) => {
     const dispatch = useDispatch()
     return (
         <MDBDropdownItem >
-            <MDBDropdownLink
 
-                onClick={() => dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${id}` }))}
+            <NavLink to='/products' className="dropdown-item"
+                style={{ backgroundColor: "white" }}
 
-            >{title}</MDBDropdownLink>
+                onClick={() => {
+                    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${id}` }));
+                    dispatch(setPaginationNumber(1))
+
+                }
+
+
+                }
+
+            >
+                {title}
+            </NavLink>
+
+
         </MDBDropdownItem>
     )
 }

@@ -10,13 +10,14 @@ const initialState = {
     error: null,
     nextPage: STORE_PRODUCTS_API,
     previousPage: STORE_PRODUCTS_API,
+    paginationNum: 1,
 
 
 }
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async (page = STORE_PRODUCTS_API) => {
     const response = await axios.get(page.page)
-    console.log("fetch slice response products",response)
+    console.log("fetch slice response products", response)
     return response.data
 })
 
@@ -26,6 +27,17 @@ const productSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
+        incrementPaginationNum: (state, action) => {
+            state.paginationNum += 1;
+
+        },
+        decrementPaginationNum: (state, action) => {
+            state.paginationNum -= 1;
+
+        },
+        setPaginationNumber: (state, action) => {
+            state.paginationNum = action.payload
+        }
 
     },
     extraReducers(builder) {
@@ -38,6 +50,7 @@ const productSlice = createSlice({
                 state.products = action.payload
                 state.nextPage = action.payload.next
                 state.previousPage = action.payload.previous
+
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = "failed"
@@ -46,11 +59,13 @@ const productSlice = createSlice({
     }
 });
 
-export const {  } = productSlice.actions
+export const { incrementPaginationNum, decrementPaginationNum ,setPaginationNumber } = productSlice.actions
 
 export const selectAllProducts = (state) => state.products.products;
 export const getProductsStatus = (state) => state.products.status;
 export const getProductsError = (state) => state.products.error;
+
+export const selectPaginationNum = (state) => state.products.paginationNum;
 
 
 export const getNextProductPageLink = (state) => state.products.nextPage;

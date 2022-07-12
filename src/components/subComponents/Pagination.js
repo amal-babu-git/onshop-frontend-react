@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { MDBBtn, MDBPagination, MDBPaginationItem, MDBPaginationLink } from 'mdb-react-ui-kit';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, getNextProductPageLink, getPreviousProductPageLink } from '../../features/prodcuts/productSlice';
+import { decrementPaginationNum, fetchProducts, getNextProductPageLink, getPreviousProductPageLink, incrementPaginationNum, selectPaginationNum } from '../../features/prodcuts/productSlice';
 
 
 
-export default function Pagination({ page }) {
+export default function Pagination() {
 
     const nextPageApi = useSelector(getNextProductPageLink)
     const previousPageApi=useSelector(getPreviousProductPageLink)
-    const [pageNum,setPageNum] = useState(1)
+    const paginationNum=useSelector(selectPaginationNum)
 
     const dispatch = useDispatch()
-
 
 
 
@@ -28,7 +27,7 @@ export default function Pagination({ page }) {
 
 
                                     dispatch(fetchProducts({ page: previousPageApi }));
-                                    setPageNum(pageNum-1)
+                                    dispatch(decrementPaginationNum())
                                 }}
 
 
@@ -38,15 +37,15 @@ export default function Pagination({ page }) {
                     
                 </MDBPaginationItem>
                 <MDBPaginationItem>
-                    <MDBPaginationLink >{pageNum-1}</MDBPaginationLink>
+                    <MDBPaginationLink >{paginationNum-1}</MDBPaginationLink>
                 </MDBPaginationItem>
                 <MDBPaginationItem active aria-current='page'>
                     <MDBPaginationLink >
-                       {pageNum}<span className='visually-hidden'>(current)</span>
+                       {paginationNum}<span className='visually-hidden'>(current)</span>
                     </MDBPaginationLink>
                 </MDBPaginationItem>
                 <MDBPaginationItem>
-                    <MDBPaginationLink >{pageNum+1}</MDBPaginationLink>
+                    <MDBPaginationLink >{paginationNum+1}</MDBPaginationLink>
                 </MDBPaginationItem>
                 <MDBPaginationItem>
 
@@ -55,9 +54,8 @@ export default function Pagination({ page }) {
                             onClick={() => {
 
 
-
                                 dispatch(fetchProducts({ page: nextPageApi }));
-                                setPageNum(pageNum+1)
+                                dispatch(incrementPaginationNum())
                             }}
 
 

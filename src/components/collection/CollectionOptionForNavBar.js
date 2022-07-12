@@ -8,6 +8,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useGetCollectionsQuery } from "../../features/collections/collectionsSlice";
 import CollectionLinkItem from "./CollectionLinkItem";
+import { Link, NavLink } from "react-router-dom";
 
 const CollectionOptionForNavBar = () => {
   const { data, isLoading, isSuccess, isError, error } =
@@ -35,7 +36,7 @@ const CollectionOptionForNavBar = () => {
 
   return (
     <MDBDropdown>
-      <MDBDropdownToggle tag="a" className="nav-link">
+      <MDBDropdownToggle tag="a" className="nav-link" style={{cursor:"pointer"}}>
         Collection
       </MDBDropdownToggle>
       <MDBDropdownMenu className="pt-4">{content}</MDBDropdownMenu>

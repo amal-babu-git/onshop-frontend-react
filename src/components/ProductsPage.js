@@ -10,7 +10,6 @@ import {
 } from "../features/prodcuts/productSlice";
 import { useEffect } from "react";
 import Pagination from "./subComponents/Pagination";
-import { MDBBtn } from "mdb-react-ui-kit";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -47,7 +46,8 @@ const ProductsPage = () => {
       <div className="row justify-content-center">
         <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
           
-          <Pagination page={1} />
+          <Pagination />
+
         </div>
       </div>
     </div>
