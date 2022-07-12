@@ -13,6 +13,7 @@ import { Link, NavLink } from "react-router-dom";
 import SearchBox from "./subComponents/SearchBox";
 import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
 import ProductNavLinkItem from "./products/ProductNavLinkItem";
+import FilterCard from "./subComponents/FilterCard";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
@@ -53,6 +54,10 @@ export default function App() {
 
             <MDBNavbarItem>
               <CollectionOptionForNavBar/>
+            </MDBNavbarItem>
+
+            <MDBNavbarItem>
+              <FilterCard />
             </MDBNavbarItem>
           </MDBNavbarNav>
 
