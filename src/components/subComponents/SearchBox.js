@@ -13,15 +13,14 @@ const SearchBox = () => {
   const navigate = useNavigate()
 
   const searchBoxClickHandler = (e) => {
-
-    navigate('/products')
-    setSearchQuery(e.target.value)
-    console.log(searchQuery)
     e.preventDefault()
+    navigate('/products')
     dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?page=1&search=${searchQuery}` }))
     dispatch(setPaginationNumber(1))
 
   }
+
+  const onChangeSearchQuery = (e) => setSearchQuery(e.target.value)
 
   return (
     <div>
@@ -33,7 +32,8 @@ const SearchBox = () => {
           className="form-control"
           placeholder="Search"
           aria-label="Search"
-          onChange={searchBoxClickHandler}
+          onChange={onChangeSearchQuery}
+          onClick={searchBoxClickHandler}
         />
         <MDBBtn rounded onClick={searchBoxClickHandler}>Search</MDBBtn>
 

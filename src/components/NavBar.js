@@ -56,9 +56,7 @@ export default function App() {
               <CollectionOptionForNavBar/>
             </MDBNavbarItem>
 
-            <MDBNavbarItem>
-              <FilterCard />
-            </MDBNavbarItem>
+            
           </MDBNavbarNav>
 
          <SearchBox/>

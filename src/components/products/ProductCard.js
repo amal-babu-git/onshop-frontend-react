@@ -9,30 +9,32 @@ import {
   MDBRipple,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+import defaultImage from "../../images/logob2.png"
 
 export default function ProductCard({ data }) {
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const product_image = data.images[0]
 
 
   return (
     <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
-     
-      <MDBCard style={{ maxWidth: "22rem" }}>
+
+      <MDBCard style={{ maxWidth: "23rem" }}>
         <MDBRipple
           rippleColor="light"
           rippleTag="div"
           className="bg-image hover-overlay"
         >
           {product_image ? (
-            <MDBCardImage src={product_image.image} fluid alt="..." />
+            <MDBCardImage src={product_image.image} fluid alt="No image available" />
           ) : (
             <MDBCardImage
-              src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+              
+              src={defaultImage}
               fluid
-              alt="..."
+              alt="No image available"
             />
           )}
 

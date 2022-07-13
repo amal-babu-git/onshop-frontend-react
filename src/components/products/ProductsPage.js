@@ -7,10 +7,10 @@ import {
   getProductsError,
   getProductsStatus,
   selectAllProducts,
-} from "../features/prodcuts/productSlice";
+} from "../../features/prodcuts/productSlice";
 import { useEffect } from "react";
-import Pagination from "./subComponents/Pagination";
-import FilterCard from "./subComponents/FilterCard";
+import Pagination from "../subComponents/Pagination";
+import FilterCard from "../subComponents/FilterCard";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();

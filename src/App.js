@@ -1,7 +1,7 @@
 
 import './App.css';
 import NavBar from "./components/NavBar"
-import ProductsPage from './components/ProductsPage';
+import ProductsPage from './components/products/ProductsPage';
 import Footer from './components/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignInPage from './components/SignInPage';
@@ -9,7 +9,7 @@ import SignUpPage from './components/SignUpPage';
 import SignUpNextPage from './components/SignUpNextPage';
 import Cart from './components/Cart';
 import Profile from './components/Profile';
-import ProductDetailPage from './components/ProductDetailPage';
+import ProductDetailPage from './components/products/ProductDetailPage';
 
 function App() {
   return (
