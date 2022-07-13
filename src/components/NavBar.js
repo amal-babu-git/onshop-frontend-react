@@ -13,12 +13,9 @@ import { Link, NavLink } from "react-router-dom";
 import SearchBox from "./subComponents/SearchBox";
 import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
 import ProductNavLinkItem from "./products/ProductNavLinkItem";
-import FilterCard from "./subComponents/FilterCard";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
-
-  
 
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
@@ -26,7 +23,6 @@ export default function App() {
         <NavLink className="fs-4 fw-bolder" to="/">
           OnShop
         </NavLink>
-
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
@@ -39,7 +35,7 @@ export default function App() {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <ProductNavLinkItem/>
+              <ProductNavLinkItem />
             </MDBNavbarItem>
             <MDBNavbarItem>
               <Link to="/profile" className="nav-link">
@@ -53,13 +49,17 @@ export default function App() {
             </MDBNavbarItem>
 
             <MDBNavbarItem>
-              <CollectionOptionForNavBar/>
+              <CollectionOptionForNavBar />
             </MDBNavbarItem>
 
-            
+            <MDBNavbarItem>
+              
+            </MDBNavbarItem>
+
+
           </MDBNavbarNav>
 
-         <SearchBox/>
+          <SearchBox />
           <form className="d-flex input-group w-auto ms-1 p-1">
             <Link to="/signin">
               <MDBBtn>Login</MDBBtn>
