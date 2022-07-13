@@ -60,9 +60,9 @@ export default function App() {
           </MDBNavbarNav>
 
          <SearchBox/>
-          <form className="d-flex input-group w-auto ms-1">
+          <form className="d-flex input-group w-auto ms-1 p-1">
             <Link to="/signin">
-              <MDBBtn >Login</MDBBtn>
+              <MDBBtn>Login</MDBBtn>
             </Link>
           </form>
         </MDBCollapse>
