@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchProducts, setPaginationNumber } from '../../features/prodcuts/productSlice';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const SearchBox = () => {
 
@@ -15,7 +15,7 @@ const SearchBox = () => {
 
   const onChangeSearchQuery = (e) => setSearchQuery(e.target.value)
 
-  const searchBoxClickHandler = (e) => {
+  const searchButtonClickHandler = (e) => {
     e.preventDefault()
     navigate('/products')
 
@@ -45,7 +45,7 @@ const SearchBox = () => {
           onChange={onChangeSearchQuery}
 
         />
-        <MDBBtn rounded onClick={searchBoxClickHandler}>Search</MDBBtn>
+        <MDBBtn rounded onClick={searchButtonClickHandler}>Search</MDBBtn>
 
       </form>
       <ToastContainer />

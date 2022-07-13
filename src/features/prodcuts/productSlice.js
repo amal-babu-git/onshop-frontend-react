@@ -59,7 +59,7 @@ const productSlice = createSlice({
     }
 });
 
-export const { incrementPaginationNum, decrementPaginationNum ,setPaginationNumber } = productSlice.actions
+export const { incrementPaginationNum, decrementPaginationNum, setPaginationNumber } = productSlice.actions
 
 export const selectAllProducts = (state) => state.products.products;
 export const getProductsStatus = (state) => state.products.status;
