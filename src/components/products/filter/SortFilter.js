@@ -1,58 +1,58 @@
 import React, { useState } from 'react'
 import { MDBBtn, MDBCardBody, MDBCardTitle, MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../../features/prodcuts/productSlice';
+import { getCurrentCollectionId } from '../../../features/collections/collectionsSlice';
 
 const SortFilter = () => {
+  const dispatch = useDispatch();
 
-  const [filterPriceAscActive, setfilterPriceAscActive] = useState(false);
-  const [filterPriceDescActive, setfilterPriceDescActive] = useState(false);
-  const [filterDateAscActive, setfilterDateAscActive] = useState(false);
-  const [filterDateDescActive, setfilterDateDescActive] = useState(false);
+  const [sortPriceAscActive, setSortPriceAscActive] = useState(false);
+  const [sortPriceDescActive, setSortPriceDescActive] = useState(false);
+  const [sortDateDescActive, setSortDateDescActive] = useState(false);
 
-  const onClickFilterPriceAscHandler = () => {
-    
-    setfilterPriceAscActive(true);
-    setfilterPriceDescActive(false);
-    setfilterDateAscActive(false);
-    setfilterDateDescActive(false);
+  const currentCollectionId = useSelector(getCurrentCollectionId) ?? ''
 
+  const onClickSortPriceAscHandler = () => {
+    setSortPriceAscActive(true);
+    setSortPriceDescActive(false);
+    setSortDateDescActive(false);
 
-  }
-  const onClickFilterPriceDescHandler = () => {
-    
+    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
 
-    setfilterPriceAscActive(false);
-    setfilterPriceDescActive(true);
-    setfilterDateAscActive(false);
-    setfilterDateDescActive(false);
 
 
   }
-  const onClickFilterDateAscHandler = () => {
-    
+  const onClickSortPriceDescHandler = () => {
 
-    setfilterPriceAscActive(false);
-    setfilterPriceDescActive(false);
-    setfilterDateAscActive(true);
-    setfilterDateDescActive(false);
+
+    setSortPriceAscActive(false);
+    setSortPriceDescActive(true);
+    setSortDateDescActive(false);
+
+    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
+
 
 
   }
-  const onClickFilterDateDescHandler = () => {
-    
+ 
+  const onClickSortDateDescHandler = () => {
 
-    setfilterPriceAscActive(false);
-    setfilterPriceDescActive(false);
-    setfilterDateAscActive(false);
-    setfilterDateDescActive(true);
+
+    setSortPriceAscActive(false);
+    setSortPriceDescActive(false);
+    setSortDateDescActive(true);
+
+    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=&unit_price__lt=` }))
+
 
 
   }
 
-  const onClickClearAllHandler=()=>{
-    setfilterPriceAscActive(false);
-    setfilterPriceDescActive(false);
-    setfilterDateAscActive(false);
-    setfilterDateDescActive(false);
+  const onClickClearAllHandler = () => {
+    setSortPriceAscActive(false);
+    setSortPriceDescActive(false);
+    setSortDateDescActive(false);
   }
 
 
@@ -63,11 +63,10 @@ const SortFilter = () => {
     <MDBCardBody>
       <MDBCardTitle>Sort by price</MDBCardTitle>
       <MDBListGroup style={{ minWidth: '22rem' }}>
-        <MDBListGroupItem onClick={onClickFilterPriceAscHandler} active={filterPriceAscActive} aria-current='true'>Filter by price ascending</MDBListGroupItem>
-        <MDBListGroupItem onClick={onClickFilterPriceDescHandler} active={filterPriceDescActive}>Filter by price descending</MDBListGroupItem>
-        <MDBListGroupItem onClick={onClickFilterDateAscHandler} active={filterDateAscActive}>Filter by update date ascending</MDBListGroupItem>
-        <MDBListGroupItem onClick={onClickFilterDateDescHandler} active={filterDateDescActive}>Filter by update date descending</MDBListGroupItem>
-       
+        <MDBListGroupItem onClick={onClickSortPriceAscHandler} active={sortPriceAscActive} aria-current='true'>Low to High</MDBListGroupItem>
+        <MDBListGroupItem onClick={onClickSortPriceDescHandler} active={sortPriceDescActive}>High to Low</MDBListGroupItem>
+        <MDBListGroupItem onClick={onClickSortDateDescHandler} active={sortDateDescActive}>Last Updated</MDBListGroupItem>
+
       </MDBListGroup>
       <MDBBtn className='mt-1' onClick={onClickClearAllHandler}>Clear all</MDBBtn>
     </MDBCardBody>

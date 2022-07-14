@@ -36,7 +36,7 @@ const FilterCard = () => {
   };
 
   return (
-    <div className="mt-2 mb-1">
+    <div className="mt-2 mb-1 col-sm-12 col-md-12 col-xl-6">
       <MDBCard className="text-center">
         <MDBCardHeader>
           <MDBTabs className="card-header-tabs">
