@@ -13,6 +13,7 @@ import Pagination from "../subComponents/Pagination";
 import FilterByPrice from "./filter/FilterByPrice";
 import FilterCard from "./filter/FilterCard"
 import { ToastContainer, toast } from 'react-toastify';
+import { setCurrentCollectionId } from "../../features/collections/collectionsSlice";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -22,12 +23,13 @@ const ProductsPage = () => {
   const products = useSelector(selectAllProducts);
   const productsFetchStatus = useSelector(getProductsStatus);
   const productsFetchError = useSelector(getProductsError);
-  const [count, setCount] = useState(0);
+
 
   useEffect(() => {
     if (productsFetchStatus === "idle") {
 
       dispatch(fetchProducts({ page: nextPageApi }));
+      
     }
   }, [productsFetchStatus, dispatch]);
 

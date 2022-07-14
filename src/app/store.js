@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from '../features/prodcuts/productSlice';
-import collectionReducer from '../features/collections/collectionsSlice';
 import { apiSlice } from '../features/api/apiSlice';
+import collectionsReducer from '../features/collections/collectionsSlice';
 
 export const store = configureStore({
     reducer: {
         products: productReducer,
+        collections:collectionsReducer,
         [apiSlice.reducerPath]: apiSlice.reducer
 
     },

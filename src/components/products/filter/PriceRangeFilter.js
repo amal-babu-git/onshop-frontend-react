@@ -1,7 +1,8 @@
 import { MDBBtn, MDBCardBody, MDBCardTitle, MDBInput } from "mdb-react-ui-kit";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { getCurrentCollectionId } from "../../../features/collections/collectionsSlice";
 import {
   fetchProducts,
   setPaginationNumber,
@@ -16,15 +17,16 @@ const PriceRangeFilter = () => {
   const onChangeLtRange = (e) => setLtPrice(e.target.value);
 
   const dispatch = useDispatch();
+  const currentCollectionId = useSelector(getCurrentCollectionId) ?? ''
 
   const filterButtonClickHandler = (e) => {
     e.preventDefault();
 
     if (gtPrice > 0 && ltPrice > gtPrice) {
-      toast("Filtering...", { position: "top-center", autoClose: 500 });
+      toast("Filtering...", { position: "top-center", autoClose: 1 });
       dispatch(
         fetchProducts({
-          page: `http://127.0.0.1:8000/store/products/?collection_id=&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
+          page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
         })
       );
       dispatch(setPaginationNumber(1));

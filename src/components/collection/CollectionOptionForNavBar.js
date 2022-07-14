@@ -3,29 +3,33 @@ import {
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBDropdownLink,
 } from "mdb-react-ui-kit";
-import { useGetCollectionsQuery } from "../../features/collections/collectionsSlice";
+import { getCollectionsError, getCollectionsStatus, selectAllCollections, useGetCollectionsQuery } from "../../features/collections/collectionsSlice";
 import CollectionLinkItem from "./CollectionLinkItem";
-import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 const CollectionOptionForNavBar = () => {
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetCollectionsQuery();
+
+  const fetchStatus = useSelector(getCollectionsStatus);
+  const error = useSelector(getCollectionsError)
+  const data = useSelector(selectAllCollections)
+
+  // fetching collections done at index.js
+
   let content = "";
 
-  if (isLoading) {
+  if (fetchStatus === 'loading') {
     content = <p className="spinner-border text-primary mt-4" />;
 
-  } else if (isSuccess) {
+  } else if (fetchStatus === 'succeeded') {
 
     console.log("collection:", data);
     content = data.map((data, index) => (
       <CollectionLinkItem key={data.id} title={data.title} id={data.id} />
 
     ));
-  } else if (isError) {
+  } else if (fetchStatus === 'failed') {
     console.log(error);
     content = (
       <p className="spinner-border text-danger mt-4 ">
@@ -36,7 +40,7 @@ const CollectionOptionForNavBar = () => {
 
   return (
     <MDBDropdown>
-      <MDBDropdownToggle tag="a" className="nav-link" style={{cursor:"pointer"}}>
+      <MDBDropdownToggle tag="a" className="nav-link" style={{ cursor: "pointer" }}>
         Collection
       </MDBDropdownToggle>
       <MDBDropdownMenu className="pt-4">{content}</MDBDropdownMenu>

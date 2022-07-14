@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom"
 import { STORE_PRODUCTS_API } from '../../apis'
 import { fetchProducts, setPaginationNumber } from '../../features/prodcuts/productSlice'
-import { MDBBtn } from 'mdb-react-ui-kit'
+
+import { setCurrentCollectionId } from '../../features/collections/collectionsSlice'
 const ProductNavLinkItem = () => {
 
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const ProductNavLinkItem = () => {
 
                 dispatch(fetchProducts({ page: STORE_PRODUCTS_API }))
                 dispatch(setPaginationNumber(1))
+                dispatch(setCurrentCollectionId (null))
             }}
 
 
