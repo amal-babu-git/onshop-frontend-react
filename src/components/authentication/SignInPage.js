@@ -12,6 +12,13 @@ import login_page_logo_img from "../../images/logob.png";
 import { Link } from "react-router-dom";
 
 const SignInPage = () => {
+
+
+  
+
+
+
+
   return (
     <MDBCard className="container p-4 mt-4 mb-4" style={{ maxWidth: "30rem" }}>
       <div className="row justify-content-center">
