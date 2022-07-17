@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBInput,
   MDBCol,
@@ -10,11 +10,28 @@ import {
 import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
+
+
+
 
 const SignInPage = () => {
 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  
+  const onChangeUsername = (e) => setUsername(e.target.value)
+  const onChangePassword = (e) => setPassword(e.target.value)
+
+  const onClickSignIn = (e) => {
+    e.preventDefault();
+    console.log('Auth:',username,password)
+
+
+  }
+
+
 
 
 
@@ -34,14 +51,18 @@ const SignInPage = () => {
           <MDBInput
             className="mb-4"
             type="text"
-            id="form1Example1"
+            id="username"
             label="Username"
+            value={username}
+            onChange={onChangeUsername}
           />
           <MDBInput
             className="mb-4"
             type="password"
-            id="form1Example2"
+            id="password"
             label="Password"
+            value={password}
+            onChange={onChangePassword}
           />
 
           <MDBRow className="mb-4">
@@ -57,7 +78,7 @@ const SignInPage = () => {
             </MDBCol>
           </MDBRow>
 
-          <MDBBtn type="submit" block>
+          <MDBBtn type="submit" block onClick={onClickSignIn}>
             Sign in
           </MDBBtn>
 
@@ -68,6 +89,7 @@ const SignInPage = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </MDBCard>
   );
 };
