@@ -7,8 +7,8 @@ import {
   MDBBtn,
   MDBCard,
 } from "mdb-react-ui-kit";
-import login_image from "../images/login-p.png";
-import login_page_logo_img from "../images/logob.png";
+import login_image from "../../images/login-p.png";
+import login_page_logo_img from "../../images/logob.png";
 import { Link } from "react-router-dom";
 
 const SignInPage = () => {
