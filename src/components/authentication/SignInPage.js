@@ -18,7 +18,7 @@ const SignInPage = () => {
         <img
           src={login_image}
           alt="img"
-          class="img-fluid rounded"
+          className="img-fluid rounded"
           style={{ maxWidth: "20rem" }}
         />
       </div>
