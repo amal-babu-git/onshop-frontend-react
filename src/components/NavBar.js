@@ -13,9 +13,13 @@ import { Link, NavLink } from "react-router-dom";
 import SearchBox from "./subComponents/SearchBox";
 import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
 import ProductNavLinkItem from "./products/ProductNavLinkItem";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut, selectUsername } from "../features/auth/authUserSlice";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
+  const username = useSelector(selectUsername);
+  const dispatch = useDispatch(logOut)
 
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
@@ -38,8 +42,13 @@ export default function App() {
               <ProductNavLinkItem />
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <Link to="/profile" className="nav-link">
+              <Link to="/user/profile" className="nav-link">
                 Profile
+              </Link>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to="/user/orders" className="nav-link">
+                Orders
               </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
@@ -53,7 +62,7 @@ export default function App() {
             </MDBNavbarItem>
 
             <MDBNavbarItem>
-              
+
             </MDBNavbarItem>
 
 
@@ -61,9 +70,8 @@ export default function App() {
 
           <SearchBox />
           <form className="d-flex input-group w-auto ms-1 p-1">
-            <Link to="/signin">
-              <MDBBtn>Login</MDBBtn>
-            </Link>
+            {username ? (<Link onClick={() => dispatch(logOut())
+            } to="/signin"> <MDBBtn>Logout</MDBBtn> </Link>) : (<Link to="/signin"><MDBBtn>Login</MDBBtn></Link>)}
           </form>
         </MDBCollapse>
       </MDBContainer>
