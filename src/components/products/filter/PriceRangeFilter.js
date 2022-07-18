@@ -17,8 +17,8 @@ import {
 
 const PriceRangeFilter = () => {
   // gt-->greater than
-  const [gtPrice, setGtPrice] = useState(null);
-  const [ltPrice, setLtPrice] = useState(null);
+  const [gtPrice, setGtPrice] = useState('');
+  const [ltPrice, setLtPrice] = useState('');
 
   const [sortPriceAscActive, setSortPriceAscActive] = useState(false);
   const [sortPriceDescActive, setSortPriceDescActive] = useState(false);

@@ -27,7 +27,7 @@ const SignInPage = () => {
   const onClickSignIn = (e) => {
     e.preventDefault();
     console.log('Auth:',username,password)
-
+    
 
   }
 
