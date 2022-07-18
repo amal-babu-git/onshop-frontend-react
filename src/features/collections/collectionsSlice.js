@@ -8,7 +8,7 @@ const initialState = {
     collections: [],
     status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
-    currentCollectionId: null
+    currentCollectionId: ''
 
 
 }

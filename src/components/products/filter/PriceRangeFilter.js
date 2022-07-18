@@ -14,6 +14,7 @@ import {
   fetchProducts,
   setPaginationNumber,
 } from "../../../features/prodcuts/productSlice";
+import { STORE_PRODUCTS_API } from "../../../apis";
 
 const PriceRangeFilter = () => {
   // gt-->greater than
@@ -28,7 +29,7 @@ const PriceRangeFilter = () => {
   const onChangeLtRange = (e) => setLtPrice(e.target.value);
 
   const dispatch = useDispatch();
-  const currentCollectionId = useSelector(getCurrentCollectionId) ?? "";
+  const currentCollectionId = useSelector(getCurrentCollectionId)
 
   const filterButtonClickHandler = (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const PriceRangeFilter = () => {
       toast("Filtering...", { position: "top-center", autoClose: 1 });
       dispatch(
         fetchProducts({
-          page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
+          page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
         })
       );
       dispatch(setPaginationNumber(1));
@@ -63,7 +64,7 @@ const PriceRangeFilter = () => {
       toast("Filtering...", { position: "top-center", autoClose: 1 });
       dispatch(
         fetchProducts({
-          page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
+          page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
         })
       );
 
@@ -82,7 +83,7 @@ const PriceRangeFilter = () => {
       toast("Filtering...", { position: "top-center", autoClose: 1 });
       dispatch(
         fetchProducts({
-          page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
+          page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
         })
       );
 
@@ -102,7 +103,7 @@ const PriceRangeFilter = () => {
       toast("Filtering...", { position: "top-center", autoClose: 1 });
       dispatch(
         fetchProducts({
-          page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
+          page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
         })
       );
 
