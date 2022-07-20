@@ -14,6 +14,7 @@ import FilterByPrice from "./filter/FilterByPrice";
 import FilterCard from "./filter/FilterCard"
 import { ToastContainer, toast } from 'react-toastify';
 import { setCurrentCollectionId } from "../../features/collections/collectionsSlice";
+import { FAILED, LOADING, SUCCESS } from "../../apis";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -39,10 +40,10 @@ const ProductsPage = () => {
 
 
   switch (productsFetchStatus) {
-    case "loading":
+    case LOADING:
                       content = <div className="spinner-border text-primary mt-4" />;
                       break;
-    case "succeeded": 
+    case SUCCESS: 
                       if (products.count == 0) {
                         toast.error("No data found",{autoClose:1000})
                       }else{
@@ -55,7 +56,7 @@ const ProductsPage = () => {
                       console.log(products)
                       break;
 
-    case "failed":    content = <p className="fs-1">{productsFetchError}</p>;
+    case FAILED :    content = <p className="fs-1">{productsFetchError}</p>;
 
       break;
     default: content = <p className="fs-1">{productsFetchError}</p>;

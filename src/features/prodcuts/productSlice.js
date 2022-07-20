@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { STORE_PRODUCTS_API } from '../../apis';
+import { FAILED, LOADING, STORE_PRODUCTS_API, SUCCESS } from '../../apis';
 
 
 const initialState = {
@@ -43,17 +43,17 @@ const productSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(fetchProducts.pending, (state, action) => {
-                state.status = "loading"
+                state.status = LOADING
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.status = "succeeded"
+                state.status = SUCCESS
                 state.products = action.payload
                 state.nextPage = action.payload.next
                 state.previousPage = action.payload.previous
 
             })
             .addCase(fetchProducts.rejected, (state, action) => {
-                state.status = "failed"
+                state.status = FAILED
                 state.error = action.error.message
             })
     }
