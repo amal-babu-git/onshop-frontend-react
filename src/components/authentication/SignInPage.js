@@ -11,13 +11,11 @@ import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
   getSignInsignInError,
   getSigninSignInStatus,
   selectAccessToken,
-  setCustomerInfo,
   signIn,
 } from "../../features/auth/authUserSlice";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
@@ -48,15 +46,15 @@ const SignInPage = () => {
 
 
   if (signInStatus === LOADING) {
-    toast("loading...", { autoClose: 200 });
+
+    toast("loading...", { autoClose: 1000 });
+
   } else if (signInStatus === SUCCESS) {
     console.log("success");
-    //toast.success("Login done..", { autoClose: 300 });
-    // navigate('/user/profile')
-
-    
+    toast.success(`Login done, welcome ${username}`, { autoClose: 1000 });
 
     setTimeout(() => navigate("/user/profile"), 1000);
+
   } else if (signInStatus === FAILED) {
     console.log(signInError)
     toast.error("Login failed, please enter correct username and password");

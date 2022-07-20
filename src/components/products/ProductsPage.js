@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
