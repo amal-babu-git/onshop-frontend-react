@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import { STORE_API } from "../../apis";
+import { FAILED, STORE_API, SUCCESS } from "../../apis";
 import {
   logOut,
   selectAccessToken,
+  selectRefreshToken,
   selectUsername,
   setCustomerInfo,
 } from "../../features/auth/authUserSlice";
@@ -15,6 +16,7 @@ const Profile = () => {
 
   const username = useSelector(selectUsername);
   const accessToken = useSelector(selectAccessToken);
+  const refreshToken = useSelector(selectRefreshToken);
 
   const fetchCustomerInfo = async () => {
     // const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -34,7 +36,8 @@ const Profile = () => {
         console.log(err.response.status);
         if (err.response.status === 401) {
           // add refresh function call here
-          dispatch(logOut());
+         dispatch(logOut())
+          
         } else {
           toast.warn("Please login agin, something went wrong !!", {
             autoClose: 1000,
@@ -43,6 +46,8 @@ const Profile = () => {
         }
       });
   };
+
+
 
   useEffect(() => {
     console.log("calling... fetch cutomer info function...");

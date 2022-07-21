@@ -1,18 +1,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { LOADING, SUCCESS, FAILED } from "../../apis"
+import { LOADING, SUCCESS, FAILED, API } from "../../apis"
 import jwt_decode from 'jwt-decode'
 
 
 
 export const signIn = createAsyncThunk('auth/signin', async ({ username, password }) => {
-    const response = await axios.post('http://127.0.0.1:8000/core/auth/token/',
+    const response = await axios.post(`${API}core/auth/token/`,
         { username: username, password: password },
         { headers: { 'Content-Type': 'application/json' } })
 
     console.log(response.data)
     return response.data
 })
+
+// export const refreshTokenHandler=createAsyncThunk('auth/refresh', async ({refreshToken}) =>{
+//     const response =await axios.post(`${API}core/auth/token/refresh/`,
+//     {refresh : refreshToken })
+
+
+//     console.log(response.data)
+//     return response.data
+// })
 
 
 const initialState = {
