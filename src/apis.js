@@ -13,3 +13,5 @@ export const IDLE = 'idle'
 export const LOADING = 'loading'
 export const SUCCESS = 'succeeded'
 export const FAILED = 'failed'
+
+export default API;

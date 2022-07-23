@@ -29,7 +29,7 @@ const PriceRangeFilter = () => {
   const onChangeLtRange = (e) => setLtPrice(e.target.value);
 
   const dispatch = useDispatch();
-  const currentCollectionId = useSelector(getCurrentCollectionId)
+  const currentCollectionId = useSelector(getCurrentCollectionId) ?? ''
 
   const filterButtonClickHandler = (e) => {
     e.preventDefault();
