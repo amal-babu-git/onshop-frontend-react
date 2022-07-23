@@ -21,7 +21,6 @@ const Profile = () => {
     // const accessToken = JSON.parse(localStorage.getItem("accessToken"));
     console.log(accessToken);
     const response = await axiosInstance
-    
       .get(`/store/customers/me`)
       .then((response) => {
         console.log(response.data);
@@ -29,25 +28,23 @@ const Profile = () => {
       })
       .catch((err) => {
         console.log(err);
-        // if (err.response.status === 401) {
-        //   // add refresh function call here
-        
-        //  dispatch(logOut())
-          
-        // } else {
-        //   toast.warn("Please login agin, something went wrong !!", {
-        //     autoClose: 1000,
-        //   });
-        //   dispatch(logOut());
-        // }
+        if (err.response.status === 401) {
+          toast.error("Time out, Please login again", {
+            draggable: true,
+            hideProgressBar: true,
+          });
+          dispatch(logOut());
+        } else {
+          toast.warn("Please login agin, something went wrong !!", {
+            autoClose: 1000,
+          });
+          dispatch(logOut());
+        }
       });
-      
   };
 
-
-
   useEffect(() => {
-    console.log("calling... fetch cutomer info function...");
+    console.log("fetch customer info...");
     fetchCustomerInfo();
   }, []);
 

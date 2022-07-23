@@ -83,8 +83,6 @@ const authUserSlice = createSlice({
                 state.username = jwt_decode(action.payload.access).username
 
                 
-                // state.username = username
-
                 localStorage.setItem('accessToken', JSON.stringify(action.payload.access))
                 localStorage.setItem('refreshToken', JSON.stringify(action.payload.refresh))
 
