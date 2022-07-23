@@ -28,6 +28,7 @@ const SignInPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
   // const [loading, setLoading] = useState(false);
 
   const onChangeUsername = (e) => setUsername(e.target.value);
@@ -39,9 +40,27 @@ const SignInPage = () => {
 
   const onClickSignIn = (e) => {
     e.preventDefault();
-    console.log("Auth:", username, password);
+    
+    if (username===''){
+
+      
+      setErr('Enter username')
+      
+      return false
+    }
+    if(parseInt(password.length) < 4){
+       setErr("Enter correct password");
+
+       return false;
+
+    }
+
+    setErr('')
+
+    console.log('username')
 
     dispatch(signIn({ username, password }));
+    return true
   };
 
 
@@ -71,7 +90,7 @@ const SignInPage = () => {
         />
       </div>
       <div className="row justify-content-center">
-        <form>
+        <form onSubmit={onClickSignIn}>
           <MDBInput
             className="mb-4"
             type="text"
@@ -88,8 +107,11 @@ const SignInPage = () => {
             value={password}
             onChange={onChangePassword}
           />
+          <p className="ms-1  text-danger">
+            {err}
+          </p>
 
-          <MDBRow className="mb-4">
+          {/* <MDBRow className="mb-4">
             <MDBCol className="d-flex justify-content-center">
               <MDBCheckbox
                 id="form1Example3"
@@ -100,9 +122,9 @@ const SignInPage = () => {
             <MDBCol>
               <a href="#!">Forgot password?</a>
             </MDBCol>
-          </MDBRow>
+          </MDBRow> */}
 
-          <MDBBtn type="submit" block onClick={onClickSignIn}>
+          <MDBBtn type="submit" block>
             Sign in
           </MDBBtn>
 

@@ -33,6 +33,7 @@ const initialState = {
 
     username: localStorage.getItem('accessToken') ? jwt_decode(JSON.parse(localStorage.getItem('accessToken'))).username:null,
     customerInfo: [],
+    userInfo:[],
 
 }
 

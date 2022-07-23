@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { MDBCard,MDBTabs,MDBTabsItem,MDBTabsLink,MDBCardBody,MDBCardHeader } from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import {
@@ -48,11 +49,66 @@ const Profile = () => {
     fetchCustomerInfo();
   }, []);
 
+
+  const [profileTabActive, setProfileTabActive] = useState(true);
+  const [filterByRangeActive, setFilterByRangeActive] = useState(false);
+  const [searchActive, setsearchActive] = useState(false);
+
+  const onClickProfileTab = () => {
+    setProfileTabActive(true);
+    setFilterByRangeActive(false);
+    setsearchActive(false);
+  };
+  const onClickUpdateTab = () => {
+    setProfileTabActive(false);
+    setFilterByRangeActive(true);
+    setsearchActive(false);
+  };
+  const searchOnClickHandler = () => {
+    setProfileTabActive(false);
+    setFilterByRangeActive(false);
+    setsearchActive(true);
+  };
+
   return (
-    <div>
-      <p>{username}</p>
-      <p>{accessToken}</p>
-      <ToastContainer />
+    <div className="container">
+      <div className="row justify-content-center ">
+        <div className="mt-2 mb-1 col-sm-12 col-md-12 col-xl-12">
+          <MDBCard className="text-center">
+            <MDBCardHeader>
+              <MDBTabs className="card-header-tabs">
+                <MDBTabsItem>
+                  <MDBTabsLink active={profileTabActive} onClick={onClickProfileTab}>
+                    Profile
+                  </MDBTabsLink>
+                </MDBTabsItem>
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={filterByRangeActive}
+                    onClick={onClickUpdateTab}
+                  >
+                    Edit Profile
+                  </MDBTabsLink>
+                </MDBTabsItem>
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={searchActive}
+                    onClick={searchOnClickHandler}
+                  >
+                    Search
+                  </MDBTabsLink>
+                </MDBTabsItem>
+              </MDBTabs>
+            </MDBCardHeader>
+
+            {filterByRangeActive && <div>h</div>}
+            {profileTabActive && <div>y</div>}
+            <MDBCardBody>{searchActive && <div>hh</div>}</MDBCardBody>
+          </MDBCard>
+        </div>
+
+        <ToastContainer />
+      </div>
     </div>
   );
 };
