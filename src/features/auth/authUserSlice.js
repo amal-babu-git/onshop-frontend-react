@@ -86,7 +86,7 @@ const authUserSlice = createSlice({
                 // state.username = username
 
                 localStorage.setItem('accessToken', JSON.stringify(action.payload.access))
-                localStorage.setItem('refreshToken', JSON.stringify(action.payload.access))
+                localStorage.setItem('refreshToken', JSON.stringify(action.payload.refresh))
 
             })
             .addCase(signIn.rejected, (state, action) => {

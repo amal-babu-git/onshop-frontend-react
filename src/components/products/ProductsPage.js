@@ -15,6 +15,7 @@ import FilterCard from "./filter/FilterCard"
 import { ToastContainer, toast } from 'react-toastify';
 import { setCurrentCollectionId } from "../../features/collections/collectionsSlice";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
+import WifiSpinner from "../subComponents/customSpinners/WifiSpinner";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const ProductsPage = () => {
   switch (productsFetchStatus) {
     case LOADING:
                       content = <div className="spinner-border text-primary mt-4" />;
+                      // content = <WifiSpinner />;
                       break;
     case SUCCESS: 
                       if (products.count == 0) {

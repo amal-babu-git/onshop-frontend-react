@@ -1,8 +1,6 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import { FAILED, STORE_API, SUCCESS } from "../../apis";
 import {
   logOut,
   selectAccessToken,
@@ -10,6 +8,7 @@ import {
   selectUsername,
   setCustomerInfo,
 } from "../../features/auth/authUserSlice";
+import axiosInstance from "../../features/auth/axios";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -21,30 +20,28 @@ const Profile = () => {
   const fetchCustomerInfo = async () => {
     // const accessToken = JSON.parse(localStorage.getItem("accessToken"));
     console.log(accessToken);
-    const response = await axios
-      .get(`${STORE_API}customers/me`, {
-        headers: {
-          // "Content-Type": "application/json",
-          Authorization: `JWT ${accessToken}`,
-        },
-      })
+    const response = await axiosInstance
+    
+      .get(`/store/customers/me`)
       .then((response) => {
         console.log(response.data);
         dispatch(setCustomerInfo(response.data));
       })
       .catch((err) => {
-        console.log(err.response.status);
-        if (err.response.status === 401) {
-          // add refresh function call here
-         dispatch(logOut())
+        console.log(err);
+        // if (err.response.status === 401) {
+        //   // add refresh function call here
+        
+        //  dispatch(logOut())
           
-        } else {
-          toast.warn("Please login agin, something went wrong !!", {
-            autoClose: 1000,
-          });
-          dispatch(logOut());
-        }
+        // } else {
+        //   toast.warn("Please login agin, something went wrong !!", {
+        //     autoClose: 1000,
+        //   });
+        //   dispatch(logOut());
+        // }
       });
+      
   };
 
 
