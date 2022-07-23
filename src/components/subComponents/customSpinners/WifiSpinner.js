@@ -3,7 +3,7 @@ import './wifiSpinner.css'
 
 function WifiSpinner() {
   return (
-      <div id="wifi-loader" className='m-4 p-4'>
+      <div id="wifi-loader" className='m-4 p-4 '>
           <svg class="circle-outer" viewBox="0 0 86 86">
               <circle class="back" cx="43" cy="43" r="40"></circle>
               <circle class="front" cx="43" cy="43" r="40"></circle>

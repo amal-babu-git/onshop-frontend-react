@@ -9,8 +9,8 @@ const LoginReqNotice = () => {
 
     return (
         <div className='p-4 m-4'>
-            <p>Login is required ....</p>
-            <MDBBtn outline className="m-4 p-4" onClick={() => navigate('/signin')}>Go to Login page</MDBBtn>
+            <p className='fs-4 fw-bolder'>Please Login !!</p>
+            <MDBBtn outline className="p-4" onClick={() => navigate('/signin')}>Go to Login page</MDBBtn>
             </div>
     )
 }

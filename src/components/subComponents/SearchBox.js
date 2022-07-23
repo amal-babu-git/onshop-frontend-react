@@ -48,7 +48,6 @@ const SearchBox = () => {
         <MDBBtn rounded onClick={searchButtonClickHandler}>Search</MDBBtn>
 
       </form>
-      <ToastContainer />
 
     </div>
   );

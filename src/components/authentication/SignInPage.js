@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBInput,
   MDBCol,
@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
+  fetchCustomerInfo,
   getSignInsignInError,
   getSigninSignInStatus,
   selectAccessToken,
@@ -40,42 +41,38 @@ const SignInPage = () => {
 
   const onClickSignIn = (e) => {
     e.preventDefault();
-    
-    if (username===''){
 
-      
-      setErr('Enter username')
-      
-      return false
+    if (username === "") {
+      setErr("Enter username");
+
+      return false;
     }
-    if(parseInt(password.length) < 4){
-       setErr("Enter correct password");
+    if (parseInt(password.length) < 4) {
+      setErr("Enter correct password");
 
-       return false;
-
+      return false;
     }
 
-    setErr('')
+    setErr("");
 
-    console.log('username')
+    console.log("username");
 
     dispatch(signIn({ username, password }));
-    return true
+    return true;
   };
 
-
   if (signInStatus === LOADING) {
-
     toast("loading...", { autoClose: 1000 });
-
   } else if (signInStatus === SUCCESS) {
     console.log("success");
-    toast.success(`Login done, welcome ${username}`, { autoClose: 1000 });
+    toast.success(`Login done, welcome ${username}`, {
+      autoClose: 1000,
+      hideProgressBar: true,
+    });
 
     setTimeout(() => navigate("/user/profile"), 1000);
-
   } else if (signInStatus === FAILED) {
-    console.log(signInError)
+    console.log(signInError);
     toast.error("Login failed, please enter correct username and password");
   }
 
@@ -107,9 +104,7 @@ const SignInPage = () => {
             value={password}
             onChange={onChangePassword}
           />
-          <p className="ms-1  text-danger">
-            {err}
-          </p>
+          <p className="ms-1  text-danger">{err}</p>
 
           {/* <MDBRow className="mb-4">
             <MDBCol className="d-flex justify-content-center">
@@ -135,7 +130,6 @@ const SignInPage = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
     </MDBCard>
   );
 };

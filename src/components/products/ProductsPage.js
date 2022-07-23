@@ -96,7 +96,6 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      <ToastContainer />
     </div>
   );
 };

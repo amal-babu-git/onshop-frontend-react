@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { LOADING, SUCCESS, FAILED, API } from "../../apis"
 import jwt_decode from 'jwt-decode'
+import axiosInstance from './axios';
 
 
 
@@ -10,6 +11,12 @@ export const signIn = createAsyncThunk('auth/signin', async ({ username, passwor
         { username: username, password: password },
         { headers: { 'Content-Type': 'application/json' } })
 
+    console.log(response.data)
+    return response.data
+})
+
+export const fetchCustomerInfo = createAsyncThunk('auth/customerInfo', async () => {
+    const response = await axiosInstance.get(`/store/customers/me`)
     console.log(response.data)
     return response.data
 })
@@ -30,10 +37,12 @@ const initialState = {
     refreshToken: localStorage.getItem('refreshToken') ? JSON.parse(localStorage.getItem('refreshToken')) : null,
     signInStatus: null,
     signInError: null,
+    customerInfoStatus: null,
+    customerInfoError: null,
 
-    username: localStorage.getItem('accessToken') ? jwt_decode(JSON.parse(localStorage.getItem('accessToken'))).username:null,
+    username: localStorage.getItem('accessToken') ? jwt_decode(JSON.parse(localStorage.getItem('accessToken'))).username : null,
     customerInfo: [],
-    userInfo:[],
+    userInfo: [],
 
 }
 
@@ -83,7 +92,7 @@ const authUserSlice = createSlice({
                 state.refreshToken = action.payload.refresh
                 state.username = jwt_decode(action.payload.access).username
 
-                
+
                 localStorage.setItem('accessToken', JSON.stringify(action.payload.access))
                 localStorage.setItem('refreshToken', JSON.stringify(action.payload.refresh))
 
@@ -92,26 +101,23 @@ const authUserSlice = createSlice({
                 state.signInStatus = FAILED
                 state.signInError = action.error.message
             })
+
+            // customer info fetching
+            .addCase(fetchCustomerInfo.pending, (state, action) => {
+                state.customerInfoStatus = LOADING
+            })
+            .addCase(fetchCustomerInfo.fulfilled, (state, action) => {
+                //const { access, refresh, username } = action.payload
+                state.customerInfoStatus = SUCCESS
+                state.customerInfo = action.payload
+
+            })
+            .addCase(fetchCustomerInfo.rejected, (state, action) => {
+                state.customerInfoStatus = FAILED
+                state.customerInfoError = action.error.message
+            })
     }
-    // extraReducers(builder) {
-    //     builder
-    //         .addCase(signIn.pending, (state, action) => {
-    //             state.signInStatus = "loading"
-    //         })
-    //         .addCase(signIn.fulfilled, (state, action) => {
-    //             state.signInStatus = "succeeded"
-    //             state.accessToken = action.payload.access
-    //             state.refreshToken = action.payload.refresh
-
-    //             localStorage.setItem('accessToken', JSON.stringify(action.payload.access))
-    //             localStorage.setItem('refreshToken', JSON.stringify(action.payload.refresh))
-
-    //         })
-    //         .addCase(signIn.rejected, (state, action) => {
-    //             state.signInStatus = "failed"
-    //             state.signInError = action.signInError.message
-    //         })
-    // }
+    
 });
 
 
@@ -120,6 +126,8 @@ export const { setCredentials, setCustomerInfo, logOut } = authUserSlice.actions
 
 export const getSigninSignInStatus = (state) => state.auth.signInStatus;
 export const getSignInsignInError = (state) => state.auth.signInError;
+export const getCustomerInfoStatus = (state) => state.auth.customerInfoStatus;
+export const getCustomerInfoError = (state) => state.auth.customerInfoError;
 
 export const selectAccessToken = (state) => state.auth.accessToken;
 export const selectRefreshToken = (state) => state.auth.refreshToken;
