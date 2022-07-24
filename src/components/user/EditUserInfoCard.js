@@ -123,6 +123,10 @@ const EditUserInfoCard = () => {
       
       toast("Date of birth is not valid, you should be above 18");
       return false;
+    }else if(phone===customerInfo.phone && dob===customerInfo.dob && membership=== customerInfo.membership){
+      
+      toast.warn('No change found',{autoClose:2000,hideProgressBar:true})
+      return false
     }
     console.log(dob)
     dispatch(updateCustomerInfo({ phone, dob, membership }));

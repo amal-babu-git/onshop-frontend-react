@@ -25,7 +25,7 @@ export const updateCustomerInfo = createAsyncThunk('auth/updateCustomer', async 
     const response = await axiosInstance.put('/store/customers/me/', {
 
         phone: phone,
-        dob: dob,
+        birth_date: dob,
         membership: membership
 
     })
