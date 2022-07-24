@@ -1,9 +1,8 @@
 import { MDBBtn, MDBCardBody, MDBCardTitle, MDBInput } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { FAILED, IDLE, INDIAN_PHONE_REGEXP, LOADING, SUCCESS } from "../../apis";
+import { FAILED, INDIAN_PHONE_REGEXP, LOADING, SUCCESS } from "../../apis";
 import {
   fetchCustomerInfo,
-  getCustomerInfoStatus,
   getupdateCustomerInfoError,
   getUpdateCustomerInfoStatus,
   getUserInfoError,
@@ -18,7 +17,6 @@ import {
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
 
 const EditUserInfoCard = () => {
   const dispatch = useDispatch();
@@ -48,12 +46,11 @@ const EditUserInfoCard = () => {
   let content = "";
 
   useEffect(() => {
-    console.log("useeff..");
+    
 
     if (updateUserInfoStatus === LOADING) {
       content = <p>Loading...</p>;
     } else if (updateUserInfoStatus === SUCCESS) {
-      console.log("updated");
 
       content = <p>Updated</p>;
 
@@ -61,7 +58,7 @@ const EditUserInfoCard = () => {
 
       dispatch(fetchCustomerInfo());
 
-      console.log("clean..");
+      
       dispatch(setUpdateUserInfoStatus());
     } else if (updateUserInfoStatus === FAILED) {
       console.log(updateUserInfoError);
@@ -69,7 +66,7 @@ const EditUserInfoCard = () => {
         hideProgressBar: true,
       });
 
-      console.log("clean..");
+      // reset the update status to null
       dispatch(setUpdateUserInfoStatus());
       dispatch(logOut());
     }
@@ -79,16 +76,21 @@ const EditUserInfoCard = () => {
 
   useEffect(() => {
     if (updateCustomerInfoStatus === SUCCESS) {
+
       toast.success("Updated", { hideProgressBar: true });
+
     } else if (updateCustomerInfoStatus === FAILED) {
+
+      console.log(updateCustomerInfoError)
       toast.error("Update request failed", { hideProgressBar: true });
     }
 
     return () => {
-      console.log("clean..");
+      
       dispatch(setUpdateCustomerInfoStatus());
     };
   }, [updateCustomerInfoStatus]);
+
 
   const onSubmitUserInfo = (e) => {
     e.preventDefault();
@@ -111,8 +113,7 @@ const EditUserInfoCard = () => {
   const onSubmitCustomerInfo = (e) => {
     e.preventDefault();
     
-   
-    
+  
 
     if(!phone.match(INDIAN_PHONE_REGEXP)){
 
@@ -123,12 +124,12 @@ const EditUserInfoCard = () => {
       
       toast("Date of birth is not valid, you should be above 18");
       return false;
-    }else if(phone===customerInfo.phone && dob===customerInfo.dob && membership=== customerInfo.membership){
+    }else if(phone===customerInfo.phone && dob===customerInfo.birth_date && membership=== customerInfo.membership){
       
       toast.warn('No change found',{autoClose:2000,hideProgressBar:true})
       return false
     }
-    console.log(dob)
+    
     dispatch(updateCustomerInfo({ phone, dob, membership }));
     return true
   };
