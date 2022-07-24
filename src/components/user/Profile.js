@@ -8,10 +8,9 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  fetchCustomerInfo,
-} from "../../features/auth/authUserSlice";
+import { fetchCustomerInfo } from "../../features/auth/authUserSlice";
 import CustomerInfoCard from "./CustomerInfoCard";
+import EditUserInfoCard from "./EditUserInfoCard";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -48,65 +47,66 @@ const Profile = () => {
     dispatch(fetchCustomerInfo());
   }, []);
 
-
   const [profileTabActive, setProfileTabActive] = useState(true);
-  const [filterByRangeActive, setFilterByRangeActive] = useState(false);
+  const [editFormActive, setEditFormActive] = useState(false);
   const [searchActive, setsearchActive] = useState(false);
 
   const onClickProfileTab = () => {
     setProfileTabActive(true);
-    setFilterByRangeActive(false);
+    setEditFormActive(false);
     setsearchActive(false);
   };
   const onClickUpdateTab = () => {
     setProfileTabActive(false);
-    setFilterByRangeActive(true);
+    setEditFormActive(true);
     setsearchActive(false);
   };
   const searchOnClickHandler = () => {
     setProfileTabActive(false);
-    setFilterByRangeActive(false);
+    setEditFormActive(false);
     setsearchActive(true);
   };
 
-  
   return (
     <div className="container">
       <div className="row justify-content-center ">
-        <div className="mt-2 mb-1 col-sm-12 col-md-12 col-xl-12"><MDBCard className="text-center">
-          <MDBCardHeader>
-            <MDBTabs className="card-header-tabs">
-              <MDBTabsItem>
-                <MDBTabsLink
-                  active={profileTabActive}
-                  onClick={onClickProfileTab}
-                >
-                  Profile
-                </MDBTabsLink>
-              </MDBTabsItem>
-              <MDBTabsItem>
-                <MDBTabsLink
-                  active={filterByRangeActive}
-                  onClick={onClickUpdateTab}
-                >
-                  Edit Profile
-                </MDBTabsLink>
-              </MDBTabsItem>
-              <MDBTabsItem>
-                <MDBTabsLink
-                  active={searchActive}
-                  onClick={searchOnClickHandler}
-                >
-                  Search
-                </MDBTabsLink>
-              </MDBTabsItem>
-            </MDBTabs>
-          </MDBCardHeader>
+        <div className="mt-2 mb-1 col-sm-12 col-md-12 col-xl-8">
+          <MDBCard className="text-center">
+            <MDBCardHeader>
+              <MDBTabs className="card-header-tabs">
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={profileTabActive}
+                    onClick={onClickProfileTab}
+                  >
+                    Profile
+                  </MDBTabsLink>
+                </MDBTabsItem>
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={editFormActive}
+                    onClick={onClickUpdateTab}
+                  >
+                    Update Profile
+                  </MDBTabsLink>
+                </MDBTabsItem>
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={searchActive}
+                    onClick={searchOnClickHandler}
+                  >
+                    Search
+                  </MDBTabsLink>
+                </MDBTabsItem>
+              </MDBTabs>
+            </MDBCardHeader>
+            
+            {profileTabActive && <CustomerInfoCard />}
+            {editFormActive && <EditUserInfoCard />}
 
-          {filterByRangeActive && <div>h</div>}
-          {profileTabActive && <CustomerInfoCard />}
-          <MDBCardBody>{searchActive && <div>hh</div>}</MDBCardBody>
-        </MDBCard></div>
+            <MDBCardBody>{searchActive && <div>hh</div>}</MDBCardBody>
+          </MDBCard>
+        </div>
       </div>
     </div>
   );

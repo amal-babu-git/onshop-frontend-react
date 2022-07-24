@@ -12,10 +12,8 @@ import { useEffect } from "react";
 import Pagination from "../subComponents/Pagination";
 import FilterByPrice from "./filter/FilterByPrice";
 import FilterCard from "./filter/FilterCard"
-import { ToastContainer, toast } from 'react-toastify';
-import { setCurrentCollectionId } from "../../features/collections/collectionsSlice";
+import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
-import WifiSpinner from "../subComponents/customSpinners/WifiSpinner";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
