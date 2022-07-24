@@ -15,3 +15,6 @@ export const SUCCESS = 'succeeded'
 export const FAILED = 'failed'
 
 export default API;
+
+// REGEXP
+export const INDIAN_PHONE_REGEXP = /^[6-9]\d{9}$/gi;
