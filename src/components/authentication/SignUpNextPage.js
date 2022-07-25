@@ -5,7 +5,7 @@ import login_page_logo_img from "../../images/logob.png";
 import { toast } from "react-toastify";
 import { INDIAN_PHONE_REGEXP } from "../../apis";
 
-TODO //Form validation is done, temporarly suspended work becs api for update this info without login not yet build
+ // TODO :Form validation is done, temporarly suspended work becs api for update this info without login not yet build
 
 const SignUpNextPage = () => {
 
