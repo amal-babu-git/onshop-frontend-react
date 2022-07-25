@@ -68,7 +68,8 @@ const SignUpNextPage = () => {
   }, [formErrors])
 
 
-  //API CALL
+  TODO:// This page is plan to navigate after signup but now i hold this call and after signin navigate to login page,
+  // same thing can done in edit profile after signin , this is page is holded here becs 'API for this without sigin in not yet built'
   
 
 
