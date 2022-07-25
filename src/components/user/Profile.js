@@ -49,22 +49,18 @@ const Profile = () => {
 
   const [profileTabActive, setProfileTabActive] = useState(true);
   const [editFormActive, setEditFormActive] = useState(false);
-  const [searchActive, setsearchActive] = useState(false);
 
   const onClickProfileTab = () => {
     setProfileTabActive(true);
     setEditFormActive(false);
-    setsearchActive(false);
   };
   const onClickUpdateTab = () => {
     setProfileTabActive(false);
     setEditFormActive(true);
-    setsearchActive(false);
   };
   const searchOnClickHandler = () => {
     setProfileTabActive(false);
     setEditFormActive(false);
-    setsearchActive(true);
   };
 
   return (
@@ -90,21 +86,13 @@ const Profile = () => {
                     Update Profile
                   </MDBTabsLink>
                 </MDBTabsItem>
-                <MDBTabsItem>
-                  <MDBTabsLink
-                    active={searchActive}
-                    onClick={searchOnClickHandler}
-                  >
-                    Search
-                  </MDBTabsLink>
-                </MDBTabsItem>
+                
               </MDBTabs>
             </MDBCardHeader>
             
             {profileTabActive && <CustomerInfoCard />}
             {editFormActive && <EditUserInfoCard />}
 
-            <MDBCardBody>{searchActive && <div>hh</div>}</MDBCardBody>
           </MDBCard>
         </div>
       </div>
