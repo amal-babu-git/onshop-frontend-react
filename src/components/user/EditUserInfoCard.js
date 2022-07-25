@@ -16,11 +16,9 @@ import {
 } from "../../features/auth/authUserSlice";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const EditUserInfoCard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const updateUserInfoStatus = useSelector(getUserInfoStatus);
   const updateUserInfoError = useSelector(getUserInfoError);

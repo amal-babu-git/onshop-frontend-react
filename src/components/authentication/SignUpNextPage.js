@@ -10,7 +10,7 @@ const SignUpNextPage = () => {
         <img
           src={login_image}
           alt="img"
-          class="img-fluid rounded"
+          className="img-fluid rounded"
           style={{ maxWidth: "20rem" }}
         />
       </div>
@@ -31,16 +31,16 @@ const SignUpNextPage = () => {
             className="btn mb-4 align-self-center"
           >
             <option value="B">
-              <b>Membership</b>
+              Membership
             </option>
             <option value="B">
-              <b>Bronze</b>
+              Bronze
             </option>
             <option value="S">
-              <b>Silver</b>
+              Silver
             </option>
             <option value="G">
-              <b>Gold</b>
+              Gold
             </option>
           </select>
 

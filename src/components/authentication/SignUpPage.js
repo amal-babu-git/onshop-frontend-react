@@ -5,6 +5,7 @@ import {
   MDBBtn,
   MDBCard,
   MDBValidation,
+  MDBIcon,
 } from "mdb-react-ui-kit";
 import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
@@ -60,7 +61,7 @@ const SignUpPage = () => {
     const errors = {};
     const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-   
+
     if (!emailRegexp.test(values.email)) {
       errors.email = "This is not valid email"
     }
@@ -126,6 +127,8 @@ const SignUpPage = () => {
 
         toast.success('Signup success')
         console.log(response.data)
+
+        navigate('/signupnext')
       })
       .catch((err) => {
 
@@ -228,32 +231,57 @@ const SignUpPage = () => {
           />
           <p className="text-danger">{formErrors.username}</p>
 
-          <MDBInput
-            className="mb-4"
-            type={passwordType}
-            id="password"
-            name="password"
-            label="Password"
-            value={formValues.password}
-            onChange={onChangeInputFieldsHandler}
-            required
-          />
-          <p className="text-danger">{formErrors.password}</p>
+          <div className="form-control mb-2">
 
-          <MDBInput
-            className="mb-4"
-            type="password"
-            id="cpassword"
-            name="confPassword"
-            label="Confirm Password"
-            value={formValues.confPassword}
-            onChange={onChangeInputFieldsHandler}
-            required
-          />
+            {passwordType === 'password' && <MDBIcon fas icon="eye" className="ms-1 mb-2"
+              onClick={() => {
 
-          <p className="text-danger">{formErrors.confPassword}</p>
+                setPasswordType('text')
+
+              }} />
+              
+            }
+            {passwordType === 'text' && <MDBIcon fas icon="eye-slash" className="ms-1 mb-2"
+              onClick={() => {
+
+                setPasswordType('password')
+
+              }} />
+              
+            }
+            
+            <MDBInput
+              className="mb-4"
+              type={passwordType}
+              id="password"
+              name="password"
+              label="Password"
+              value={formValues.password}
+              onChange={onChangeInputFieldsHandler}
+              required
+            />
+            <p className="text-danger">{formErrors.password}</p>
+
+            <MDBInput
+              className="mb-4"
+              type={passwordType}
+              id="cpassword"
+              name="confPassword"
+              label="Confirm Password"
+              value={formValues.confPassword}
+              onChange={onChangeInputFieldsHandler}
+              required
+            />
+
+            <p className="text-danger">{formErrors.confPassword}</p>
+          </div>
+
+
+
+
           <MDBBtn type="submit" block>
             Sign Up
+
           </MDBBtn>
 
 
