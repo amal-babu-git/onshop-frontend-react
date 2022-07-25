@@ -21,3 +21,4 @@ export default API;
 
 // REGEXP
 export const INDIAN_PHONE_REGEXP = /^[6-9]\d{9}$/gi;
+export const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

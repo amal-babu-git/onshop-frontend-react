@@ -11,7 +11,7 @@ import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom'
-import { REGISTER_NEW_USER_API } from "../../apis";
+import { EMAIL_REGEXP, REGISTER_NEW_USER_API } from "../../apis";
 import axios from 'axios'
 
 
@@ -59,10 +59,10 @@ const SignUpPage = () => {
   const validate = (values) => {
 
     const errors = {};
-    const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    
 
 
-    if (!emailRegexp.test(values.email)) {
+    if (!EMAIL_REGEXP.test(values.email)) {
       errors.email = "This is not valid email"
     }
     if (values.password.length < 9) {

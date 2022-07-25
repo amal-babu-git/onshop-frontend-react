@@ -145,6 +145,7 @@ const EditUserInfoCard = () => {
             type="text"
             value={firstname}
             onChange={onChangeFirstName}
+            required
           />
 
           <MDBInput
@@ -154,6 +155,7 @@ const EditUserInfoCard = () => {
             type="text"
             value={lastname}
             onChange={onChangeLastName}
+            required
           />
           <MDBInput
             className="mt-2"
@@ -162,6 +164,7 @@ const EditUserInfoCard = () => {
             type="email"
             value={email}
             onChange={onChangeEmail}
+            required
           />
           <MDBBtn className="mt-2" type="submit" id="btnSubmit">
             Update
@@ -180,6 +183,7 @@ const EditUserInfoCard = () => {
             type="tel"
             value={phone}
             onChange={onChangePhone}
+            required
           />
 
           <div className="mt-2 mb-2 ms-1 text-start font-bolder">
@@ -192,6 +196,7 @@ const EditUserInfoCard = () => {
               className="btn text-bolder ms-4"
               onChange={onChangeMembership}
               defaultChecked={membership}
+              
 
               // value={membership}
             >
@@ -214,6 +219,7 @@ const EditUserInfoCard = () => {
             type="date"
             value={dob}
             onChange={onChangeDob}
+            
           />
           <MDBBtn
             className="mt-2"
