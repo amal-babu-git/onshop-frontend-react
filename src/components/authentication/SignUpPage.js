@@ -1,28 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  MDBValidationItem,
   MDBInput,
   MDBBtn,
   MDBCard,
+  MDBValidation,
 } from "mdb-react-ui-kit";
 import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom'
+import { REGISTER_NEW_USER_API } from "../../apis";
+import axios from 'axios'
+
 
 const SignUpPage = () => {
 
+  const navigate = useNavigate()
+
+
   const initialValues = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    username: '',
-    password: '',
-    confPassword: ''
+    firstname: 'martin',
+    lastname: 'mass',
+    email: 'mae@gm.com',
+    username: 'marmass',
+    password: '123456789',
+    confPassword: '123456789'
   }
 
 
   const [formValues, setFormValues] = useState(initialValues)
   const [formErrors, setFormErrors] = useState({})
   const [isSubmit, setIsSubmit] = useState(false)
+  const [passwordType, setPasswordType] = useState('password')
 
 
 
@@ -50,29 +60,15 @@ const SignUpPage = () => {
     const errors = {};
     const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (!values.username) {
-      errors.username = "Username is required"
-    }
-    if (!values.firstname) {
-      errors.firstname = "First name is required"
-    }
-    if (!values.lastname) {
-      errors.lastname = "Last name is required"
-    }
-    if (!values.email) {
-      errors.email = "Email is required"
-    } else if (!emailRegexp.test(values.email)) {
+   
+    if (!emailRegexp.test(values.email)) {
       errors.email = "This is not valid email"
     }
-    if (!values.password) {
-      errors.password = "Password is required"
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 character"
+    if (values.password.length < 9) {
+      errors.password = "Password must be more than 8 character"
 
     }
-    if (!values.confPassword) {
-      errors.confPassword = "Please confirm your password"
-    } else if (!(values.password === values.confPassword)) {
+    if (!(values.password === values.confPassword)) {
       errors.confPassword = "Password doesn's match"
     }
 
@@ -83,14 +79,89 @@ const SignUpPage = () => {
 
     console.log(formErrors)
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log('fv', formValues)
-      toast.success('SignUp success')
+      // console.log('fv', formValues)
+
+      registerUserHandler(formValues)
+
     }
 
   }, [formErrors])
 
+  // useEffect(() => {
+  //   if (signUpStatus === SUCCESS) {
+
+  //     toast.success('Signup success...')
 
 
+  //   } else if (signUpStatus === FAILED) {
+
+  //     toast.error(signUpError)
+
+  //   }
+
+  //   return () => {
+  //     dispatch(setSignUpStatus())
+  //   }
+  // }, [signUpStatus])
+
+
+  const registerUserHandler = async (formValues) => {
+
+
+    const response = await axios.post(REGISTER_NEW_USER_API, {
+
+      username: formValues.username,
+      email: formValues.email,
+      password: formValues.password,
+      first_name: formValues.firstname,
+      last_name: formValues.lastname,
+
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+      .then((response) => {
+
+        toast.success('Signup success')
+        console.log(response.data)
+      })
+      .catch((err) => {
+
+        console.log(err)
+
+
+        let serverErros = ''
+
+
+        if (err.response.data.password) {
+          err.response.data.password.map((res) => (serverErros += '\n' + res))
+
+        } else if (err.response.data.username) {
+          err.response.data.username.map((res) => (serverErros += '\n' + res))
+
+        } else if (err.response.data.email) {
+
+          err.response.data.email.map((res) => (serverErros += '\n' + res))
+
+        } else {
+
+          serverErros += 'Something went wrong please try again!'
+
+        }
+
+
+        toast.error(serverErros, { autoClose: 10000 })
+
+        console.log(err)
+
+
+
+
+      })
+
+  }
 
 
 
@@ -106,6 +177,7 @@ const SignUpPage = () => {
       </div>
       <div className="row justify-content-center">
         <form onSubmit={onSubmitHandler}>
+
           <MDBInput
             className="mb-4"
             type="text"
@@ -114,8 +186,11 @@ const SignUpPage = () => {
             label="First name"
             value={formValues.firstname}
             onChange={onChangeInputFieldsHandler}
+            required
           />
+
           <p className="text-danger">{formErrors.firstname}</p>
+
           <MDBInput
             className="mb-4"
             type="text"
@@ -124,8 +199,11 @@ const SignUpPage = () => {
             label="Last name"
             value={formValues.lastname}
             onChange={onChangeInputFieldsHandler}
+            required
           />
+
           <p className="text-danger">{formErrors.lastname}</p>
+
           <MDBInput
             className="mb-4"
             type="email"
@@ -134,8 +212,10 @@ const SignUpPage = () => {
             label="Email address"
             value={formValues.email}
             onChange={onChangeInputFieldsHandler}
+            required
           />
           <p className="text-danger">{formErrors.email}</p>
+
           <MDBInput
             className="mb-4"
             type="text"
@@ -144,18 +224,22 @@ const SignUpPage = () => {
             label="Username"
             value={formValues.username}
             onChange={onChangeInputFieldsHandler}
+            required
           />
           <p className="text-danger">{formErrors.username}</p>
+
           <MDBInput
             className="mb-4"
-            type="password"
+            type={passwordType}
             id="password"
             name="password"
             label="Password"
             value={formValues.password}
             onChange={onChangeInputFieldsHandler}
+            required
           />
           <p className="text-danger">{formErrors.password}</p>
+
           <MDBInput
             className="mb-4"
             type="password"
@@ -164,12 +248,16 @@ const SignUpPage = () => {
             label="Confirm Password"
             value={formValues.confPassword}
             onChange={onChangeInputFieldsHandler}
+            required
           />
-          <p className="text-danger">{formErrors.confPassword}</p>
 
+          <p className="text-danger">{formErrors.confPassword}</p>
           <MDBBtn type="submit" block>
             Sign Up
           </MDBBtn>
+
+
+
         </form>
       </div>
     </MDBCard>

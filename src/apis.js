@@ -7,6 +7,9 @@ export const STORE_CARTS_API = `${API}store/carts/`
 export const STORE_ORDEERS_API = `${API}store/orders/`
 
 
+export const REGISTER_NEW_USER_API = `${API}auth/users/`
+
+
 
 // constants 
 export const IDLE = 'idle'
