@@ -14,6 +14,7 @@ import FilterByPrice from "./filter/FilterByPrice";
 import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
+import CartSpinner from "../subComponents/customSpinners/CartSpinner";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,8 @@ const ProductsPage = () => {
 
   switch (productsFetchStatus) {
     case LOADING:
-                      content = <div className="spinner-border text-primary mt-4" />;
-                      // content = <WifiSpinner />;
+                      // content = <div className="spinner-border text-primary mt-4" />;
+                      content = <CartSpinner />;
                       break;
     case SUCCESS: 
                       if (products.count == 0) {

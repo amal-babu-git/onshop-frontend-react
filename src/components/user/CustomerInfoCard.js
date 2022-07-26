@@ -19,7 +19,7 @@ const CustomerInfoCard = () => {
   switch (customerInfoStatus) {
     case LOADING:
       content = (
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border text-primary ms-4 mt-4" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       );
@@ -49,7 +49,7 @@ const CustomerInfoCard = () => {
             </MDBTooltip>
           </div>
           <p className="text-center fs-5 fw-bolder">
-            {"Phone :" + customerInfo?.phone}
+            {customerInfo?.phone && "Phone :" + customerInfo?.phone}
           </p>
         </MDBCardBody>
       );

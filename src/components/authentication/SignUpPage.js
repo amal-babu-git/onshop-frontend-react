@@ -21,12 +21,12 @@ const SignUpPage = () => {
 
 
   const initialValues = {
-    firstname: 'martin',
-    lastname: 'mass',
-    email: 'mae@gm.com',
-    username: 'marmass',
-    password: '123456789',
-    confPassword: '123456789'
+    firstname: '',
+    lastname: '',
+    email: '',
+    username: '',
+    password: '',
+    confPassword: ''
   }
 
 
@@ -88,23 +88,9 @@ const SignUpPage = () => {
 
   }, [formErrors])
 
-  // useEffect(() => {
-  //   if (signUpStatus === SUCCESS) {
-
-  //     toast.success('Signup success...')
 
 
-  //   } else if (signUpStatus === FAILED) {
-
-  //     toast.error(signUpError)
-
-  //   }
-
-  //   return () => {
-  //     dispatch(setSignUpStatus())
-  //   }
-  // }, [signUpStatus])
-
+  //API CALL
 
   const registerUserHandler = async (formValues) => {
 
@@ -128,7 +114,7 @@ const SignUpPage = () => {
         toast.success('Signup success')
         console.log(response.data)
 
-        navigate('/signupnext')
+        navigate('/signin')
       })
       .catch((err) => {
 

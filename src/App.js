@@ -27,14 +27,15 @@ function App() {
           <Route path='/signin' element={<SignInPage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/signupnext' element={<SignUpNextPage />} />
-
+          <Route path='/cart' element={<Cart />} />
+          
           {/* Private routes  */}
           <Route path='/user' element={<User />}>
             <Route path='/user/profile' element={<Profile />} />
             <Route path='/user/orders' element={<Order />} />
           </Route>
 
-          <Route path='/cart' element={<Cart />} />
+         
         </Routes>
         <Footer />
       </BrowserRouter>

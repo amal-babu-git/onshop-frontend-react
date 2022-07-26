@@ -30,7 +30,7 @@ const EditUserInfoCard = () => {
   const [firstname, setFirstname] = useState(customerInfo?.first_name);
   const [lastname, setLastname] = useState(customerInfo?.last_name);
   const [email, setEmail] = useState(customerInfo?.email);
-  const [phone, setPhone] = useState(customerInfo?.phone);
+  const [phone, setPhone] = useState(customerInfo?.phone)  ;
   const [membership, setMembership] = useState("B");
   const [dob, setDob] = useState(customerInfo?.birth_date);
 
@@ -120,7 +120,7 @@ const EditUserInfoCard = () => {
 
     }else if ((new Date().getFullYear() - new Date(dob).getFullYear()<18)) {
       
-      toast("Date of birth is not valid, you should be above 18");
+      toast.error("Date of birth is not valid, you should be above 18");
       return false;
     }else if(phone===customerInfo.phone && dob===customerInfo.birth_date && membership=== customerInfo.membership){
       
@@ -219,6 +219,7 @@ const EditUserInfoCard = () => {
             type="date"
             value={dob}
             onChange={onChangeDob}
+            
             
           />
           <MDBBtn

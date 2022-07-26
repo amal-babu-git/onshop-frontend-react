@@ -105,6 +105,11 @@ const authUserSlice = createSlice({
 
 
         },
+        setSignInStatus: (state, action) => {
+            state.signInStatus = null
+            state.signInError = null
+        }
+        ,
         setUpdateUserInfoStatus: (state, action) => {
             state.updateUserStatus = null
             state.updateUserError = null
@@ -173,7 +178,7 @@ const authUserSlice = createSlice({
             })
             .addCase(updateCustomerInfo.fulfilled, (state, action) => {
                 state.updateCustomerInfoStatus = SUCCESS
-                state.customerInfo=action.payload
+                state.customerInfo = action.payload
 
             })
             .addCase(updateCustomerInfo.rejected, (state, action) => {
@@ -186,7 +191,7 @@ const authUserSlice = createSlice({
 });
 
 
-export const { setCredentials, setCustomerInfo, logOut, setUpdateUserInfoStatus,setUpdateCustomerInfoStatus } = authUserSlice.actions
+export const { setCredentials, setCustomerInfo, logOut, setUpdateUserInfoStatus, setUpdateCustomerInfoStatus,setSignInStatus } = authUserSlice.actions
 
 
 export const getSigninSignInStatus = (state) => state.auth.signInStatus;

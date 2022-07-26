@@ -10,18 +10,16 @@ import {
 import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
-  fetchCustomerInfo,
   getSignInsignInError,
   getSigninSignInStatus,
   selectAccessToken,
+  setSignInStatus,
   signIn,
 } from "../../features/auth/authUserSlice";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
-import { STORE_API } from "../../apis";
-import jwtDecode from "jwt-decode";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -61,20 +59,24 @@ const SignInPage = () => {
     return true;
   };
 
-  if (signInStatus === LOADING) {
-    toast("loading...", { autoClose: 1000 });
-  } else if (signInStatus === SUCCESS) {
-    console.log("success");
-    toast.success(`Login done, welcome ${username}`, {
-      autoClose: 1000,
-      hideProgressBar: true,
-    });
+  useEffect(()=>{
+    if (signInStatus === LOADING) {
+      toast("loading...", { autoClose: 1000 });
+    } else if (signInStatus === SUCCESS) {
+      console.log("success");
+      toast.success(`Login done, welcome ${username}`, {
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
 
-    setTimeout(() => navigate("/user/profile"), 1000);
-  } else if (signInStatus === FAILED) {
-    console.log(signInError);
-    toast.error("Login failed, please enter correct username and password");
-  }
+      setTimeout(() => navigate("/user/profile"), 1000);
+    } else if (signInStatus === FAILED) {
+      console.log(signInError);
+
+      dispatch(setSignInStatus());
+      toast.error("Login failed, please enter correct username and password");
+    }
+  },[signInStatus])
 
   return (
     <MDBCard className="container p-4 mt-4 mb-4" style={{ maxWidth: "30rem" }}>
