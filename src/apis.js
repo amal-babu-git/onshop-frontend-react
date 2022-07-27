@@ -17,6 +17,10 @@ export const LOADING = 'loading'
 export const SUCCESS = 'succeeded'
 export const FAILED = 'failed'
 
+export const ACCESS_TOKEN='accessToken'
+export const REFRESH_TOKEN='refreshToken'
+export const CART_ID='cartId'
+
 export default API;
 
 // REGEXP
