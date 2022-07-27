@@ -8,9 +8,9 @@ import {
   MDBBtn,
   MDBRipple,
 } from "mdb-react-ui-kit";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import defaultImage from "../../images/logob2.png"
-import { addToCart } from "../cart/cartApiCalls";
+import AddToCartBtn from "../cart/AddToCartBtn";
 
 export default function ProductCard({ data }) {
 
@@ -18,11 +18,7 @@ export default function ProductCard({ data }) {
 
   const product_image = data.images[0]
 
-  const addToCartHandler = () => {
 
-    addToCart(data.id,1)
-
-  }
 
 
   return (
@@ -57,13 +53,7 @@ export default function ProductCard({ data }) {
           <p className="text-dark"> ₹ {data.unit_price}</p>
           <MDBCardText>{data.collection}</MDBCardText>
 
-          <>
-            <MDBBtn rounded outline className="me-4 mt-1 "
-              onClick={addToCartHandler}
-            >
-              Add to cart
-            </MDBBtn>
-          </>
+          <AddToCartBtn id={data.id}/>
 
           <MDBBtn
             rounded

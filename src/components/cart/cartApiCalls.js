@@ -1,6 +1,6 @@
 import axios from "axios"
-import { CART_ID, STORE_CARTS_API } from "../../apis"
-import {toast} from 'react-toastify'
+import { CART_ID, STORE_CARTS_API, STORE_PRODUCTS_API } from "../../apis"
+import { toast } from 'react-toastify'
 import CartToast from "../subComponents/Toast/CartToast"
 
 
@@ -43,7 +43,7 @@ export const addToCart = async (productId, quantity) => {
     })
         .then((response) => {
             console.log(response.data)
-            toast(<CartToast msg="Added to cart" />,{hideProgressBar:true})
+            toast(<CartToast msg="Added to cart" />, { hideProgressBar: true })
             return response.data
         })
         .catch((err) => {
@@ -51,3 +51,6 @@ export const addToCart = async (productId, quantity) => {
         })
 }
 
+export const deleteCart=async ()=>{
+    
+}
