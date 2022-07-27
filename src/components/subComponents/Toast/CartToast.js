@@ -4,10 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 const CartToast = ({ link = '/cart', msg = 'Added' }) => {
 
-   
-
-    
-
 
     return (
         <div>
