@@ -2,15 +2,19 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { CART_ID, FAILED, LOADING, STORE_CARTS_API, SUCCESS } from '../../apis';
 
-export const fetchCartItems = createAsyncThunk('cart/fetchItems', async (cartId) => {
-    const respone = axios.get(`${STORE_CARTS_API}${cartId}`)
-    console.log('cart items', respone.data)
-    return respone.data
-})
+export const fetchCartItems = createAsyncThunk('cart/fetchItems',
+    async ({cartId}) => {
+        const respone =await axios.get(`${STORE_CARTS_API}${cartId}/`)
+        console.log('cart items', respone.data)
+        return respone.data
+    })
+
+
 
 const initialState = {
 
-    cartID: localStorage.getItem(CART_ID) ? JSON.stringify(localStorage.getItem(CART_ID)) : null,
+    cartID: localStorage.getItem(CART_ID) ?
+        JSON.parse(localStorage.getItem(CART_ID)) : null,
     cart: [],
     fetchStatus: null,
     fetchError: null,
@@ -45,11 +49,12 @@ const cartSlice = createSlice({
     }
 });
 
-export const { setCartFetchStatus} = cartSlice.actions
+export const { setCartFetchStatus } = cartSlice.actions
 
-export const selectCart =(state)=>state.cart.cart
+export const selectCart = (state) => state.cart.cart
+export const selectCartId = (state) => state.cart.cartID
 
-export const getCartFetchStatus=(state)=>state.cart.fetchStatus
-export const getCartFetchError=(state)=>state.cart.fetchError
+export const getCartFetchStatus = (state) => state.cart.fetchStatus
+export const getCartFetchError = (state) => state.cart.fetchError
 
 export default cartSlice.reducer

@@ -10,12 +10,19 @@ import {
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import defaultImage from "../../images/logob2.png"
+import { addToCart } from "../cart/cartApiCalls";
 
 export default function ProductCard({ data }) {
 
   const navigate = useNavigate()
 
   const product_image = data.images[0]
+
+  const addToCartHandler = () => {
+
+    addToCart(data.id,1)
+
+  }
 
 
   return (
@@ -31,7 +38,7 @@ export default function ProductCard({ data }) {
             <MDBCardImage src={product_image.image} fluid alt="No image available" />
           ) : (
             <MDBCardImage
-              
+
               src={defaultImage}
               fluid
               alt="No image available"
@@ -50,11 +57,13 @@ export default function ProductCard({ data }) {
           <p className="text-dark"> ₹ {data.unit_price}</p>
           <MDBCardText>{data.collection}</MDBCardText>
 
-          <Link to="/cart">
-            <MDBBtn rounded outline className="me-4 mt-1 ">
+          <>
+            <MDBBtn rounded outline className="me-4 mt-1 "
+              onClick={addToCartHandler}
+            >
               Add to cart
             </MDBBtn>
-          </Link>
+          </>
 
           <MDBBtn
             rounded
