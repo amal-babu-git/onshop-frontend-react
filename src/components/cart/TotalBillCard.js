@@ -12,6 +12,14 @@ const TotalBillCard = ({ cart }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const order = {
+        cartId: cart.id,
+        paymentStatus: 'P',
+        paymentMethod: 'POD',
+        total_bill: cart.total_price
+
+    }
+
 
     const onClickDelete = () => {
         deleteCart();
@@ -25,7 +33,8 @@ const TotalBillCard = ({ cart }) => {
 
     const onClickBuy = () => {
 
-        navigate('/user/place-order')
+
+        navigate('/user/place-order', { state: cart })
 
     }
 
@@ -34,23 +43,43 @@ const TotalBillCard = ({ cart }) => {
     return (
         <MDBCard>
             <MDBCardBody>
-                <div className="ms-4">
-                    <p className="fs-6 fw-bold mt-2">
-                        Total Bill    : ₹ {cart.total_price}
-                    </p>
-                </div>
-                <div className="">
-                    <MDBBtn color="danger" className="ms-4" onClick={onClickDelete}>
-                        Delete Cart
-                    </MDBBtn>
-                    <MDBBtn className="ms-4" id='buy' name='buy'
+                
 
-                        onClick={onClickBuy}
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            
+                            <th>TOTAL BILL AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            
+                            <td>
+                                <strong> ₹ {cart.total_price}</strong>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <MDBBtn color="danger" className="ms-4" onClick={onClickDelete}>
+                                    Delete Cart
+                                </MDBBtn>
+                                <MDBBtn className="ms-4" id='buy' name='buy'
 
-                    >
-                        Buy
-                    </MDBBtn>
-                </div>
+                                    onClick={onClickBuy}
+
+                                >
+                                    Buy
+                                </MDBBtn>
+                                
+                            </td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+                
             </MDBCardBody>
         </MDBCard>
     )

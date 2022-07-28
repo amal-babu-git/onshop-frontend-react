@@ -41,6 +41,7 @@ const cartSlice = createSlice({
             state.fetchError = null
 
         },
+        //set cart id null
         setCartId: (state, action) => {
             state.cartID = null
         },

@@ -34,7 +34,7 @@ function Cart() {
     }
   }, []);
 
-
+  
 
   switch (cartFetchStatus) {
     case LOADING:
