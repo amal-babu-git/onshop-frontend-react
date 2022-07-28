@@ -11,8 +11,11 @@ import Cart from './components/cart/Cart';
 import Profile from './components/user/Profile';
 import ProductDetailPage from './components/products/ProductDetailPage';
 import User from './components/user/User';
-import Order from './components/user/Order';
+import Orders from './components/order/Orders';
 import { ToastContainer } from 'react-toastify';
+import PaymentPage from './components/payment/PaymentPage';
+import PlaceOrder from './components/order/PlaceOrder';
+import NotFound from './components/subComponents/NotFound';
 
 function App() {
   return (
@@ -32,8 +35,12 @@ function App() {
           {/* Private routes  */}
           <Route path='/user' element={<User />}>
             <Route path='/user/profile' element={<Profile />} />
-            <Route path='/user/orders' element={<Order />} />
+            <Route path='/user/orders' element={<Orders />} />
+            <Route path='/user/place-order' element={<PlaceOrder />} />
+            <Route path='/user/payment' element={<PaymentPage />} />
           </Route>
+
+          <Route path='*' element={<NotFound />} />
 
          
         </Routes>

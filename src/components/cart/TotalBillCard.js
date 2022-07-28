@@ -7,10 +7,10 @@ import { setCartFetchStatus, setCartId } from '../../features/cart/cartSlice';
 import DeleteToast from '../subComponents/Toast/DeleteToast';
 import { deleteCart } from './cartApiCalls';
 
-const TotalBillCard = ({cart}) => {
+const TotalBillCard = ({ cart }) => {
 
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const onClickDelete = () => {
@@ -23,26 +23,37 @@ const TotalBillCard = ({cart}) => {
     };
 
 
+    const onClickBuy = () => {
+
+        navigate('/user/place-order')
+
+    }
 
 
 
-  return (
-      <MDBCard>
-          <MDBCardBody>
-              <div className="ms-4">
-                  <p className="fs-6 fw-bold mt-2">
-                      Total Bill    : ₹ {cart.total_price}
-                  </p>
-              </div>
-              <div className="">
-                  <MDBBtn color="danger" className="ms-4" onClick={onClickDelete}>
-                      Delete Cart
-                  </MDBBtn>
-                  <MDBBtn className="ms-4">Buy</MDBBtn>
-              </div>
-          </MDBCardBody>
-      </MDBCard>
-  )
+    return (
+        <MDBCard>
+            <MDBCardBody>
+                <div className="ms-4">
+                    <p className="fs-6 fw-bold mt-2">
+                        Total Bill    : ₹ {cart.total_price}
+                    </p>
+                </div>
+                <div className="">
+                    <MDBBtn color="danger" className="ms-4" onClick={onClickDelete}>
+                        Delete Cart
+                    </MDBBtn>
+                    <MDBBtn className="ms-4" id='buy' name='buy'
+
+                        onClick={onClickBuy}
+
+                    >
+                        Buy
+                    </MDBBtn>
+                </div>
+            </MDBCardBody>
+        </MDBCard>
+    )
 }
 
 export default TotalBillCard

@@ -2,20 +2,16 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React from "react";
 import { STORE_PRODUCTS_API } from "../../apis";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { addToCart } from "./cartApiCalls";
 import { useDispatch } from "react-redux";
-import { fetchCartItems } from "../../features/cart/cartSlice";
 
 const CartListItem = ({ item }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // fetch product details and navigate to detail page while user clik view btn in cart card
   const fetchSingleProductItem = async () => {
