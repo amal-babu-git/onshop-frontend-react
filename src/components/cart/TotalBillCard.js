@@ -31,7 +31,7 @@ const TotalBillCard = ({cart}) => {
           <MDBCardBody>
               <div className="ms-4">
                   <p className="fs-6 fw-bold mt-2">
-                      Total Price: ₹ {cart.total_price}
+                      Total Bill    : ₹ {cart.total_price}
                   </p>
               </div>
               <div className="">

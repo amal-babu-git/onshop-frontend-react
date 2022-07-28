@@ -17,8 +17,6 @@ const User = () => {
 
   return (
     <div>
-      <h2>user</h2>
-
       {username ? <Outlet /> :<LoginReqNotice/> }
     </div>
   );
