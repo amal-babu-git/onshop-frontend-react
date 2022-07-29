@@ -7,10 +7,12 @@ import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API } from "../../apis";
 import axiosInstance from "../../features/auth/axios";
 import { setCartId } from "../../features/cart/cartSlice";
 import { getPaymentStatus, selectOrder, setCart, setOrder } from "../../features/order/orderSlice";
-import { deleteCart } from "../cart/cartApiCalls";
 import PlaceOrderTable from "./PlaceOrderTable";
 
 const PlaceOrder = () => {
+  window.onbeforeunload = function () {
+    return "Are you sure";
+  };
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const location = useLocation();
@@ -21,6 +23,8 @@ const PlaceOrder = () => {
   const [onlinePayment, setOnlinePayment] = useState(false);
   const [payOnDelivary, setpayOnDelivary] = useState(false);
   const [displayOrderResponse, setDisplayOrderResponse] = useState(false);
+  const [disablePayButtons,setDisablePayButtons]=useState(false)
+  const [loading,setLoading]=useState(false)
 
   const paymentStatus = useSelector(getPaymentStatus);
 
@@ -35,30 +39,39 @@ const PlaceOrder = () => {
   };
 
   const placeOrderHandler = async (paymentMethod, cartId) => {
+
     if (paymentMethod === PAY_ON_DELIVARY) {
       await axiosInstance
         .post(STORE_ORDEERS_API, {
           cart_id: cartId,
         })
         .then((response) => {
-          
-          dispatch(setOrder(response.data))
+
           dispatch(setCartId())
+          dispatch(setOrder(response.data))
+          
           console.log(orderList)
           toast.success('Order plcaed successfully !')
+          setLoading(false)
           setDisplayOrderResponse(true)
 
           return response.data;
         })
         .catch((err) => {
+           dispatch(setCartId());
+           setLoading(false);
+          toast.error('Cant place order!, Please contact to customer service for more details.')
+
           console.log(err);
         });
     }
   };
 
 
-  const onClickPlcaeOrder = () => {
-
+  const onClickPlcaeOrder = (e) => {
+    e.target.disabled=true
+    setDisablePayButtons(true)
+    setLoading(true)
     const data = placeOrderHandler(PAY_ON_DELIVARY, cart.id);
   };
 
@@ -69,7 +82,7 @@ const PlaceOrder = () => {
           <MDBCardBody>
             <p className="note note-primary">
               <strong>Note: </strong>
-              Do not close this window.Order is progressing....
+              Do not refresh or close this window.Order is progressing....
             </p>
 
             <table className="table table-striped">
@@ -97,7 +110,7 @@ const PlaceOrder = () => {
                 outline={!onlinePayment}
                 className="me-1 mt-1"
                 onClick={onClickOnlinePayment}
-                // disabled={onlinePayment}
+                disabled={disablePayButtons}
               >
                 Online payment
               </MDBBtn>
@@ -105,12 +118,17 @@ const PlaceOrder = () => {
                 outline={!payOnDelivary}
                 className="ms-1 mt-1"
                 onClick={onClickPayOnDelivary}
-                // disabled={payOnDelivary}
+                disabled={disablePayButtons}
               >
                 Pay on delivary
               </MDBBtn>
             </div>
 
+            {loading && (
+              <div className="text-center">
+                <p className="spinner-border text-primary" role="status"> </p>
+              </div>
+            )}
 
             {onlinePayment && (
               <div className="mt-4 ms-1 form-control">
@@ -157,7 +175,7 @@ const PlaceOrder = () => {
                   </table>
                 </div>
                 {displayOrderResponse && (
-                  <PlaceOrderTable orderList={orderList}/>
+                  <PlaceOrderTable orderList={orderList} />
                 )}
               </>
             )}

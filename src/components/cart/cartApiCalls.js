@@ -17,8 +17,18 @@ export const addToCart = async (productId, quantity, cartId) => {
             return response.data
         })
         .catch((err) => {
-            return err
+            let msg = 'Not enough stock .'
             console.log(err)
+            if (err.response.status === 400) {
+                msg += err?.response?.data?.quantity
+                toast.error(msg, { hideProgressBar: true })
+            } else {
+                toast.error(msg, { hideProgressBar: true })
+
+            }
+
+            return err
+
         })
 }
 

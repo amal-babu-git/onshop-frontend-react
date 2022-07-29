@@ -1,48 +1,44 @@
-import { MDBBtn } from 'mdb-react-ui-kit'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
-import { selectCartId, setCartId } from '../../features/cart/cartSlice'
-import { addToCart } from './cartApiCalls'
-import { createCart } from '../../features/cart/cartSlice'
+import { MDBBtn } from "mdb-react-ui-kit";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { selectCartId, setCartId } from "../../features/cart/cartSlice";
+import { addToCart } from "./cartApiCalls";
+import { createCart } from "../../features/cart/cartSlice";
 
 const AddToCartBtn = ({ id, quantity = 1 }) => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  let cartId = useSelector(selectCartId);
 
-    let cartId = useSelector(selectCartId)
+  const addToCartHandler = async () => {
 
-    const addToCartHandler = async () => {
+    if(quantity>5){
 
-        // id=product_id
-        if (cartId) {
-            addToCart(id, quantity, cartId)
-        }
-        else {
-
-            // cartId=await createCart()
-            toast
-                .info('No cart found!\n Creating cart...', { autoClose: 2000 })
-            dispatch(createCart())
-
-            
-
-
-        }
-
+        toast.warn("Out of stock")
+        return false
 
     }
+    
+    if (cartId) {
+      // id=product_id
+      await addToCart(id, quantity, cartId);
+      
+    } else {
+      toast.info("No cart found!\n Creating cart...", { autoClose: 1000 });
+      dispatch(createCart());
 
+    }
+    return true;
+  };
 
-    return (
-        <>
-            <MDBBtn rounded outline className="me-4 mt-1 "
-                onClick={addToCartHandler}
-            >
-                Add to cart
-            </MDBBtn>
-        </>
-    )
-}
+  return (
+    <>
+      <MDBBtn rounded outline className="me-4 mt-1 " onClick={addToCartHandler}>
+        Add to cart
+      </MDBBtn>
+    </>
+  );
+};
 
-export default AddToCartBtn
+export default AddToCartBtn;
