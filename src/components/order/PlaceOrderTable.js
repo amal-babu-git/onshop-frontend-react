@@ -34,10 +34,7 @@ const PlaceOrderTable = ({ orderList }) => {
               <td>Customer ID</td>
               <td>{orderList?.customer}</td>
             </tr>
-            <tr>
-              <td>Customer ID</td>
-              <td>{orderList?.customer}</td>
-            </tr>
+
             <tr>
               <td>Username</td>
               <td>{username}</td>
