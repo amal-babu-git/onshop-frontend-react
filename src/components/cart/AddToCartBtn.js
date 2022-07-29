@@ -15,7 +15,7 @@ const AddToCartBtn = ({ id, quantity = 1 }) => {
 
     if(quantity>5){
 
-        toast.warn("Out of stock")
+        toast.warn("Only 5 can add one time")
         return false
 
     }

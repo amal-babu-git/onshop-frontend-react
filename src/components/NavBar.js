@@ -69,6 +69,7 @@ export default function App() {
           </MDBNavbarNav>
 
           <SearchBox />
+          
           <form className="d-flex input-group w-auto ms-1 p-1">
             {username ? (<Link onClick={() => dispatch(logOut())
             } to="/signin"> <MDBBtn>Logout</MDBBtn> </Link>) : (<Link to="/signin"><MDBBtn>Login</MDBBtn></Link>)}
