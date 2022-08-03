@@ -1,22 +1,40 @@
+import axios from 'axios';
 import { MDBBtn, MDBCard, MDBCardBody } from 'mdb-react-ui-kit'
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { CART_ID, STORE_CARTS_API } from '../../apis';
 import { setCartFetchStatus, setCartId } from '../../features/cart/cartSlice';
 import DeleteToast from '../subComponents/Toast/DeleteToast';
-import { deleteCart } from './cartApiCalls';
 
 const TotalBillCard = ({ cart }) => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const order = {
-        cartId: cart.id,
-        paymentStatus: 'P',
-        paymentMethod: 'POD',
-        total_bill: cart.total_price
+    const deleteCart = async () => {
+
+
+        if (localStorage.getItem(CART_ID)) {
+
+            const cartId = JSON.parse(localStorage.getItem(CART_ID))
+
+            await axios.delete(`${STORE_CARTS_API}${cartId}`)
+                .then((response) => {
+                    console.log(response.data)
+                    localStorage.removeItem(CART_ID)
+                    toast.done('deleted')
+                    return response.data
+                })
+                .catch((err) => {
+                    console.log(err)
+
+                    toast.error("Can't delete")
+
+                    return err
+                })
+        }
 
     }
 

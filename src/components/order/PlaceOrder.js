@@ -10,21 +10,25 @@ import { getPaymentStatus, selectOrder, setCart, setOrder } from "../../features
 import PlaceOrderTable from "./PlaceOrderTable";
 
 const PlaceOrder = () => {
-  window.onbeforeunload = function () {
-    return "Are you sure";
-  };
-  const navigate=useNavigate()
-  const dispatch=useDispatch()
+
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      return "Are you sure";
+    };
+  }, [])
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const location = useLocation();
   const cart = location.state;
   const totalBill = location.state.total_price;
 
-  const orderList=useSelector(selectOrder)
+  const orderList = useSelector(selectOrder)
   const [onlinePayment, setOnlinePayment] = useState(false);
   const [payOnDelivary, setpayOnDelivary] = useState(false);
   const [displayOrderResponse, setDisplayOrderResponse] = useState(false);
-  const [disablePayButtons,setDisablePayButtons]=useState(false)
-  const [loading,setLoading]=useState(false)
+  const [disablePayButtons, setDisablePayButtons] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const paymentStatus = useSelector(getPaymentStatus);
 
@@ -49,7 +53,7 @@ const PlaceOrder = () => {
 
           dispatch(setCartId())
           dispatch(setOrder(response.data))
-          
+
           console.log(orderList)
           toast.success('Order plcaed successfully !')
           setLoading(false)
@@ -58,8 +62,8 @@ const PlaceOrder = () => {
           return response.data;
         })
         .catch((err) => {
-           dispatch(setCartId());
-           setLoading(false);
+          dispatch(setCartId());
+          setLoading(false);
           toast.error('Cant place order!, Please contact to customer service for more details.')
 
           console.log(err);
@@ -69,7 +73,7 @@ const PlaceOrder = () => {
 
 
   const onClickPlcaeOrder = (e) => {
-    e.target.disabled=true
+    e.target.disabled = true
     setDisablePayButtons(true)
     setLoading(true)
     const data = placeOrderHandler(PAY_ON_DELIVARY, cart.id);
