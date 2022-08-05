@@ -8,7 +8,7 @@ const PrimaryAddress = () => {
   return (
     <div>
       {customerInfo.address[0] ? (
-        <table className="table text-center">
+        <table className="table text-center table-striped">
           <thead></thead>
           <tbody>
             <tr>
@@ -27,7 +27,9 @@ const PrimaryAddress = () => {
                     {customerInfo.address[0].street} ,{" "}
                     {customerInfo.address[0].city}
                   </p>
-                  <p className="fs-6 fw-bolder">Phone : {customerInfo.address[0].phone_no}</p>
+                  <p className="fs-6 fw-bolder">
+                    Phone : {customerInfo.address[0].phone_no}
+                  </p>
                 </div>
               </td>
             </tr>

@@ -7,6 +7,7 @@ import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API } from "../../apis";
 import axiosInstance from "../../features/auth/axios";
 import { setCartId } from "../../features/cart/cartSlice";
 import { getPaymentStatus, selectOrder, setCart, setOrder } from "../../features/order/orderSlice";
+import PrimaryAddress from "../user/PrimaryAddress";
 import PlaceOrderTable from "./PlaceOrderTable";
 
 const PlaceOrder = () => {
@@ -93,7 +94,7 @@ const PlaceOrder = () => {
               <thead>
                 <tr>
                   <th>CART ID</th>
-                  <th>TOTAL BILL AMOUNT</th>
+                  <th>TOTAL BILL AMOUNT</th>  
                 </tr>
               </thead>
               <tbody>
@@ -103,8 +104,10 @@ const PlaceOrder = () => {
                     <strong> ₹ {cart.total_price}</strong>
                   </td>
                 </tr>
+                
               </tbody>
             </table>
+            <PrimaryAddress/>
 
             <div className="ms-1 mt-1 fs-5">
               <p className="fs-6 ms-1 fw-bold text-dark">
