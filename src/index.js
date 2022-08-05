@@ -9,8 +9,10 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { fetchCollections } from './features/collections/collectionsSlice';
 import { STORE_COLLECTIONS_API } from './apis';
+import { fetchCustomerInfo } from './features/auth/authUserSlice';
 
 store.dispatch(fetchCollections({page:STORE_COLLECTIONS_API}))
+store.dispatch(fetchCustomerInfo())
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

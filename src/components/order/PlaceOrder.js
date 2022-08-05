@@ -3,36 +3,39 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API } from "../../apis";
+import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API, SUCCESS } from "../../apis";
+import { getCustomerInfoStatus } from "../../features/auth/authUserSlice";
 import axiosInstance from "../../features/auth/axios";
 import { setCartId } from "../../features/cart/cartSlice";
-import { getPaymentStatus, selectOrder, setCart, setOrder } from "../../features/order/orderSlice";
+import {
+  getPaymentStatus,
+  selectOrder,
+  setCart,
+  setOrder,
+} from "../../features/order/orderSlice";
+import PopupMenu from "../products/filter/PopupMenu";
+import EditAddressCard from "../user/EditAddressCard";
 import PrimaryAddress from "../user/PrimaryAddress";
 import PlaceOrderTable from "./PlaceOrderTable";
 
 const PlaceOrder = () => {
 
-  useEffect(() => {
-    window.onbeforeunload = function () {
-      return "Are you sure";
-    };
-  }, [])
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const cart = location.state;
   const totalBill = location.state.total_price;
 
-  const orderList = useSelector(selectOrder)
+  const orderList = useSelector(selectOrder);
   const [onlinePayment, setOnlinePayment] = useState(false);
   const [payOnDelivary, setpayOnDelivary] = useState(false);
   const [displayOrderResponse, setDisplayOrderResponse] = useState(false);
-  const [disablePayButtons, setDisablePayButtons] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [disablePayButtons, setDisablePayButtons] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const customerInfoStatus=useSelector(getCustomerInfoStatus)
 
   const paymentStatus = useSelector(getPaymentStatus);
-
 
   const onClickOnlinePayment = () => {
     setpayOnDelivary(false);
@@ -44,39 +47,38 @@ const PlaceOrder = () => {
   };
 
   const placeOrderHandler = async (paymentMethod, cartId) => {
-
     if (paymentMethod === PAY_ON_DELIVARY) {
       await axiosInstance
         .post(STORE_ORDEERS_API, {
           cart_id: cartId,
         })
         .then((response) => {
+          dispatch(setCartId());
+          dispatch(setOrder(response.data));
 
-          dispatch(setCartId())
-          dispatch(setOrder(response.data))
-
-          console.log(orderList)
-          toast.success('Order plcaed successfully !')
-          setLoading(false)
-          setDisplayOrderResponse(true)
+          console.log(orderList);
+          toast.success("Order plcaed successfully !");
+          setLoading(false);
+          setDisplayOrderResponse(true);
 
           return response.data;
         })
         .catch((err) => {
           dispatch(setCartId());
           setLoading(false);
-          toast.error('Cant place order!, Please contact to customer service for more details.')
+          toast.error(
+            "Can't place order!, Please contact to customer service for more details."
+          );
 
           console.log(err);
         });
     }
   };
 
-
   const onClickPlcaeOrder = (e) => {
-    e.target.disabled = true
-    setDisablePayButtons(true)
-    setLoading(true)
+    e.target.disabled = true;
+    setDisablePayButtons(true);
+    setLoading(true);
     const data = placeOrderHandler(PAY_ON_DELIVARY, cart.id);
   };
 
@@ -94,7 +96,7 @@ const PlaceOrder = () => {
               <thead>
                 <tr>
                   <th>CART ID</th>
-                  <th>TOTAL BILL AMOUNT</th>  
+                  <th>TOTAL BILL AMOUNT</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,10 +106,21 @@ const PlaceOrder = () => {
                     <strong> ₹ {cart.total_price}</strong>
                   </td>
                 </tr>
-                
               </tbody>
             </table>
-            <PrimaryAddress/>
+
+            {customerInfoStatus === SUCCESS && (
+              <div className="text-end">
+                <PrimaryAddress />
+                <PopupMenu
+                  body={<EditAddressCard />}
+                  title="Update Address"
+                  btnText="Edit Address"
+                  btnColor="light"
+                  btnOutline={false}
+                />
+              </div>
+            )}
 
             <div className="ms-1 mt-1 fs-5">
               <p className="fs-6 ms-1 fw-bold text-dark">
@@ -133,7 +146,9 @@ const PlaceOrder = () => {
 
             {loading && (
               <div className="text-center">
-                <p className="spinner-border text-primary" role="status"> </p>
+                <p className="spinner-border text-primary" role="status">
+                  {" "}
+                </p>
               </div>
             )}
 

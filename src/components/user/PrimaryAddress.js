@@ -3,7 +3,6 @@ import { selectCustomerInfo } from "../../features/auth/authUserSlice";
 
 const PrimaryAddress = () => {
   const customerInfo = useSelector(selectCustomerInfo);
-  
 
   return (
     <div>
