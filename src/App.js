@@ -11,7 +11,7 @@ import Cart from './components/cart/Cart';
 import Profile from './components/user/Profile';
 import ProductDetailPage from './components/products/ProductDetailPage';
 import User from './components/user/User';
-import Orders from './components/order/Orders';
+import Orders from './components/order/orders/Orders';
 import { ToastContainer } from 'react-toastify';
 import PaymentPage from './components/payment/PaymentPage';
 import PlaceOrder from './components/order/PlaceOrder';
