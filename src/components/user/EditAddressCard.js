@@ -43,6 +43,25 @@ const EditAddressCard = () => {
   const validate = (values) => {
     const errors = {};
 
+    if (
+      customerInfo.address[0].street === values.street &&
+      customerInfo.address[0].city === values.city &&
+      customerInfo.address[0].land_mark === values.landmark &&
+      customerInfo.address[0].phone_no === values.phone &&
+      customerInfo.address[0].postal === parseInt(values.postal) &&
+      customerInfo.address[0].house_no === parseInt(values.house)
+    ) {
+      toast.warn("No changes found", {
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
+      errors.street = "No change found";
+      errors.city = "No change found";
+      errors.phone = "No change found";
+      errors.house = "No change found";
+      errors.landmark = "No change found";
+      errors.postal = "No change found";
+    }
     if (!values.phone.match(INDIAN_PHONE_REGEXP)) {
       errors.phone = "Please enter valid phone number";
     }
@@ -120,7 +139,7 @@ const EditAddressCard = () => {
       <MDBCard className="mt-2">
         <PrimaryAddress />
         <form className="mt-2 p-2" onSubmit={onSubmitHandler}>
-          <table className="table table-borderless text-start">
+          <table className="table table-borderless table-sm text-start">
             <thead></thead>
             <tbody>
               <tr>
@@ -199,7 +218,6 @@ const EditAddressCard = () => {
                     name="house"
                     type="number"
                     value={formValues.house}
-                    pattern="[0-9]{6}"
                     onChange={onChangeInputFieldHandler}
                     required
                   />
