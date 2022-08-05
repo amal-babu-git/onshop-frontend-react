@@ -105,8 +105,8 @@ const EditUserInfoCard = () => {
     if (!phone.match(INDIAN_PHONE_REGEXP)) {
       toast.error("Enter valid phone number", { autoClose: 2000 });
       return false;
-    } else if (new Date().getFullYear() - new Date(dob).getFullYear() < 18) {
-      toast.error("Date of birth is not valid, you should be above 18");
+    } else if (new Date().getFullYear() - new Date(dob).getFullYear() < 15) {
+      toast.error("Date of birth is not valid, you should be above 15");
       return false;
     } else if (
       phone === customerInfo.phone &&

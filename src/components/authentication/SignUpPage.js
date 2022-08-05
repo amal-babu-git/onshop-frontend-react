@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-  MDBValidationItem,
   MDBInput,
   MDBBtn,
   MDBCard,
-  MDBValidation,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import login_image from "../../images/login-p.png";
-import login_page_logo_img from "../../images/logob.png";
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom'
 import { EMAIL_REGEXP, REGISTER_NEW_USER_API } from "../../apis";

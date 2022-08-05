@@ -83,7 +83,7 @@ const ProductsPage = () => {
   // }
   return (
     <div className="container">
-      <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" />
+      {/* <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" /> */}
 
       <div className="row justify-content-center">
         <FilterCard />
