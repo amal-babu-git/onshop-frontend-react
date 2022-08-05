@@ -30,7 +30,7 @@ const EditUserInfoCard = () => {
   const [firstname, setFirstname] = useState(customerInfo?.first_name);
   const [lastname, setLastname] = useState(customerInfo?.last_name);
   const [email, setEmail] = useState(customerInfo?.email);
-  const [phone, setPhone] = useState(customerInfo?.phone)  ;
+  const [phone, setPhone] = useState(customerInfo?.phone);
   const [membership, setMembership] = useState("B");
   const [dob, setDob] = useState(customerInfo?.birth_date);
 
@@ -44,19 +44,15 @@ const EditUserInfoCard = () => {
   let content = "";
 
   useEffect(() => {
-    
-
     if (updateUserInfoStatus === LOADING) {
       content = <p>Loading...</p>;
     } else if (updateUserInfoStatus === SUCCESS) {
-
       content = <p>Updated</p>;
 
       toast.success("Updated", { hideProgressBar: true });
 
       dispatch(fetchCustomerInfo());
 
-      
       dispatch(setUpdateUserInfoStatus());
     } else if (updateUserInfoStatus === FAILED) {
       console.log(updateUserInfoError);
@@ -74,21 +70,16 @@ const EditUserInfoCard = () => {
 
   useEffect(() => {
     if (updateCustomerInfoStatus === SUCCESS) {
-
       toast.success("Updated", { hideProgressBar: true });
-
     } else if (updateCustomerInfoStatus === FAILED) {
-
-      console.log(updateCustomerInfoError)
+      console.log(updateCustomerInfoError);
       toast.error("Update request failed", { hideProgressBar: true });
     }
 
     return () => {
-      
       dispatch(setUpdateCustomerInfoStatus());
     };
   }, [updateCustomerInfoStatus]);
-
 
   const onSubmitUserInfo = (e) => {
     e.preventDefault();
@@ -110,26 +101,24 @@ const EditUserInfoCard = () => {
   };
   const onSubmitCustomerInfo = (e) => {
     e.preventDefault();
-    
-  
 
-    if(!phone.match(INDIAN_PHONE_REGEXP)){
-
-      toast.error('Enter valid phone number',{autoClose:2000})
-      return false
-
-    }else if ((new Date().getFullYear() - new Date(dob).getFullYear()<18)) {
-      
+    if (!phone.match(INDIAN_PHONE_REGEXP)) {
+      toast.error("Enter valid phone number", { autoClose: 2000 });
+      return false;
+    } else if (new Date().getFullYear() - new Date(dob).getFullYear() < 18) {
       toast.error("Date of birth is not valid, you should be above 18");
       return false;
-    }else if(phone===customerInfo.phone && dob===customerInfo.birth_date && membership=== customerInfo.membership){
-      
-      toast.warn('No change found',{autoClose:2000,hideProgressBar:true})
-      return false
+    } else if (
+      phone === customerInfo.phone &&
+      dob === customerInfo.birth_date &&
+      membership === customerInfo.membership
+    ) {
+      toast.warn("No change found", { autoClose: 2000, hideProgressBar: true });
+      return false;
     }
-    
+
     dispatch(updateCustomerInfo({ phone, dob, membership }));
-    return true
+    return true;
   };
 
   return (
@@ -137,35 +126,70 @@ const EditUserInfoCard = () => {
       <MDBCardBody className="ms-1 me-1">
         <MDBCardTitle>Update your profile</MDBCardTitle>
 
-        <form className="mt-2 p-2 " onSubmit={onSubmitUserInfo}>
-          <MDBInput
-            className="mt-1 "
-            label="First Name"
-            id="firstname"
-            type="text"
-            value={firstname}
-            onChange={onChangeFirstName}
-            required
-          />
+        <form className="mt-2 p-2 form-control" onSubmit={onSubmitUserInfo}>
+          <table className="table table-borderless text-start">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="firstname">
+                    First Name
+                  </label>
+                </td>
 
-          <MDBInput
-            className="mt-2"
-            label="Last Name"
-            id="lastname"
-            type="text"
-            value={lastname}
-            onChange={onChangeLastName}
-            required
-          />
-          <MDBInput
-            className="mt-2"
-            label="Email"
-            id="email"
-            type="email"
-            value={email}
-            onChange={onChangeEmail}
-            required
-          />
+                <td>
+                  <input
+                    className="form-control"
+                    label="First Name"
+                    id="firstname"
+                    name="firstname"
+                    type="text"
+                    value={firstname}
+                    onChange={onChangeFirstName}
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="lastname">
+                    Last Name
+                  </label>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    label="Last Name"
+                    id="lastname"
+                    name="lastname"
+                    type="text"
+                    value={lastname}
+                    onChange={onChangeLastName}
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="email">
+                    Email
+                  </label>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    label="Email"
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                    required
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <MDBBtn className="mt-2" type="submit" id="btnSubmit">
             Update
           </MDBBtn>
@@ -175,53 +199,80 @@ const EditUserInfoCard = () => {
       <MDBCardBody className="ms-1 me-1">
         {/* <MDBCardTitle></MDBCardTitle> */}
 
-        <form className="mt-2 p-2" onSubmit={onSubmitCustomerInfo}>
-          <MDBInput
-            className="mt-1 "
-            label="Phone"
-            id="phone"
-            type="tel"
-            value={phone}
-            onChange={onChangePhone}
-            required
-          />
+        <form className="mt-2 p-2 form-control" onSubmit={onSubmitCustomerInfo}>
+          <table className="table table-borderless text-start">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="phone">
+                    Phone
+                  </label>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    label="Phone"
+                    name="phone"
+                    id="phone"
+                    type="tel"
+                    value={phone}
+                    onChange={onChangePhone}
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="membership">
+                    Membership
+                  </label>
+                </td>
+                <td>
+                  <div className="text-start font-bolder">
+                    <select
+                      id="membership"
+                      name="membership"
+                      tag="a"
+                      className="btn text-bolder form-control"
+                      onChange={onChangeMembership}
+                      defaultChecked={membership}
 
-          <div className="mt-2 mb-2 ms-1 text-start font-bolder">
-            <label htmlFor="membership" className="me-4">
-              <b>Membership</b>
-            </label>
-            <select
-              id="membership"
-              tag="a"
-              className="btn text-bolder ms-4"
-              onChange={onChangeMembership}
-              defaultChecked={membership}
-              
+                      // value={membership}
+                    >
+                      <option value="B" id="B">
+                        Bronze
+                      </option>
+                      <option value="S" id="S">
+                        Silver
+                      </option>
+                      <option value="G" id="G">
+                        Gold 
+                      </option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label className="fs-6 fw-bolder" htmlFor="dob">
+                    Date Of Birth
+                  </label>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    label="Date of birth"
+                    id="dob"
+                    type="date"
+                    value={dob}
+                    onChange={onChangeDob}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-              // value={membership}
-            >
-              <option value="B" id="B">
-                Bronze
-              </option>
-              <option value="S" id="S">
-                Silver
-              </option>
-              <option value="G" id="G">
-                Gold
-              </option>
-            </select>
-          </div>
-
-          <MDBInput
-            className="mt-2"
-            label="Date of birth"
-            id="dob"
-            type="date"
-            value={dob}
-            onChange={onChangeDob}
-            
-            
-          />
           <MDBBtn
             className="mt-2"
             type="submit"

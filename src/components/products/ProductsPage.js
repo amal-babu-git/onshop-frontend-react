@@ -10,11 +10,12 @@ import {
 } from "../../features/prodcuts/productSlice";
 import { useEffect } from "react";
 import Pagination from "../subComponents/Pagination";
-import FilterByPrice from "./filter/FilterByPrice";
 import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
+import PopupMenu from "./filter/PopupMenu";
+import EditAddressCard from "../user/EditAddressCard";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const ProductsPage = () => {
   // }
   return (
     <div className="container">
-      <FilterByPrice />
+      <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" />
 
       <div className="row justify-content-center">
         <FilterCard />

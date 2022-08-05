@@ -27,7 +27,7 @@ const CustomerInfoCard = () => {
       break;
     case SUCCESS:
       content = (
-        <MDBCardBody className="vh-100">
+        <MDBCardBody className="p-1">
           <img
             src={profileDefaultImg}
             className="rounded-circle mb-3"
@@ -38,19 +38,58 @@ const CustomerInfoCard = () => {
             {customerInfo?.first_name + " " + customerInfo?.last_name}
           </MDBCardTitle>
           <p className="text-primary fw-bolder fs-5">
-            @{customerInfo?.username}
+            @{customerInfo?.username} | {customerInfo?.membership}
           </p>
-          <p className="text-center fs-5 fw-bolder">
-            Email : {customerInfo?.email}{" "}
-          </p>
-          <div className="text-center fs-5 fw-bolder">
-            <MDBTooltip tag="p" title="B-Bronze, S-Silver, G-Gold">
-              Membership : {customerInfo?.membership}
-            </MDBTooltip>
-          </div>
-          <p className="text-center fs-5 fw-bolder">
-            {customerInfo?.phone && "Phone :" + customerInfo?.phone}
-          </p>
+          <table className="table table-sm  table-hover">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p className="fs-6 fw-bolder">Email</p>
+                </td>
+                <td>
+                  <p className="text-center fs-6 fw-bolder">
+                    {customerInfo?.email}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="fs-6 fw-bolder">Phone</p>
+                </td>
+                <td>
+                  <p className="text-center fs-6 fw-bolder">
+                    {customerInfo?.phone && customerInfo?.phone}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="fs-6 fw-bolder">Address</p>
+                </td>
+                <td>
+                  <div className="">
+                    {customerInfo?.address[0] && (
+                      <div>
+                        {" "}
+                        <p className="text-center fs-6">
+                          {customerInfo?.address[0]?.street}
+                        </p>
+                        <p className="text-center fs-6">
+                          {customerInfo?.address[0]?.land_mark}
+                        </p>
+                        <p className="text-center fs-6">
+                          {customerInfo?.address[0]?.city},
+                          {customerInfo?.address[0]?.postal}
+                        </p>
+                        <p className="text-center fs-6"></p>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </MDBCardBody>
       );
 

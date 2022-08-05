@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCustomerInfo } from "../../features/auth/authUserSlice";
 import CustomerInfoCard from "./CustomerInfoCard";
+import EditAddressCard from "./EditAddressCard";
 import EditUserInfoCard from "./EditUserInfoCard";
 
 const Profile = () => {
@@ -49,18 +50,22 @@ const Profile = () => {
 
   const [profileTabActive, setProfileTabActive] = useState(true);
   const [editFormActive, setEditFormActive] = useState(false);
+  const [editAddFormActive, setEditAddFormActive] = useState(false);
 
   const onClickProfileTab = () => {
     setProfileTabActive(true);
     setEditFormActive(false);
+    setEditAddFormActive(false);
   };
   const onClickUpdateTab = () => {
     setProfileTabActive(false);
     setEditFormActive(true);
+    setEditAddFormActive(false);
   };
-  const searchOnClickHandler = () => {
+  const onClickEditAddressTab = () => {
     setProfileTabActive(false);
     setEditFormActive(false);
+    setEditAddFormActive(true);
   };
 
   return (
@@ -78,6 +83,16 @@ const Profile = () => {
                     Profile
                   </MDBTabsLink>
                 </MDBTabsItem>
+
+                <MDBTabsItem>
+                  <MDBTabsLink
+                    active={editAddFormActive}
+                    onClick={onClickEditAddressTab}
+                  >
+                    Update Address
+                  </MDBTabsLink>
+                </MDBTabsItem>
+
                 <MDBTabsItem>
                   <MDBTabsLink
                     active={editFormActive}
@@ -92,6 +107,7 @@ const Profile = () => {
             
             {profileTabActive && <CustomerInfoCard />}
             {editFormActive && <EditUserInfoCard />}
+            {editAddFormActive && <EditAddressCard />}
 
           </MDBCard>
         </div>
