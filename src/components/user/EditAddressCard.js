@@ -44,12 +44,12 @@ const EditAddressCard = () => {
     const errors = {};
 
     if (
-      customerInfo.address[0].street === values.street &&
-      customerInfo.address[0].city === values.city &&
-      customerInfo.address[0].land_mark === values.landmark &&
-      customerInfo.address[0].phone_no === values.phone &&
-      customerInfo.address[0].postal === parseInt(values.postal) &&
-      customerInfo.address[0].house_no === parseInt(values.house)
+      customerInfo?.address[0]?.street === values.street &&
+      customerInfo?.address[0]?.city === values.city &&
+      customerInfo?.address[0]?.land_mark === values.landmark &&
+      customerInfo?.address[0]?.phone_no === values.phone &&
+      customerInfo?.address[0]?.postal === parseInt(values.postal) &&
+      customerInfo?.address[0]?.house_no === parseInt(values.house)
     ) {
       toast.warn("No changes found", {
         autoClose: 1000,

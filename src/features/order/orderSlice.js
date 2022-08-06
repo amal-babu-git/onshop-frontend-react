@@ -3,7 +3,7 @@ import { FAILED, LOADING, PENDING, STORE_ORDEERS_API, SUCCESS } from '../../apis
 import axiosInstance from "../auth/axios"
 
 export const fetchOrdersHandler = createAsyncThunk('order/fetchOrders', async () => {
-    const response = axiosInstance.get(STORE_ORDEERS_API)
+    const response = await axiosInstance.get(STORE_ORDEERS_API)
     console.log(response.data)
     return response.data
 })
@@ -57,7 +57,8 @@ export const selectOrder = (state) => state.order.order
 export const selectOrders = (state) => state.order.orders
 
 export const getPaymentStatus = (state) => state.order.paymentStatus
-export const getOrdersFetchStatus = (state) => state.order.ordersFetchStatus
 export const getPaymentError = (state) => state.order.ordersFetchError
+export const getOrdersFetchStatus = (state) => state.order.ordersFetchStatus
+export const getOrdersFetchError = (state) => state.order.ordersFetchError
 
 export default orderSlice.reducer

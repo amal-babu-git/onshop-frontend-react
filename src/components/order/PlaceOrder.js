@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API, SUCCESS } from "../../apis";
 import { getCustomerInfoStatus } from "../../features/auth/authUserSlice";
 import axiosInstance from "../../features/auth/axios";
-import { setCartId } from "../../features/cart/cartSlice";
+import { createCart, setCartId } from "../../features/cart/cartSlice";
 import {
   getPaymentStatus,
   selectOrder,
@@ -54,6 +54,7 @@ const PlaceOrder = () => {
         })
         .then((response) => {
           dispatch(setCartId());
+          dispatch(createCart())
           dispatch(setOrder(response.data));
 
           console.log(orderList);

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MDBBtn, MDBCard, MDBCardBody } from "mdb-react-ui-kit";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import DeleteToast from "../subComponents/Toast/DeleteToast";
 const TotalBillCard = ({ cart }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const deleteCart = async () => {
     if (localStorage.getItem(CART_ID)) {
@@ -40,7 +41,7 @@ const TotalBillCard = ({ cart }) => {
     return (
       <div>
         <p className="fs-5 fw-bolder" > Are you sure ? </p>
-        <MDBBtn color="danger"  onClick={onClickDelete}>
+        <MDBBtn color="danger"  onClick={onClickDelete} >
           Delete Cart
         </MDBBtn>
       </div>
@@ -78,14 +79,14 @@ const TotalBillCard = ({ cart }) => {
             <tr>
               <td>
                 <PopupMenu btnText="Delete Cart" title="Delete Cart" body={<DeleteAlert/>} btnOutline={false} />
-                <MDBBtn
+                {!cart.total_price==0 && <MDBBtn
                   className="ms-4"
                   id="buy"
                   name="buy"
                   onClick={onClickBuy}
                 >
                   Buy
-                </MDBBtn>
+                </MDBBtn>}
               </td>
             </tr>
           </tbody>
