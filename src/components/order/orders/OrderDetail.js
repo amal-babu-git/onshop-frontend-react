@@ -1,8 +1,10 @@
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBCardTitle, MDBIcon } from "mdb-react-ui-kit";
+import axios from "axios";
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardTitle, MDBIcon, MDBTypography } from "mdb-react-ui-kit";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { useLocation } from "react-router-dom";
-import { SUCCESS } from "../../../apis";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { STORE_PRODUCTS_API, SUCCESS } from "../../../apis";
 import {
   getOrdersFetchStatus,
   selectOrders,
@@ -14,6 +16,8 @@ const OrderDetail = () => {
   const order=location.state
   const isShipped=order.is_shipped
   const isDeliverd=order.is_delivered
+  
+  const isCancelled = order.is_cancelled;
   const paymentStatus=order.payment_status
   const orderId=order.id
   const placedAt=order.placed_at
@@ -22,15 +26,44 @@ const OrderDetail = () => {
 
   const fetchOrdersStatus = useSelector(getOrdersFetchStatus);
 
+  const navigate =useNavigate()
+
+  // When user click the view button in the order detail table navigate to that product detail page
+  const fetchSingleProductItem = async (productId) => {
+    await axios
+      .get(`${STORE_PRODUCTS_API}${productId}/`)
+
+      .then((response) => {
+        console.log(response.data);
+        navigate("/product-detail", { state: response.data });
+      })
+
+      .catch((err) => {
+        console.log(err);
+        toast.err(
+          "Something went wrong ! product not found.Please contact to customer service.."
+        );
+      });
+  };
 
 
   const Content = () => {
+
 
     let items=order.items.map((item,index)=>(
       <tr key={index}>
         <td>{item.product.title}</td>
         <td>{item.quantity}</td>
         <td>{item.unit_price}</td>
+        <td><MDBBtn outline rounded size="sm"
+
+        onClick={()=>{
+
+          fetchSingleProductItem(item.product.id)
+
+        }}
+        
+        >View</MDBBtn></td>
       </tr>
     ))
 
@@ -41,6 +74,13 @@ const OrderDetail = () => {
             <MDBCardTitle className="ms-1">Order Details</MDBCardTitle>
           </MDBCardHeader>
           <MDBCardBody>
+            <div>
+              {isCancelled && (
+                <MDBTypography note noteColor="danger">
+                  <strong>This order is cancelled</strong> For  more details please contact to onshop customer care
+                </MDBTypography>
+              )}
+            </div>
             <table className="table table-striped fs-6">
               <thead></thead>
               <tbody>
@@ -101,14 +141,17 @@ const OrderDetail = () => {
             </table>
             <table className="table table-striped ms-1">
               <thead>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                </tr>
               </thead>
               <tbody>
                 {items}
                 <tr className="fs-6 fw-bolder">
                   <td>Total price</td>
+                  <td></td>
                   <td></td>
                   <td>₹ {totalPrice}</td>
                 </tr>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBCardTitle,MDBBtn, MDBIcon} from 'mdb-react-ui-kit'
+import {MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBCardTitle,MDBBtn, MDBIcon, MDBTypography} from 'mdb-react-ui-kit'
 import { useNavigate } from 'react-router-dom';
 
 const OrderCard = ({order}) => {
@@ -15,6 +15,7 @@ const OrderCard = ({order}) => {
   const isShipped = order.is_shipped;
   const isDeliverd=order.is_delivered
   const paymentStatus=order.payment_status
+  const isCancelled = order.is_cancelled;
   
 
     return (
@@ -87,6 +88,14 @@ const OrderCard = ({order}) => {
                 </tr>
               </tbody>
             </table>
+
+            <div>
+              {isCancelled && (
+                <MDBTypography className='text-dark' note noteColor="danger">
+                  This order is cancelled
+                </MDBTypography>
+              )}
+            </div>
           </MDBCardBody>
 
           <MDBCardFooter className="text-end">

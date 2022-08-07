@@ -1,4 +1,4 @@
-import { MDBCardBody, MDBCardTitle, MDBTooltip } from "mdb-react-ui-kit";
+import { MDBCardBody, MDBCardHeader, MDBCardTitle, MDBTooltip } from "mdb-react-ui-kit";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
@@ -8,6 +8,7 @@ import {
   selectCustomerInfo,
 } from "../../features/auth/authUserSlice";
 import profileDefaultImg from "../../images/default profile.jpg";
+import AdminProfileCard from "./AdminProfileCard";
 
 const CustomerInfoCard = () => {
   const customerInfoStatus = useSelector(getCustomerInfoStatus);
@@ -28,18 +29,24 @@ const CustomerInfoCard = () => {
     case SUCCESS:
       content = (
         <MDBCardBody className="p-1">
-          <img
-            src={profileDefaultImg}
-            className="rounded-circle mb-3"
-            style={{ width: "150px" }}
-            alt="Avatar"
-          />
-          <MDBCardTitle>
-            {customerInfo?.first_name + " " + customerInfo?.last_name}
-          </MDBCardTitle>
-          <p className="text-primary fw-bolder fs-5">
-            @{customerInfo?.username} | {customerInfo?.membership}
-          </p>
+          <MDBCardHeader>
+            <img
+              src={profileDefaultImg}
+              className="rounded-circle mb-3"
+              style={{ width: "150px" }}
+              alt="Avatar"
+            />
+            <MDBCardTitle>
+              {customerInfo?.first_name + " " + customerInfo?.last_name}
+            </MDBCardTitle>
+            <p className="text-primary fw-bolder fs-5">
+              @{customerInfo?.username} | {customerInfo?.membership}
+            </p>
+            <div className="row justify-content-center">
+              <AdminProfileCard />
+            </div>
+          </MDBCardHeader>
+
           <table className="table table-sm  table-hover">
             <thead></thead>
             <tbody>
@@ -71,7 +78,6 @@ const CustomerInfoCard = () => {
                   <div className="">
                     {customerInfo?.address[0] && (
                       <div>
-                        {" "}
                         <p className="text-center fs-6">
                           {customerInfo?.address[0]?.street}
                         </p>

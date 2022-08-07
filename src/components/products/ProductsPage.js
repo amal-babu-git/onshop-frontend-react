@@ -14,8 +14,8 @@ import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
-import PopupMenu from "./filter/PopupMenu";
-import EditAddressCard from "../user/EditAddressCard";
+import AdminProfileCard from "../user/AdminProfileCard";
+import { MDBCard } from "mdb-react-ui-kit";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -86,6 +86,9 @@ const ProductsPage = () => {
       {/* <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" /> */}
 
       <div className="row justify-content-center">
+        {/* <MDBCard className=" col-xl-6 badge-primary mt-2 mb-1" style={{minHeight:'320px'}}>
+          <AdminProfileCard />
+        </MDBCard> */}
         <FilterCard />
       </div>
       <div className="row justify-content-center">{content}</div>
