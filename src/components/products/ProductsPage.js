@@ -14,8 +14,6 @@ import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
-import AdminProfileCard from "../user/AdminProfileCard";
-import { MDBCard } from "mdb-react-ui-kit";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();

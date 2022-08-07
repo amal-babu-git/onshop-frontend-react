@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { Link, useLocation } from "react-router-dom";
 import AddToCartBtn from "../cart/AddToCartBtn";
+import ReviewsList from "./reviews/ReviewsList";
 
 export default function ProductCard() {
   const location = useLocation();
@@ -69,6 +70,10 @@ export default function ProductCard() {
           <p className="fs-4 ">{description}</p>
         </div>
       </div>
+
+     <ReviewsList productId={id}/>
+
+
     </div>
   );
 }
