@@ -30,9 +30,9 @@ const EditUserInfoCard = () => {
   const [firstname, setFirstname] = useState(customerInfo?.first_name);
   const [lastname, setLastname] = useState(customerInfo?.last_name);
   const [email, setEmail] = useState(customerInfo?.email);
-  const [phone, setPhone] = useState(customerInfo?.phone);
+  const [phone, setPhone] = useState(customerInfo?.phone ?? '');
   const [membership, setMembership] = useState("B");
-  const [dob, setDob] = useState(customerInfo?.birth_date);
+  const [dob, setDob] = useState(customerInfo?.birth_date ?? '');
 
   const onChangeFirstName = (e) => setFirstname(e.target.value);
   const onChangeLastName = (e) => setLastname(e.target.value);
