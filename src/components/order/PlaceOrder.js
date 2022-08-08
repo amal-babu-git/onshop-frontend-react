@@ -30,6 +30,7 @@ const PlaceOrder = () => {
   const orderList = useSelector(selectOrder);
   const [onlinePayment, setOnlinePayment] = useState(false);
   const [payOnDelivary, setpayOnDelivary] = useState(false);
+  const [payMethod, setPayMethod] = useState(PAY_ON_DELIVARY);
   const [displayOrderResponse, setDisplayOrderResponse] = useState(false);
   const [disablePayButtons, setDisablePayButtons] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,10 +41,12 @@ const PlaceOrder = () => {
   const onClickOnlinePayment = () => {
     setpayOnDelivary(false);
     setOnlinePayment(true);
+    setPayMethod(ONLINE_PAYMENT)
   };
   const onClickPayOnDelivary = () => {
     setpayOnDelivary(true);
     setOnlinePayment(false);
+    setPayMethod(PAY_ON_DELIVARY)
   };
 
   const placeOrderHandler = async (paymentMethod, cartId) => {
@@ -51,6 +54,7 @@ const PlaceOrder = () => {
       await axiosInstance
         .post(STORE_ORDEERS_API, {
           cart_id: cartId,
+          payment_method:payMethod,
         })
         .then((response) => {
           dispatch(setCartId());
@@ -141,7 +145,7 @@ const PlaceOrder = () => {
                 onClick={onClickPayOnDelivary}
                 disabled={disablePayButtons}
               >
-                Pay on delivary
+                Pay on delivery
               </MDBBtn>
             </div>
 
