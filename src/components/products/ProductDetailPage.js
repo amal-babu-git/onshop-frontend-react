@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
+import { MDBBtn, MDBCard, MDBInput } from "mdb-react-ui-kit";
 import { Link, useLocation } from "react-router-dom";
 import AddToCartBtn from "../cart/AddToCartBtn";
 import ReviewsList from "./reviews/ReviewsList";
 
 export default function ProductCard() {
+
+
+
+  useEffect(() => { window.scrollTo(0, 0) },[])
   const location = useLocation();
 
   const id = location.state.id
@@ -21,8 +25,8 @@ export default function ProductCard() {
 
   return (
     <div className="container">
-      <div className="row justify-content-center ">
-        <div className="mt-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div className="row justify-content-center">
+        <div className="mt-4 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
           {product_image ? (
             <img
               src={product_image.image}
@@ -37,17 +41,17 @@ export default function ProductCard() {
             />
           )}
         </div>
-        <div className="mt-4 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-          <h3 className="fs-1">{title}</h3>
-          <h4>
+        <div className="mt-4 p-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <h3 className="fs-3 mb-2">{title}</h3>
+          <h5>
             Price :
-            <strong className="text-decoration-line-through fs-4">
+            <strong className="text-decoration-line-through fs-5">
               ₹{" "}
               {Math.floor((unit_price / 100) * discount_price_prcent) +
                 unit_price}
             </strong>
-            <strong className="fs-4"> ₹ {unit_price}</strong>
-          </h4>
+            <strong className="fs-5"> ₹ {unit_price}</strong>
+          </h5>
           <h5>Category : {collection}</h5>
           <h5>Discount : {discount_price_prcent}%</h5>
           <div className="mt-4 w-50" >
@@ -67,7 +71,7 @@ export default function ProductCard() {
       </div>
       <div className="row justify-content-center col-sm col-md-6 col-lg-6 col-xl-6">
         <div className="mt-4">
-          <p className="fs-4 ">{description}</p>
+          <p className="fs-5 ">{description}</p>
         </div>
       </div>
 

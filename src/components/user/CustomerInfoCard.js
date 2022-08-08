@@ -20,8 +20,10 @@ const CustomerInfoCard = () => {
   switch (customerInfoStatus) {
     case LOADING:
       content = (
-        <div className="spinner-border text-primary ms-4 mt-4" role="status">
-          <span className="visually-hidden">Loading...</span>
+        <div className="text-center">
+          <div className="spinner-border text-primary ms-4 mt-4" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       );
 

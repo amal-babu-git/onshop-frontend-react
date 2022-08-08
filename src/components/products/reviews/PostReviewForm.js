@@ -30,12 +30,12 @@ const PostReviewForm = ({ productId }) => {
         description: description,
       })
       .then((response) => {
-        dispatch(fetchReviewsHandler({productId}))
+        dispatch(fetchReviewsHandler({ productId }));
         toast.success("Review posted successfully", {
           hideProgressBar: true,
           autoClose: 1000,
         });
-        console.log(response.data);
+        setDescription("");
       })
       .catch((err) => {
         console.log(err);
@@ -43,8 +43,6 @@ const PostReviewForm = ({ productId }) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
-
-        
       });
   };
 
@@ -54,8 +52,8 @@ const PostReviewForm = ({ productId }) => {
   };
 
   return (
-    <div>
-      <MDBCard>
+    
+      <MDBCard className="mb-2">
         <MDBCardHeader>
           <MDBCardTitle>Add New Review</MDBCardTitle>
         </MDBCardHeader>
@@ -76,7 +74,7 @@ const PostReviewForm = ({ productId }) => {
           </form>
         </MDBCardBody>
       </MDBCard>
-    </div>
+    
   );
 };
 

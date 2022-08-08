@@ -44,14 +44,18 @@ const ReviewsList = ({ productId }) => {
   }
 
   return (
-    <div className="mt-4 ms-1 me-1 p-1 container-fluid">
-      <p className="text-center fs-5 fw-bolder badge-primary">Reviews</p>
+    <div className="mt-4  container-fluid">
       <div className="row col-xl-12">
+        <p className="text-center fs-5 fw-bolder badge-primary">Reviews</p>
+      </div>
+      <div className="row">
         <PostReviewForm productId={productId} />
       </div>
-      <div className="row col-xl-12">{content}</div>
+      <div className="row justify-content-around"> {content}</div>
     </div>
   );
 };
 
 export default ReviewsList;
+
+      

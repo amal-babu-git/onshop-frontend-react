@@ -67,11 +67,7 @@ const PlaceOrderTable = ({ orderList }) => {
                   rounded
                   outline
                   onClick={() => {
-                    window.scrollTo({
-                      top: 100,
-                      left: 100,
-                      behavior: "smooth",
-                    });
+                    window.scrollTo(0, 0)
                     setTimeout(() => {
                       window.print();
                     }, 1000);
