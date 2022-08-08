@@ -10,6 +10,7 @@ import {
 import ReviewCard from "./ReviewCard";
 import { toast } from "react-toastify";
 import PostReviewForm from "./PostReviewForm";
+import { getCustomerInfoStatus } from "../../../features/auth/authUserSlice";
 
 const ReviewsList = ({ productId }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const ReviewsList = ({ productId }) => {
   const reviews = useSelector(selectReviews);
   const reviewsFetchStatus = useSelector(getReviewsFetchStatus);
   const reviewsFetchError = useSelector(getReviewsFetchError);
+  const customerInfoStatus = useSelector(getCustomerInfoStatus);
   let content = "";
 
   if (reviewsFetchStatus === LOADING) {
@@ -49,7 +51,9 @@ const ReviewsList = ({ productId }) => {
         <p className="text-center fs-5 fw-bolder badge-primary">Reviews</p>
       </div>
       <div className="row">
-        <PostReviewForm productId={productId} />
+        {customerInfoStatus === SUCCESS && (
+          <PostReviewForm productId={productId} />
+        )}
       </div>
       <div className="row justify-content-around"> {content}</div>
     </div>
@@ -57,5 +61,3 @@ const ReviewsList = ({ productId }) => {
 };
 
 export default ReviewsList;
-
-      

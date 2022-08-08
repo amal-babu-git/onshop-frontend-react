@@ -7,8 +7,6 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
-  MDBInput,
 } from 'mdb-react-ui-kit';
 
 const PopupMenu = ({ title, btnText = 'Popup', body, btnOutline = true, btnColor = 'primary' }) => {

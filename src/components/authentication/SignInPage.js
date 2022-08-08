@@ -20,6 +20,7 @@ import {
   signIn,
 } from "../../features/auth/authUserSlice";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
+import { createCart } from "../../features/cart/cartSlice";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -62,13 +63,15 @@ const SignInPage = () => {
   useEffect(()=>{
     if (signInStatus === LOADING) {
       toast("loading...", { autoClose: 1000 });
+
     } else if (signInStatus === SUCCESS) {
-      console.log("success");
+
+      
       toast.success(`Login done, welcome ${username}`, {
         autoClose: 1000,
         hideProgressBar: true,
       });
-
+      dispatch(createCart())
       setTimeout(() => navigate("/user/profile"), 1000);
     } else if (signInStatus === FAILED) {
       console.log(signInError);

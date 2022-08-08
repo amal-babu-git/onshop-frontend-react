@@ -6,20 +6,17 @@ import {
   MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
-  MDBBtn,
   MDBCollapse,
 } from "mdb-react-ui-kit";
 import { Link, NavLink } from "react-router-dom";
 import SearchBox from "./subComponents/SearchBox";
 import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
 import ProductNavLinkItem from "./products/ProductNavLinkItem";
-import { useDispatch, useSelector } from "react-redux";
-import { logOut, selectUsername } from "../features/auth/authUserSlice";
+import LoginLogoutNavBtns from "./subComponents/LoginLogoutNavBtns";
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
-  const username = useSelector(selectUsername);
-  const dispatch = useDispatch(logOut)
+  
 
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
@@ -69,11 +66,8 @@ export default function App() {
           </MDBNavbarNav>
 
           <SearchBox />
-          
-          <form className="d-flex input-group w-auto ms-1 p-1">
-            {username ? (<Link onClick={() => dispatch(logOut())
-            } to="/signin"> <MDBBtn>Logout</MDBBtn> </Link>) : (<Link to="/signin"><MDBBtn>Login</MDBBtn></Link>)}
-          </form>
+
+         <LoginLogoutNavBtns/>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

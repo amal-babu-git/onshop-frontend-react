@@ -13,7 +13,7 @@ import {
   setCart,
   setOrder,
 } from "../../features/order/orderSlice";
-import PopupMenu from "../products/filter/PopupMenu";
+import PopupMenu from "../subComponents/popupmenu/PopupMenu";
 import EditAddressCard from "../user/EditAddressCard";
 import PrimaryAddress from "../user/PrimaryAddress";
 import PlaceOrderTable from "./PlaceOrderTable";

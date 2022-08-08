@@ -32,12 +32,12 @@ const CustomerInfoCard = () => {
       content = (
         <MDBCardBody className="p-1">
           <MDBCardHeader>
-            <img
+            {/* <img
               src={profileDefaultImg}
               className="rounded-circle mb-3"
               style={{ width: "150px" }}
               alt="Avatar"
-            />
+            /> */}
             <MDBCardTitle>
               {customerInfo?.first_name + " " + customerInfo?.last_name}
             </MDBCardTitle>

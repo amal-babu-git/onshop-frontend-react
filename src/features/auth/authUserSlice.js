@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { LOADING, SUCCESS, FAILED, API } from "../../apis"
+import { LOADING, SUCCESS, FAILED, API, CART_ID } from "../../apis"
 import jwt_decode from 'jwt-decode'
 import axiosInstance from './axios';
 
@@ -98,10 +98,11 @@ const authUserSlice = createSlice({
             state.accessToken = null
             state.refreshToken = null
             state.signInStatus = null
-            state.signInError = null
+            state.signInError = null  
 
             localStorage.removeItem('accessToken')
             localStorage.removeItem('refreshToken')
+            localStorage.removeItem(CART_ID)
 
 
         },
@@ -191,7 +192,7 @@ const authUserSlice = createSlice({
 });
 
 
-export const { setCredentials, setCustomerInfo, logOut, setUpdateUserInfoStatus, setUpdateCustomerInfoStatus,setSignInStatus } = authUserSlice.actions
+export const { setCredentials, setCustomerInfo, logOut, setUpdateUserInfoStatus, setUpdateCustomerInfoStatus, setSignInStatus } = authUserSlice.actions
 
 
 export const getSigninSignInStatus = (state) => state.auth.signInStatus;

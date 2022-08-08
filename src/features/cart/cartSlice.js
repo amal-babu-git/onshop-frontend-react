@@ -41,7 +41,7 @@ const cartSlice = createSlice({
             state.fetchError = null
 
         },
-        //set cart id null
+        //set cart id null FIXME: this name is consufing change later, its now a braking change!
         setCartId: (state, action) => {
             state.cartID = null
         },

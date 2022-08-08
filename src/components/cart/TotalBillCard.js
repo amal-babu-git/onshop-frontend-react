@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CART_ID, STORE_CARTS_API } from "../../apis";
 import { setCartFetchStatus, setCartId } from "../../features/cart/cartSlice";
-import PopupMenu from "../products/filter/PopupMenu";
+import PopupMenu from "../subComponents/popupmenu/PopupMenu";
 import DeleteToast from "../subComponents/Toast/DeleteToast";
 
 const TotalBillCard = ({ cart }) => {
