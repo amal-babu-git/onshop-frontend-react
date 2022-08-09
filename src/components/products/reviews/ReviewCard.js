@@ -9,7 +9,7 @@ import {
 
 const ReviewCard = ({ username, description ,date}) => {
   return (
-    <MDBCard className="col-xl-6 mt-2" style={{ maxWidth: "40rem" }}>
+    <div className="col-xl-6 mt-2 card" style={{ maxWidth: "40rem" }}>
       <MDBCardHeader>
         <MDBCardTitle>{username}</MDBCardTitle>
       </MDBCardHeader>
@@ -17,7 +17,7 @@ const ReviewCard = ({ username, description ,date}) => {
         <p className="fw-normal">{description}</p>
       </MDBCardBody>
       <MDBCardFooter>{date}</MDBCardFooter>
-    </MDBCard>
+    </div>
   );
 };
 
