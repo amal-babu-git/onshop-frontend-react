@@ -1,111 +1,111 @@
 import React from 'react'
-import {MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBCardTitle,MDBBtn, MDBIcon, MDBTypography} from 'mdb-react-ui-kit'
+import { MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardTitle, MDBBtn, MDBIcon, MDBTypography } from 'mdb-react-ui-kit'
 import { useNavigate } from 'react-router-dom';
 
-const OrderCard = ({order}) => {
+const OrderCard = ({ order }) => {
 
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
-  const onClickView=()=>{
-    navigate('/user/order-detail',{state:order})
+  const onClickView = () => {
+    navigate('/user/order-detail', { state: order })
   }
 
-  const orderId=order.id
-  const isShipped = order.is_shipped;
-  const isDeliverd=order.is_delivered
-  const paymentStatus=order.payment_status
-  const isCancelled = order.is_cancelled;
-  
+  const orderId = order.id
+  const isShipped = order?.is_shipped;
+  const isDeliverd = order?.is_delivered
+  const paymentStatus = order?.payment[0]?.payment_status
+  const isCancelled = order?.is_cancelled;
 
-    return (
-      <div className="col-sm-12 col-md-4 col-xl-3 mt-2">
-        <MDBCard>
-          <MDBCardHeader>
-            <MDBCardTitle>{orderId}</MDBCardTitle>
-          </MDBCardHeader>
 
-          <MDBCardBody>
-            <table className="table table-sm table-striped">
-              <thead></thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <p>Shipped</p>
-                  </td>
-                  <td>
-                    <div>
-                      {isShipped ? (
-                        <MDBIcon
-                          fas
-                          icon="check-circle"
-                          color="primary"
-                          size="lg"
-                        />
-                      ) : (
-                        <MDBIcon fas icon="times" color="danger" size="lg" />
-                      )}
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>Deliverd</p>
-                  </td>
-                  <td>
-                    <p>
-                      {isDeliverd ? (
-                        <MDBIcon
-                          fas
-                          icon="check-circle"
-                          color="primary"
-                          size="lg"
-                        />
-                      ) : (
-                        <MDBIcon fas icon="times" color="danger" size="lg" />
-                      )}
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>Payment</p>
-                  </td>
-                  <td>
-                    <p>
-                      {paymentStatus === "C" ? (
-                        <MDBIcon
-                          fas
-                          icon="check-circle"
-                          color="primary"
-                          size="lg"
-                        />
-                      ) : (
-                        <MDBIcon fas icon="times" color="danger" size="lg" />
-                      )}
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  return (
+    <div className="col-sm-12 col-md-4 col-xl-3 mt-2">
+      <MDBCard>
+        <MDBCardHeader>
+          <MDBCardTitle>{orderId}</MDBCardTitle>
+        </MDBCardHeader>
 
-            <div>
-              {isCancelled && (
-                <MDBTypography className='text-dark' note noteColor="danger">
-                  This order is cancelled
-                </MDBTypography>
-              )}
-            </div>
-          </MDBCardBody>
+        <MDBCardBody>
+          <table className="table table-sm table-striped">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p>Shipped</p>
+                </td>
+                <td>
+                  <div>
+                    {isShipped ? (
+                      <MDBIcon
+                        fas
+                        icon="check-circle"
+                        color="primary"
+                        size="lg"
+                      />
+                    ) : (
+                      <MDBIcon fas icon="times" color="danger" size="lg" />
+                    )}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Deliverd</p>
+                </td>
+                <td>
+                  <p>
+                    {isDeliverd ? (
+                      <MDBIcon
+                        fas
+                        icon="check-circle"
+                        color="primary"
+                        size="lg"
+                      />
+                    ) : (
+                      <MDBIcon fas icon="times" color="danger" size="lg" />
+                    )}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Payment</p>
+                </td>
+                <td>
+                  <p>
+                    {paymentStatus === "C" ? (
+                      <MDBIcon
+                        fas
+                        icon="check-circle"
+                        color="primary"
+                        size="lg"
+                      />
+                    ) : (
+                      <MDBIcon fas icon="times" color="danger" size="lg" />
+                    )}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-          <MDBCardFooter className="text-end">
-            <MDBBtn outline rounded onClick={onClickView}>
-              View
-            </MDBBtn>
-          </MDBCardFooter>
-        </MDBCard>
-      </div>
-    );
+          <div>
+            {isCancelled && (
+              <MDBTypography className='text-dark' note noteColor="danger">
+                This order is cancelled
+              </MDBTypography>
+            )}
+          </div>
+        </MDBCardBody>
+
+        <MDBCardFooter className="text-end">
+          <MDBBtn outline rounded onClick={onClickView}>
+            View
+          </MDBBtn>
+        </MDBCardFooter>
+      </MDBCard>
+    </div>
+  );
 }
 
 export default OrderCard

@@ -4,8 +4,17 @@ import { getPaymentToken, processPayment } from "./paymentHelper";
 import { MDBBtn, MDBTypography } from 'mdb-react-ui-kit'
 import CartSpinner from "../subComponents/customSpinners/CartSpinner"
 import { toast } from 'react-toastify'
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setPaymentDetails } from "../../features/order/orderSlice";
 
 const PaymentB = ({ totalAmount = 199 }) => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
+
     const [info, setInfo] = useState({
         loading: false,
         success: false,
@@ -32,12 +41,14 @@ const PaymentB = ({ totalAmount = 199 }) => {
     }, []);
 
     // onclick payment button
-    const onPayment =  () => {
+    const onPayment = () => {
         setInfo({ ...info, loading: true })
         let nonce;
-        let getNonce =  info.instance.requestPaymentMethod()
+        console.log(info.instance)
+        let getNonce = info.instance.requestPaymentMethod()
             .then((data) => {
                 nonce = data.nonce
+                console.log('nonce', nonce)
                 const paymentData = {
                     paymentMethodNonce: nonce,
                     amount: totalAmount
@@ -57,16 +68,24 @@ const PaymentB = ({ totalAmount = 199 }) => {
                                 success: response.success,
                                 loading: false
                             })
+                            
                             toast.success('Payment success', { hideProgressBar: true })
                             console.log('paymentSucess')
-                            // const paymentResponseData = {
-                            //     transactionId: response.transaction.id,
-                            //     amount: response.transaction.amount
-                            // }
+                            const paymentResponseData = {
+                                transactionId: response.transaction.id,
+                                amount: response.transaction.amount,
+                                paymentMethod:'ON',
+                                paymentStatus:'C',
+
+                            }
+                            dispatch(setPaymentDetails(paymentResponseData))
+                            console.log(paymentResponseData)
+                            navigate('/user/place-order/',{replace:true})
                         }
                     }))
             })
             .catch((err) => {
+                console.log('err')
                 console.log('nonceErr', err)
                 toast.error('Payment failed', { hideProgressBar: true })
                 setInfo({ ...info, loading: false })
@@ -75,7 +94,7 @@ const PaymentB = ({ totalAmount = 199 }) => {
     }
 
     const ShowBtnDropin = () => {
-        return <div className="text-center">
+        return (<div className="text-center">
             {
                 info.clientToken !== null && (
                     <div>
@@ -87,7 +106,7 @@ const PaymentB = ({ totalAmount = 199 }) => {
                         {<MDBBtn onClick={onPayment} disabled={info.loading} className="mt-1 mb-2 text-end">Confirm</MDBBtn>}
                     </div>
                 )}
-        </div>;
+        </div>);
     };
 
     return (<div className="card ms-1 me-1">
@@ -95,13 +114,15 @@ const PaymentB = ({ totalAmount = 199 }) => {
             <MDBTypography note noteColor='danger'>
                 <strong>Please wait...</strong>
                 Do not refresh or close this page.
+
             </MDBTypography>
             <p className="fs-5 fw-bold ms-2">Bill amount : ₹ {totalAmount}</p>
+            <p>4009348888881881</p>
             <div className="text-center">
                 {info.loading && <CartSpinner />}
             </div>
         </div>
-        <ShowBtnDropin />
+        {ShowBtnDropin()}
     </div>);
 };
 

@@ -16,6 +16,7 @@ const initialState = {
     ordersFetchError: '',
 
     paymentStatus: PENDING,
+    paymentDetails:[] 
 
 
 }
@@ -30,6 +31,12 @@ const orderSlice = createSlice({
         },
         setpaymentStatus: (state, action) => {
             state.order = action.payload
+        },
+        setPaymentDetails: (state, action) => {
+            state.paymentDetails = action.payload
+        },
+        resetPaymentDetails: (state, action) => {
+            state.paymentDetails = []
         },
 
     },
@@ -51,10 +58,11 @@ const orderSlice = createSlice({
 
 });
 
-export const { setOrder, setCart } = orderSlice.actions
+export const { setOrder, setCart,setPaymentDetails,resetPaymentDetails } = orderSlice.actions
 
 export const selectOrder = (state) => state.order.order
 export const selectOrders = (state) => state.order.orders
+export const selectPaymentDetails = (state) => state.order.paymentDetails
 
 export const getPaymentStatus = (state) => state.order.paymentStatus
 export const getPaymentError = (state) => state.order.ordersFetchError

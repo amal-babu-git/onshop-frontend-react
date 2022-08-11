@@ -3,13 +3,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ONLINE_PAYMENT, PAY_ON_DELIVARY, STORE_ORDEERS_API, SUCCESS } from "../../apis";
-import { getCustomerInfoStatus } from "../../features/auth/authUserSlice";
+import {
+  ONLINE_PAYMENT,
+  PAY_ON_DELIVARY,
+  STORE_ORDEERS_API,
+  SUCCESS,
+} from "../../apis";
+import {
+  getCustomerInfoStatus,
+  selectCustomerInfo,
+} from "../../features/auth/authUserSlice";
 import axiosInstance from "../../features/auth/axios";
-import { createCart, setCartId } from "../../features/cart/cartSlice";
+import { createCart, selectCart, setCartId } from "../../features/cart/cartSlice";
 import {
   getPaymentStatus,
+  resetPaymentDetails,
   selectOrder,
+  selectPaymentDetails,
   setCart,
   setOrder,
 } from "../../features/order/orderSlice";
@@ -19,34 +29,33 @@ import PrimaryAddress from "../user/PrimaryAddress";
 import PlaceOrderTable from "./PlaceOrderTable";
 
 const PlaceOrder = () => {
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const cart = location.state;
-  const totalBill = location.state.total_price;
+  const cart = useSelector(selectCart)??location?.state;
+  const totalBill = cart.total_price;
 
   const orderList = useSelector(selectOrder);
-  const [onlinePayment, setOnlinePayment] = useState(false);
+  const [onlinePayment, setOnlinePayment] = useState(true);
   const [payOnDelivary, setpayOnDelivary] = useState(false);
   const [payMethod, setPayMethod] = useState(PAY_ON_DELIVARY);
   const [displayOrderResponse, setDisplayOrderResponse] = useState(false);
   const [disablePayButtons, setDisablePayButtons] = useState(false);
   const [loading, setLoading] = useState(false);
-  const customerInfoStatus=useSelector(getCustomerInfoStatus)
-
-  const paymentStatus = useSelector(getPaymentStatus);
+  const customerInfoStatus = useSelector(getCustomerInfoStatus);
+  const paymentDetails = useSelector(selectPaymentDetails);
+  const customerInfo = useSelector(selectCustomerInfo);
+  const paymentStatus = paymentDetails?.paymentStatus ?? "P";
 
   const onClickOnlinePayment = () => {
     setpayOnDelivary(false);
     setOnlinePayment(true);
-    setPayMethod(ONLINE_PAYMENT)
+    setPayMethod(ONLINE_PAYMENT);
   };
   const onClickPayOnDelivary = () => {
     setpayOnDelivary(true);
     setOnlinePayment(false);
-    setPayMethod(PAY_ON_DELIVARY)
+    setPayMethod(PAY_ON_DELIVARY);
   };
 
   const placeOrderHandler = async (paymentMethod, cartId) => {
@@ -54,11 +63,19 @@ const PlaceOrder = () => {
       await axiosInstance
         .post(STORE_ORDEERS_API, {
           cart_id: cartId,
-          payment_method:payMethod,
+
+          payment: {
+            // if only online
+            total_amount: paymentDetails?.amount ?? 0,
+            transaction_id: paymentDetails?.transactionId ?? "OFF",
+            username: paymentDetails?.username ?? customerInfo?.username,
+            payment_method: paymentDetails?.paymentMethod ?? payMethod,
+            payment_status: paymentDetails?.paymentStatus ?? "P",
+          },
         })
         .then((response) => {
           dispatch(setCartId());
-          dispatch(createCart())
+          dispatch(createCart());
           dispatch(setOrder(response.data));
 
           console.log(orderList);
@@ -86,6 +103,21 @@ const PlaceOrder = () => {
     setLoading(true);
     const data = placeOrderHandler(PAY_ON_DELIVARY, cart.id);
   };
+
+  const onClickMakePayment=()=>{
+
+    navigate('/user/payment/',{state:totalBill})
+
+  }
+
+  useEffect(() => {
+    
+
+    return () => {
+      console.log("Reseting payment details");
+      dispatch(resetPaymentDetails());
+    };
+  }, []);
 
   return (
     <div className="container">
@@ -171,8 +203,36 @@ const PlaceOrder = () => {
                       <td>Online</td>
                       <td>{paymentStatus}</td>
                     </tr>
+                    <tr>
+                      <td>Transaction ID</td>
+                      <td>
+                        {paymentDetails?.transactionId ??
+                          "Transaction not yet done"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Amount paid</td>
+                      <td>{paymentDetails?.amount ?? "Not paid"}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        {paymentDetails?.paymentStatus === "C" ? (
+                          <MDBBtn rounded outline onClick={onClickPlcaeOrder}>
+                            Plcae order
+                          </MDBBtn>
+                        ) : (
+                          <MDBBtn rounded outline onClick={onClickMakePayment}>
+                            Make payment
+                          </MDBBtn>
+                        )}
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
+                {displayOrderResponse && (
+                  <PlaceOrderTable orderList={orderList} />
+                )}
               </div>
             )}
             {payOnDelivary && (

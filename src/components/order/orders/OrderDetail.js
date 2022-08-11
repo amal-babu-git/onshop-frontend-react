@@ -7,26 +7,27 @@ import { toast } from "react-toastify";
 import { STORE_PRODUCTS_API, SUCCESS } from "../../../apis";
 import {
   getOrdersFetchStatus,
-  selectOrders,
 } from "../../../features/order/orderSlice";
 
 const OrderDetail = () => {
 
-  const location =useLocation()
-  const order=location.state
-  const isShipped=order.is_shipped
-  const isDeliverd=order.is_delivered
-  
+  const location = useLocation()
+  const order = location.state
+  const isShipped = order.is_shipped
+  const isDeliverd = order.is_delivered
+
   const isCancelled = order.is_cancelled;
-  const paymentStatus=order.payment_status
-  const orderId=order.id
-  const placedAt=order.placed_at
-  const totalPrice=order.total_price
-  console.log(location.state)
+  const orderId = order.id
+  const placedAt = order.placed_at
+  const totalPrice = order.total_price
+  const paymentStatus = order?.payment[0]?.payment_status
+  const transactionId = order?.payment[0]?.transaction_id
+  const totalAmountPaid = order?.payment[0]?.total_amount
+  const paymentMethod = order?.payment[0]?.payment_method
 
   const fetchOrdersStatus = useSelector(getOrdersFetchStatus);
 
-  const navigate =useNavigate()
+  const navigate = useNavigate()
 
   // When user click the view button in the order detail table navigate to that product detail page
   const fetchSingleProductItem = async (productId) => {
@@ -50,19 +51,19 @@ const OrderDetail = () => {
   const Content = () => {
 
 
-    let items=order.items.map((item,index)=>(
+    let items = order.items.map((item, index) => (
       <tr key={index}>
         <td>{item.product.title}</td>
         <td>{item.quantity}</td>
         <td>{item.unit_price}</td>
         <td><MDBBtn outline rounded size="sm"
 
-        onClick={()=>{
+          onClick={() => {
 
-          fetchSingleProductItem(item.product.id)
+            fetchSingleProductItem(item.product.id)
 
-        }}
-        
+          }}
+
         >View</MDBBtn></td>
       </tr>
     ))
@@ -114,6 +115,15 @@ const OrderDetail = () => {
                     )}
                   </td>
                 </tr>
+
+                <tr>
+                  <td>Order Id</td>
+                  <td>{orderId}</td>
+                </tr>
+                <tr>
+                  <td>Placed at</td>
+                  <td>{placedAt}</td>
+                </tr>
                 <tr>
                   <td>Payment status</td>
                   <td>
@@ -130,12 +140,22 @@ const OrderDetail = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>Order Id</td>
-                  <td>{orderId}</td>
+                  <td>Payment method</td>
+                  <td>
+                    {paymentMethod === "ON" ? <p>Online</p> : <p>Pay on delivery</p>}
+                  </td>
                 </tr>
                 <tr>
-                  <td>Placed at</td>
-                  <td>{placedAt}</td>
+                  <td>Amount paid in online</td>
+                  <td>
+                    {totalAmountPaid}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Online transaction id</td>
+                  <td>
+                    {transactionId}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -155,6 +175,7 @@ const OrderDetail = () => {
                   <td></td>
                   <td>₹ {totalPrice}</td>
                 </tr>
+
               </tbody>
             </table>
           </MDBCardBody>
@@ -168,7 +189,7 @@ const OrderDetail = () => {
 
 
 
-  return <div>{fetchOrdersStatus === SUCCESS && <Content/>}</div>;
+  return <div>{fetchOrdersStatus === SUCCESS && <Content />}</div>;
 };
 
 export default OrderDetail;

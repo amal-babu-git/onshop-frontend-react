@@ -26,6 +26,7 @@ export const processPayment = async ({ paymentData }) => {
                 return response.data
             })
             .catch((error) => {
+                console.log('paymentData',paymentData   )
                 console.log(error)
                 toast.error('Payment failed', { hideProgressBar: true })
 
