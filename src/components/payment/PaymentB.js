@@ -70,6 +70,7 @@ const PaymentB = ({ totalAmount = 199 }) => {
                             })
                             
                             toast.success('Payment success', { hideProgressBar: true })
+                            toast.info('You can place your order', { hideProgressBar: true })
                             console.log('paymentSucess')
                             const paymentResponseData = {
                                 transactionId: response.transaction.id,

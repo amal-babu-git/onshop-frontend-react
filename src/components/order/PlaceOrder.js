@@ -14,7 +14,11 @@ import {
   selectCustomerInfo,
 } from "../../features/auth/authUserSlice";
 import axiosInstance from "../../features/auth/axios";
-import { createCart, selectCart, setCartId } from "../../features/cart/cartSlice";
+import {
+  createCart,
+  selectCart,
+  setCartId,
+} from "../../features/cart/cartSlice";
 import {
   getPaymentStatus,
   resetPaymentDetails,
@@ -32,8 +36,10 @@ const PlaceOrder = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const cart = useSelector(selectCart)??location?.state;
+  const cart = useSelector(selectCart) ?? location?.state;
   const totalBill = cart.total_price;
+
+  // useEffect(()=>{window.scrollTo(0, document.body.scrollHeight)},[])
 
   const orderList = useSelector(selectOrder);
   const [onlinePayment, setOnlinePayment] = useState(true);
@@ -82,7 +88,6 @@ const PlaceOrder = () => {
           toast.success("Order plcaed successfully !");
           setLoading(false);
           setDisplayOrderResponse(true);
-
           return response.data;
         })
         .catch((err) => {
@@ -104,15 +109,11 @@ const PlaceOrder = () => {
     const data = placeOrderHandler(PAY_ON_DELIVARY, cart.id);
   };
 
-  const onClickMakePayment=()=>{
-
-    navigate('/user/payment/',{state:totalBill})
-
-  }
+  const onClickMakePayment = () => {
+    navigate("/user/payment/", { state: totalBill });
+  };
 
   useEffect(() => {
-    
-
     return () => {
       console.log("Reseting payment details");
       dispatch(resetPaymentDetails());
@@ -189,7 +190,7 @@ const PlaceOrder = () => {
               </div>
             )}
 
-            {onlinePayment && (
+            {onlinePayment && totalBill > 0 && (
               <div className="mt-4 ms-1 form-control">
                 <table className="table table-striped">
                   <thead>
@@ -235,7 +236,7 @@ const PlaceOrder = () => {
                 )}
               </div>
             )}
-            {payOnDelivary && (
+            {payOnDelivary && totalBill > 0 && (
               <>
                 <div className="mt-4 ms-1 form-control">
                   <table className="table table-striped">
