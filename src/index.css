@@ -7,4 +7,7 @@ body {
   margin: 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   background-color: #fafafa;
+  
+  /* overflow-x: hidden;
+  overflow-y: auto; */
 }

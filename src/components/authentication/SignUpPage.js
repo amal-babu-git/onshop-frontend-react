@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom'
 import { EMAIL_REGEXP, REGISTER_NEW_USER_API } from "../../apis";
 import axios from 'axios'
+import ColorLogo from "./ColorLogo";
 
 
 const SignUpPage = () => {
@@ -154,12 +155,13 @@ const SignUpPage = () => {
   return (
     <MDBCard className="container p-4 mt-4 mb-4" style={{ maxWidth: "30rem" }}>
       <div className="row justify-content-center">
-        <img
+        {/* <img
           src={login_image}
           alt="img"
           className="img-fluid rounded"
           style={{ maxWidth: "20rem" }}
-        />
+        /> */}
+        <ColorLogo/>
       </div>
       <div className="row justify-content-center">
         <form onSubmit={onSubmitHandler}>

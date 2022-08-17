@@ -5,13 +5,16 @@ import { MDBBtn, MDBTypography } from 'mdb-react-ui-kit'
 import CartSpinner from "../subComponents/customSpinners/CartSpinner"
 import { toast } from 'react-toastify'
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setPaymentDetails } from "../../features/order/orderSlice";
 
 const PaymentB = ({ totalAmount = 199 }) => {
 
+    
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location=useLocation()
+    totalAmount=location.state
 
 
 

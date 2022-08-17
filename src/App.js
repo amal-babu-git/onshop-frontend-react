@@ -17,6 +17,7 @@ import PaymentPage from './components/payment/PaymentPage';
 import PlaceOrder from './components/order/PlaceOrder';
 import NotFound from './components/subComponents/NotFound';
 import OrderDetail from './components/order/orders/OrderDetail';
+import Home from './components/home/Home';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <NavBar />
         <Routes>
           {/* public routes */}
-          <Route path='/' element={<ProductsPage />} />
+          <Route path='/' element={<Home />} />
           <Route path='/products' element={<ProductsPage />} />
           <Route path='/product-detail' element={<ProductDetailPage />} />
           <Route path='/signin' element={<SignInPage />} />

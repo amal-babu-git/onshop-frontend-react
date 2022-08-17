@@ -9,8 +9,8 @@ const PaymentPage = () => {
   return (
     <div className="container">
       <div className="row mt-4 mb-2">
-        <PaymentB />
-        {/* <PaymentR/> */}
+        {/* <PaymentB /> */}
+        <PaymentR/>
       </div>
     </div>
   );
