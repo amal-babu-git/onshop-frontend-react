@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import API from '../../apis';
 import axiosInstance from '../../features/auth/axios'
 import { setPaymentDetails } from '../../features/order/orderSlice';
+import { selectCustomerInfo } from "../../features/auth/authUserSlice"
 
 
 const PaymentR = () => {
@@ -15,7 +16,10 @@ const PaymentR = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const totalAmount = location.state ?? 99
-  // const customerInfo=useSelector(selectCustomerInfo)
+  const customerInfo = useSelector(selectCustomerInfo)
+  const customerEmail = customerInfo.email ?? ""
+  const customerphone = customerInfo.phone ?? ""
+  const username = customerInfo.username ?? ""
 
   // const handlePaymentSuccess = async (response) => {
   //   try {
@@ -65,6 +69,11 @@ const PaymentR = () => {
     }).then((res) => {
       console.log('response', res)
       return res;
+    }).catch((err) => {
+
+      console.log(err)
+      toast.warn('Something went wrong!')
+
     });
     var options = {
       key_id: process.env.REACT_APP_PUBLIC_KEY, // in react your environment variable must start with REACT_APP_
@@ -86,7 +95,7 @@ const PaymentR = () => {
           toast.info('You can place your order', { hideProgressBar: true })
           console.log('paymentSucess')
           const paymentResponseData = {
-            transactionId: ('pay_id= ' + response.razorpay_payment_id + ', orderid= ' + response.razorpay_order_id + ', signature= ' + response.razorpay_signature),
+            transactionId: ('pay_id=' + response.razorpay_payment_id + ',orderid=' + response.razorpay_order_id),
             totalAmount: totalAmount,
             paymentMethod: 'ON',
             paymentStatus: 'C',
@@ -103,9 +112,9 @@ const PaymentR = () => {
         }
       },
       prefill: {
-        name: "",
-        email: "",
-        contact: "",
+        name: username,
+        email: customerEmail,
+        contact: customerphone,
       },
       notes: {
         address: "Razorpay Corporate Office",
@@ -120,9 +129,10 @@ const PaymentR = () => {
   };
 
   return (
-    <div>
+    <div className='ms-1 me-1'>
+
       <MDBBtn onClick={showRazorpay} className="">
-        Pay with razorpay
+        Pay with razorpay | UPI | GOOGLE PAY | PHONE PAY | PAYTM
       </MDBBtn>
     </div>
   )

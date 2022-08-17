@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DropIn from "braintree-web-drop-in-react";
 import { getPaymentToken, processPayment } from "./paymentHelper";
-import { MDBBtn, MDBTypography } from 'mdb-react-ui-kit'
+import { MDBBtn } from 'mdb-react-ui-kit'
 import CartSpinner from "../subComponents/customSpinners/CartSpinner"
 import { toast } from 'react-toastify'
 import { useDispatch } from "react-redux";
@@ -113,13 +113,9 @@ const PaymentB = ({ totalAmount = 199 }) => {
         </div>);
     };
 
-    return (<div className="card ms-1 me-1">
+    return (<div className="ms-1 me-1">
         <div className="mt-2">
-            <MDBTypography note noteColor='danger'>
-                <strong>Please wait...</strong>
-                Do not refresh or close this page.
-
-            </MDBTypography>
+        
             <p className="fs-5 fw-bold ms-2">Bill amount : ₹ {totalAmount}</p>
             <p>4009348888881881</p>
             <div className="text-center">
