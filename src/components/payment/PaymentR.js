@@ -8,6 +8,7 @@ import API from '../../apis';
 import axiosInstance from '../../features/auth/axios'
 import { setPaymentDetails } from '../../features/order/orderSlice';
 import { selectCustomerInfo } from "../../features/auth/authUserSlice"
+import upiIcon from "../../images/icons/icons8-bhim-16.png"
 
 
 const PaymentR = () => {
@@ -89,26 +90,25 @@ const PaymentR = () => {
         // will pass the response that we've got from razorpay
         // handlePaymentSuccess(response);
         console.log(response)
-        if (response.status_code === 200) {
-
-          toast.success('Payment success', { hideProgressBar: true })
-          toast.info('You can place your order', { hideProgressBar: true })
-          console.log('paymentSucess')
+        if (response.status_code === 200 || response.razorpay_order_id !==null) {
+          toast.success("Payment success", { hideProgressBar: true });
+          toast.info("You can place your order", { hideProgressBar: true });
+          console.log("paymentSucess");
           const paymentResponseData = {
-            transactionId: ('pay_id=' + response.razorpay_payment_id + ',orderid=' + response.razorpay_order_id),
+            transactionId:
+              "pay_id=" +
+              response.razorpay_payment_id +
+              ",orderid=" +
+              response.razorpay_order_id,
             totalAmount: totalAmount,
-            paymentMethod: 'ON',
-            paymentStatus: 'C',
-
-          }
-          dispatch(setPaymentDetails(paymentResponseData))
-          console.log(paymentResponseData)
-          navigate('/user/place-order/', { replace: true })
-
+            paymentMethod: "ON",
+            paymentStatus: "C",
+          };
+          dispatch(setPaymentDetails(paymentResponseData));
+          console.log(paymentResponseData);
+          navigate("/user/place-order/", { replace: true });
         } else {
-
-          toast.error('Payment failed', { hideProgressBar: true })
-
+          toast.error("Payment failed", { hideProgressBar: true });
         }
       },
       prefill: {
@@ -129,13 +129,12 @@ const PaymentR = () => {
   };
 
   return (
-    <div className='ms-1 me-1'>
-
-      <MDBBtn onClick={showRazorpay} className="">
-        Pay with razorpay | UPI | GOOGLE PAY | PHONE PAY | PAYTM
+    <div className="ms-1 me-1">
+      <MDBBtn outline onClick={showRazorpay} className="">
+        Pay with razorpay | UPI <img src={upiIcon} alt='upi'/> | GPAY | PHONE PAY | PAYTM
       </MDBBtn>
     </div>
-  )
+  );
 }
 
 export default PaymentR

@@ -17,6 +17,8 @@ import TotalBillCard from "./TotalBillCard";
 function Cart() {
   const dispatch = useDispatch();
 
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const cartFetchStatus = useSelector(getCartFetchStatus);
   const cartFetchError = useSelector(getCartFetchError);
   let cartId = useSelector(selectCartId);
@@ -60,7 +62,7 @@ function Cart() {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid vh-100">
         <div className="row justify-content-center mt-2 ms-1 me-1">
           {content}
         </div>

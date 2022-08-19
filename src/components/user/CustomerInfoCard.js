@@ -117,7 +117,7 @@ const CustomerInfoCard = () => {
       break;
   }
 
-  return <>{content}</>;
+  return <div className="vh-100">{content}</div>;
 };
 
 export default CustomerInfoCard;

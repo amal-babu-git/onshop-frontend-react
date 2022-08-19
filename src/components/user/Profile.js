@@ -70,7 +70,7 @@ const Profile = () => {
 
   return (
     <div className="container">
-      <div className="row justify-content-center ">
+      <div className="row justify-content-center">
         <div className="mt-2 mb-1 col-sm-12 col-md-12 col-xl-8">
           <MDBCard className="text-center">
             <MDBCardHeader>

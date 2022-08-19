@@ -2,6 +2,7 @@ import React from "react";
 import ColorLogo from "../authentication/ColorLogo";
 import logo from "../../images/logo.png";
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCardTitle } from "mdb-react-ui-kit";
+import Card from "./Card";
 
 const Home = () => {
   return (
@@ -20,69 +21,12 @@ const Home = () => {
             Don't worry , we have it !
           </p>
         </div>
-        <MDBCard
-          className="col-xl-2 mt-1 p-1 me-1 text-center"
-          //   style={{ backgroundColor: "transparent" }}
-          style={{
-            background: "linear-gradient(to right, #1266F1, #B23CFD)",
-            minHeight: "300px",
-          }}
-        >
-          <MDBCardHeader>
-            <MDBCardTitle>Products</MDBCardTitle>
-          </MDBCardHeader>
-          <MDBCardBody>
-            <p className="fs-5">View avalilable products</p>
-          </MDBCardBody>
-        </MDBCard>
-        <MDBCard
-          className="col-xl-2 mt-1 p-1 me-1 text-center"
-          //   style={{ backgroundColor: "transparent" }}
-          style={{
-            background: "linear-gradient(to right, #1266F1, #B23CFD)",
-            minHeight: "300px",
-          }}
-        >
-          <MDBCardHeader>
-            <MDBCardTitle>Products</MDBCardTitle>
-          </MDBCardHeader>
-          <MDBCardBody>
-            <p className="fs-5">View avalilable products</p>
-          </MDBCardBody>
-        </MDBCard>
-       
-        <MDBCard
-          className="col-xl-2 mt-1 p-1 me-1 text-center"
-          //   style={{ backgroundColor: "transparent" }}
-          style={{
-            background: "linear-gradient(to right, #1266F1, #B23CFD)",
-            minHeight: "300px",
-          }}
-        >
-          <MDBCardHeader>
-            <MDBCardTitle>Products</MDBCardTitle>
-          </MDBCardHeader>
-          <MDBCardBody>
-            <p className="fs-5">View avalilable products</p>
-          </MDBCardBody>
-        </MDBCard>
-       
-        <MDBCard
-          className="col-xl-2 mt-1 p-1 me-1 text-center"
-          //   style={{ backgroundColor: "transparent" }}
-          style={{
-            background: "linear-gradient(to right, #1266F1, #B23CFD)",
-            minHeight: "300px",
-          }}
-        >
-          <MDBCardHeader>
-            <MDBCardTitle>Products</MDBCardTitle>
-          </MDBCardHeader>
-          <MDBCardBody>
-            <p className="fs-5">View avalilable products</p>
-          </MDBCardBody>
-        </MDBCard>
-       
+
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
        
         
       </div>

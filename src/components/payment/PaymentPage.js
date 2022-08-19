@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PaymentB from './PaymentB'
 import PaymentR from './PaymentR';
 import {  MDBTypography } from 'mdb-react-ui-kit'
