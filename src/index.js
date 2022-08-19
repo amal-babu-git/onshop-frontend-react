@@ -11,6 +11,7 @@ import { fetchCollections } from './features/collections/collectionsSlice';
 import { STORE_COLLECTIONS_API } from './apis';
 import { fetchCustomerInfo } from './features/auth/authUserSlice';
 
+
 store.dispatch(fetchCollections({page:STORE_COLLECTIONS_API}))
 store.dispatch(fetchCustomerInfo())
 

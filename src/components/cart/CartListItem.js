@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import {motion} from 'framer-motion'
 
 const CartListItem = ({ item }) => {
   const navigate = useNavigate();
@@ -38,7 +39,12 @@ const CartListItem = ({ item }) => {
   // };
 
   return (
-    <MDBCard className="col-xs-12 col-sm-12 col-md-4  col-xl-3 m-1 ">
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'tween' }}
+      
+     className="col-xs-12 col-sm-12 col-md-4  col-xl-3 m-1 card">
       <MDBCardBody>
         <div className="ms-2 mt-1">
           <p className="fs-5 fw-bold ">{item.product.title}</p>
@@ -54,14 +60,14 @@ const CartListItem = ({ item }) => {
           <MDBBtn
             rounded
             outline
-            className="mt-1"
+            className="mt-1 "
             onClick={fetchSingleProductItem}
           >
             View Product
           </MDBBtn>
         </div>
       </MDBCardBody>
-    </MDBCard>
+    </motion.div>
   );
 };
 

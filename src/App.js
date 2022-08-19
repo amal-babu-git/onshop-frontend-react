@@ -18,6 +18,7 @@ import PlaceOrder from './components/order/PlaceOrder';
 import NotFound from './components/subComponents/NotFound';
 import OrderDetail from './components/order/orders/OrderDetail';
 import Home from './components/home/Home';
+import CustomerService from './components/customerService/CustomerService';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/signupnext' element={<SignUpNextPage />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/contactus' element={<CustomerService />} />
           
           {/* Private routes  */}
           <Route path='/user' element={<User />}>

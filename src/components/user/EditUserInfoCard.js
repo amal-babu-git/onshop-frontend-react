@@ -16,6 +16,7 @@ import {
 } from "../../features/auth/authUserSlice";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import {motion} from 'framer-motion'
 
 const EditUserInfoCard = () => {
   const dispatch = useDispatch();
@@ -122,7 +123,9 @@ const EditUserInfoCard = () => {
   };
 
   return (
-    <>
+    <motion.div initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'tween' }}>
       <MDBCardBody className="ms-1 me-1">
         <MDBCardTitle>Update your profile</MDBCardTitle>
 
@@ -284,7 +287,7 @@ const EditUserInfoCard = () => {
           </MDBBtn>
         </form>
       </MDBCardBody>
-    </>
+    </motion.div>
   );
 };
 

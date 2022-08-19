@@ -1,6 +1,7 @@
 import React from 'react'
 import { MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardTitle, MDBBtn, MDBIcon, MDBTypography } from 'mdb-react-ui-kit'
 import { useNavigate } from 'react-router-dom';
+import {motion} from 'framer-motion'
 
 const OrderCard = ({ order }) => {
 
@@ -19,7 +20,12 @@ const OrderCard = ({ order }) => {
 
 
   return (
-    <div className="col-sm-12 col-md-4 col-xl-3 mt-2">
+    <motion.div 
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'tween' }}
+      whileHover={{ scale: 1.05 }}
+    className="col-sm-12 col-md-4 col-xl-3 mt-2">
       <MDBCard>
         <MDBCardHeader>
           <MDBCardTitle>{orderId}</MDBCardTitle>
@@ -104,7 +110,7 @@ const OrderCard = ({ order }) => {
           </MDBBtn>
         </MDBCardFooter>
       </MDBCard>
-    </div>
+    </motion.div>
   );
 }
 

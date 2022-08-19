@@ -48,7 +48,7 @@ const Orders = () => {
   return (
     <div>
       <div className="container">
-        <div className="row justify-content-center">{content}</div>
+        <div className="row justify-content-center" style={{minHeight:"600px"}}>{content}</div>
       </div>
     </div>
   );

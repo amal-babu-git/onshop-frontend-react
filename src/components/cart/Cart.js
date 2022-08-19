@@ -62,7 +62,7 @@ function Cart() {
 
   return (
     <>
-      <div className="container-fluid vh-100">
+      <div className="container-fluid" style={{minHeight:"600px"}}>
         <div className="row justify-content-center mt-2 ms-1 me-1">
           {content}
         </div>

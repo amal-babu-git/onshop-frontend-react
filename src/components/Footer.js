@@ -6,10 +6,11 @@ import {
     MDBRow,
     MDBIcon
 } from 'mdb-react-ui-kit';
+import "./Footer.css"
 
 export default function Footer() {
     return (
-        <MDBFooter className='bg-dark text-center text-white mt-4 '>
+        <MDBFooter className='bg-dark text-center text-white mt-4 p-2'>
             <MDBContainer className='p-4 pb-0'>
                 <section className='mb-4'>
                     <a className='btn btn-outline-light btn-floating m-1' href='#!' role='button'>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
@@ -15,8 +15,10 @@ import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
 
+
 const ProductsPage = () => {
   const dispatch = useDispatch();
+  const constrainRef = useRef(null)
 
   const nextPageApi = useSelector(getNextProductPageLink);
 
@@ -80,16 +82,17 @@ const ProductsPage = () => {
   //   content = <p className="fs-1">{productsFetchError}</p>;
   // }
   return (
-    <div className="container">
+    <div className="container-fluid" ref={constrainRef}>
+      <div className="container" >
       {/* <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" /> */}
 
       <div className="row justify-content-center">
         {/* <MDBCard className=" col-xl-6 badge-primary mt-2 mb-1" style={{minHeight:'320px'}}>
           <AdminProfileCard />
         </MDBCard> */}
-        <FilterCard />
+        <FilterCard constrainRef={constrainRef} />
       </div>
-      <div className="row justify-content-center">{content}</div>
+      <div className="row justify-content-center mt-2">{content}</div>
       <div className="row justify-content-center">
         <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
 
@@ -97,6 +100,7 @@ const ProductsPage = () => {
         </div>
       </div>
 
+    </div>
     </div>
   );
 };

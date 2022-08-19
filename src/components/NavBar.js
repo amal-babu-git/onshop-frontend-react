@@ -13,16 +13,23 @@ import SearchBox from "./subComponents/SearchBox";
 import CollectionOptionForNavBar from "./collection/CollectionOptionForNavBar";
 import ProductNavLinkItem from "./products/ProductNavLinkItem";
 import LoginLogoutNavBtns from "./subComponents/LoginLogoutNavBtns";
+import {motion} from "framer-motion"
 
 export default function App() {
   const [showBasic, setShowBasic] = useState(false);
-  
+    const [rotate, setRotate] = useState(false);
 
   return (
     <MDBNavbar expand="lg" light bgColor="light justify-content sticky-top">
       <MDBContainer fluid>
         <NavLink className="fs-4 fw-bolder" to="/">
-          OnShop
+          <motion.div
+            animate={{ rotate: rotate ? 360 : 0, scale: 1 }}
+            onClick={() => setRotate(!rotate)}
+            initial={{ scale: 0 }}
+          >
+            OnShop
+          </motion.div>
         </NavLink>
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
@@ -53,21 +60,22 @@ export default function App() {
                 Cart
               </Link>
             </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to="/contactus" className="nav-link">
+                Contact us
+              </Link>
+            </MDBNavbarItem>
 
             <MDBNavbarItem>
               <CollectionOptionForNavBar />
             </MDBNavbarItem>
 
-            <MDBNavbarItem>
-
-            </MDBNavbarItem>
-
-
+            <MDBNavbarItem></MDBNavbarItem>
           </MDBNavbarNav>
 
           <SearchBox />
 
-         <LoginLogoutNavBtns/>
+          <LoginLogoutNavBtns />
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

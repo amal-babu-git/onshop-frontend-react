@@ -39,7 +39,7 @@ const PlaceOrder = () => {
   const cart = useSelector(selectCart) ?? location?.state;
   const totalBill = cart.total_price;
 
-  // useEffect(()=>{window.scrollTo(0, document.body.scrollHeight)},[])
+  // useEffect(() => {  }, [])
 
   const orderList = useSelector(selectOrder);
   const [onlinePayment, setOnlinePayment] = useState(true);
@@ -52,6 +52,14 @@ const PlaceOrder = () => {
   const paymentDetails = useSelector(selectPaymentDetails);
   const customerInfo = useSelector(selectCustomerInfo);
   const paymentStatus = paymentDetails?.paymentStatus ?? "P";
+
+  useEffect(() => {
+    if (paymentDetails?.paymentStatus === "C") {
+      window.scrollTo(0, document.body.scrollHeight);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   const onClickOnlinePayment = () => {
     setpayOnDelivary(false);
@@ -219,13 +227,17 @@ const PlaceOrder = () => {
                       <td></td>
                       <td>
                         {paymentDetails?.paymentStatus === "C" ? (
-                          <MDBBtn rounded outline onClick={onClickPlcaeOrder}>
-                            Plcae order
-                          </MDBBtn>
+                          <div>
+                            <MDBBtn rounded outline onClick={onClickPlcaeOrder}>
+                              Plcae order
+                            </MDBBtn>
+                          </div>
                         ) : (
-                          <MDBBtn rounded outline onClick={onClickMakePayment}>
+                          <div>
+                            <MDBBtn rounded outline onClick={onClickMakePayment}>
                             Make payment
-                          </MDBBtn>
+                           </MDBBtn>
+                          </div>
                         )}
                       </td>
                     </tr>

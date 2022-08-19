@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import defaultImage from "../../images/logob2.png"
 import AddToCartBtn from "../cart/AddToCartBtn";
+import {motion} from 'framer-motion'
 
 export default function ProductCard({ data }) {
 
@@ -22,16 +23,22 @@ export default function ProductCard({ data }) {
 
 
   return (
-    <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
+    <motion.div 
+    initial={{scale:0}}
+    animate={{scale:1}}
+    transition={{type:'tween'}}
+    whileHover={{scale:1.1,zIndex:1}}
+    className="col-sm-12 col-md-4  col-xl-3 mt-2"
+    >
 
-      <MDBCard style={{ maxWidth: "23rem" }}>
+      <MDBCard style={{ maxWidth: "23rem" ,height:"30rem"}}>
         <MDBRipple
           rippleColor="light"
           rippleTag="div"
           className="bg-image hover-overlay"
         >
           {product_image ? (
-            <MDBCardImage src={product_image.image} fluid alt="No image available" />
+            <MDBCardImage src={product_image.image} fluid alt="No image available" style={{maxHeight:"300px"}} />
           ) : (
             <MDBCardImage
 
@@ -49,9 +56,9 @@ export default function ProductCard({ data }) {
           </a>
         </MDBRipple>
         <MDBCardBody>
-          <MDBCardTitle>{data.title}</MDBCardTitle>
-          <p className="text-dark"> ₹ {data.unit_price}</p>
-          <MDBCardText>{data.collection}</MDBCardText>
+          <MDBCardTitle className="fs-6">{data?.title}</MDBCardTitle>
+          <p className="text-dark"> ₹ {data?.unit_price}</p>
+          <MDBCardText>{data?.collection}</MDBCardText>
 
           <AddToCartBtn id={data.id}/>
 
@@ -67,6 +74,6 @@ export default function ProductCard({ data }) {
           </MDBBtn>
         </MDBCardBody>
       </MDBCard>
-    </div>
+    </motion.div>
   );
 }

@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBCheckbox,
+  
   MDBBtn,
-  MDBCard,
 } from "mdb-react-ui-kit";
 import login_image from "../../images/login-p.png";
 import login_page_logo_img from "../../images/logob.png";
 import { Link, useNavigate } from "react-router-dom";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
   getSignInsignInError,
@@ -20,12 +17,16 @@ import {
   signIn,
 } from "../../features/auth/authUserSlice";
 import { FAILED, LOADING, SUCCESS } from "../../apis";
-import { createCart } from "../../features/cart/cartSlice";
 import ColorLogo from "./ColorLogo";
+import { motion } from 'framer-motion'
+
 
 const SignInPage = () => {
   useEffect(() => { window.scrollTo(0, 0) }, [])
-  
+
+  const [rotate, setRotate] = useState(false)
+  const constrainRef = useRef(null)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const SignInPage = () => {
   const signInStatus = useSelector(getSigninSignInStatus);
   const signInError = useSelector(getSignInsignInError);
   const accessToken = useSelector(selectAccessToken);
-  
+
 
   const onClickSignIn = (e) => {
     e.preventDefault();
@@ -64,13 +65,13 @@ const SignInPage = () => {
     return true;
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (signInStatus === LOADING) {
       toast("loading...", { autoClose: 1000 });
 
     } else if (signInStatus === SUCCESS) {
 
-      
+
       toast.success(`Login done, welcome ${username}`, {
         autoClose: 1000,
         hideProgressBar: true,
@@ -82,11 +83,15 @@ const SignInPage = () => {
       dispatch(setSignInStatus());
       toast.error("Login failed, please enter correct username and password");
     }
-  },[signInStatus])
+  }, [signInStatus])
 
   return (
-    <div className="vh-100">
-      <MDBCard className="container p-4 mt-4 mb-4" style={{ maxWidth: "30rem" }}>
+    <div className="vh-100" ref={constrainRef}>
+      <motion.div
+        drag
+        dragConstraints={constrainRef}
+        className="container p-4 mt-4 mb-4 card"
+        style={{ maxWidth: "30rem" }}>
         <div className="row justify-content-center">
 
           {/*TODO: can place login image here*/}
@@ -96,7 +101,7 @@ const SignInPage = () => {
           className="img-fluid rounded"
           style={{ maxWidth: "20rem" }}
         /> */}
-         <ColorLogo/>
+          <ColorLogo />
         </div>
         <div className="row justify-content-center">
           <form onSubmit={onClickSignIn}>
@@ -142,7 +147,7 @@ const SignInPage = () => {
             </div>
           </form>
         </div>
-      </MDBCard>
+      </motion.div>
     </div>
   );
 };

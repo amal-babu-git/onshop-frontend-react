@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
 import { selectCustomerInfo } from "../../features/auth/authUserSlice";
+import {motion} from 'framer-motion'
 
 const PrimaryAddress = () => {
   const customerInfo = useSelector(selectCustomerInfo);
 
   return (
-    <div>
+    <motion.div
+
+      whileHover={{ scaleY:1.1}}
+      transition={{ type: "spring", duration: 0.5 }}
+    >
       {customerInfo.address[0] ? (
         <table className="table text-center table-striped">
           <thead></thead>
@@ -39,7 +44,7 @@ const PrimaryAddress = () => {
           No address found, please add new address
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
 export default PrimaryAddress;

@@ -35,7 +35,7 @@ const PriceRangeFilter = () => {
     e.preventDefault();
 
     if (gtPrice > 0 && ltPrice > gtPrice) {
-      toast("Filtering...", { position: "top-center", autoClose: 1 });
+      
       dispatch(
         fetchProducts({
           page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
@@ -61,7 +61,7 @@ const PriceRangeFilter = () => {
     setSortDateDescActive(false);
 
     if (parseFloat(gtPrice) > 0 && parseFloat(ltPrice) > parseFloat(gtPrice)) {
-      toast("Filtering...", { position: "top-center", autoClose: 1 });
+      
       dispatch(
         fetchProducts({
           page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
@@ -80,7 +80,7 @@ const PriceRangeFilter = () => {
     setSortDateDescActive(false);
 
     if (parseFloat(gtPrice) > 0 && parseFloat(ltPrice) > parseFloat(gtPrice)) {
-      toast("Filtering...", { position: "top-center", autoClose: 1 });
+      
       dispatch(
         fetchProducts({
           page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,
@@ -100,7 +100,7 @@ const PriceRangeFilter = () => {
     setSortDateDescActive(true);
 
     if (parseFloat(gtPrice) > 0 && parseFloat(ltPrice) > parseFloat(gtPrice)) {
-      toast("Filtering...", { position: "top-center", autoClose: 1 });
+      
       dispatch(
         fetchProducts({
           page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=${gtPrice}&unit_price__lt=${ltPrice}`,

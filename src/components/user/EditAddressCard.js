@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { updateAddress } from "../../features/auth/updateAddressThunk";
 import axiosInstance from "../../features/auth/axios";
 import PrimaryAddress from "./PrimaryAddress";
+import {motion} from 'framer-motion'
 
 const EditAddressCard = () => {
   const dispatch = useDispatch();
@@ -134,7 +135,10 @@ const EditAddressCard = () => {
   }, [formErrors]);
 
   return (
-    <div>
+    <motion.div 
+    initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'tween' }}>
       <MDBCard className="mt-2">
         <PrimaryAddress />
         <form className="mt-2 p-2" onSubmit={onSubmitHandler}>
@@ -278,7 +282,7 @@ const EditAddressCard = () => {
           )}
         </form>
       </MDBCard>
-    </div>
+    </motion.div>
   );
 };
 
