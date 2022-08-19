@@ -14,7 +14,7 @@ import ColorLogo from "./ColorLogo";
 
 
 const SignUpPage = () => {
-
+  useEffect(() => { window.scrollTo(0, 0) }, [])
   const navigate = useNavigate()
 
 

@@ -102,8 +102,6 @@ const authUserSlice = createSlice({
 
             localStorage.removeItem('accessToken')
             localStorage.removeItem('refreshToken')
-            localStorage.removeItem(CART_ID)
-
 
         },
         setSignInStatus: (state, action) => {

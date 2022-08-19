@@ -12,7 +12,6 @@ const LoginLogoutNavBtns = () => {
 
   const onClickLogout = () => {
     dispatch(logOut());
-    dispatch(setCartId());
     navigate("signin");
   };
 

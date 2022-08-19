@@ -24,6 +24,8 @@ import { createCart } from "../../features/cart/cartSlice";
 import ColorLogo from "./ColorLogo";
 
 const SignInPage = () => {
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -73,7 +75,6 @@ const SignInPage = () => {
         autoClose: 1000,
         hideProgressBar: true,
       });
-      dispatch(createCart())
       setTimeout(() => navigate("/user/profile"), 1000);
     } else if (signInStatus === FAILED) {
       console.log(signInError);
