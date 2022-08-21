@@ -11,13 +11,13 @@ const Home = () => {
   const constrainRef=useRef(null)
   const constrainRefCard=useRef(null)
   return (
-    <div className="container-fluid vh-100">
+    <div className="container-fluid">
       <div
         className="row justify-content-around  text-white "
         ref={constrainRefCard}
       >
         <div
-          className="card p-2 text-center text-white"
+          className=" p-2 text-center text-white"
           //   style={{ backgroundColor: "transparent" }}
           style={{
             background: "linear-gradient(to right, #1266F1, #B23CFD)",

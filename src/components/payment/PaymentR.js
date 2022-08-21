@@ -90,7 +90,7 @@ const PaymentR = () => {
         // will pass the response that we've got from razorpay
         // handlePaymentSuccess(response);
         console.log(response)
-        if (response.status_code === 200 || response.razorpay_order_id !==null) {
+        if (response.status_code === 200 || response.razorpay_order_id !== null) {
           toast.success("Payment success", { hideProgressBar: true });
           toast.info("You can place your order", { hideProgressBar: true });
           console.log("paymentSucess");
@@ -100,7 +100,7 @@ const PaymentR = () => {
               response.razorpay_payment_id +
               ",orderid=" +
               response.razorpay_order_id,
-            totalAmount: totalAmount,
+            amount: totalAmount,
             paymentMethod: "ON",
             paymentStatus: "C",
           };
@@ -131,7 +131,7 @@ const PaymentR = () => {
   return (
     <div className="ms-1 me-1">
       <MDBBtn outline onClick={showRazorpay} className="">
-        Pay with razorpay | UPI <img src={upiIcon} alt='upi'/> | GPAY | PHONE PAY | PAYTM
+        Pay with razorpay | UPI <img src={upiIcon} alt='upi' /> | GPAY | PHONE PAY | PAYTM
       </MDBBtn>
     </div>
   );

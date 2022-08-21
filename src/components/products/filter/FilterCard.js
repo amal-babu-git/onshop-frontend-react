@@ -46,7 +46,7 @@ const FilterCard = ({ constrainRef }) => {
     >
       <MDBBtn
         color="secondary"
-        
+
         className="mt-2 mb-2"
         onClick={() => {
           setOpen(!open);
@@ -55,7 +55,12 @@ const FilterCard = ({ constrainRef }) => {
         {open ? "Close Filter" : "Open filter"}
       </MDBBtn>
       {open && (
-        <MDBCard className="text-center" style={{maxWidth:"400px"}}>
+        <motion.div className="text-center card" style={{ maxWidth: "400px" }}
+
+          initial={{ scale: 0 }}
+          animate={{scale: 1 }}
+          transition={{ type: "tween" }}
+        >
           <MDBCardHeader>
             <MDBTabs className="card-header-tabs">
               <MDBTabsItem>
@@ -85,7 +90,7 @@ const FilterCard = ({ constrainRef }) => {
           {filterByRangeActive && <PriceRangeFilter />}
           {sortActive && <SortFilter />}
           <MDBCardBody>{searchActive && <SearchBox />}</MDBCardBody>
-        </MDBCard>
+        </motion.div>
       )}
     </motion.div>
   );
