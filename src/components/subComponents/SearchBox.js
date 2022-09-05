@@ -1,9 +1,10 @@
 import { MDBBtn } from 'mdb-react-ui-kit';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchProducts, setPaginationNumber } from '../../features/prodcuts/productSlice';
 import {  toast } from 'react-toastify';
+import { STORE_PRODUCTS_API } from '../../apis';
 
 
 const SearchBox = () => {
@@ -20,7 +21,7 @@ const SearchBox = () => {
     navigate('/products')
 
     if (!searchQuery == '') {
-      dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?page=1&search=${searchQuery}` }))
+      dispatch(fetchProducts({ page: `${STORE_PRODUCTS_API}?page=1&search=${searchQuery}` }))
       dispatch(setPaginationNumber(1))
     } else {
 

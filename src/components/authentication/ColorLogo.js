@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import {motion} from 'framer-motion'
 
 const ColorLogo = () => {
-  // const [logoTheme, setLogoTheme] = useState(true);
+
 
   const [rotate, setRotate] = useState(false)
   const constrainRef = useRef(null)
@@ -13,28 +13,7 @@ const ColorLogo = () => {
   const on = useRef();
   const shop = useRef();
 
-  //   function getRandomColor() {
-  //     var letters = "0123456789ABCDEF";
-  //     var color = "#";
-  //     for (var i = 0; i < 6; i++) {
-  //       color += letters[Math.floor(Math.random() * 16)];
-  //     }
-  //     return color;
-  //   }
-
-//   function changeColor() {
-//     if (logoTheme) {
-//       on.current.className = outcolor1;
-//       shop.current.className = inColor1;
-//       setLogoTheme(false);
-//     } else {
-//       on.current.className = inColor1;
-//       shop.current.className = outcolor1;
-//       setLogoTheme(true);
-//     }
-//   }
-
-//   setInterval(changeColor, 2000);
+  
 
   return (
     <motion.div className="p-2 mb-4 mt-4" ref={constrainRef}

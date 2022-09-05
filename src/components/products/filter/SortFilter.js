@@ -3,7 +3,7 @@ import { MDBBtn, MDBCardBody, MDBCardTitle, MDBListGroup, MDBListGroupItem } fro
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../features/prodcuts/productSlice';
 import { getCurrentCollectionId } from '../../../features/collections/collectionsSlice';
-
+import { STORE_PRODUCTS_API } from '../../../apis';
 const SortFilter = () => {
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const SortFilter = () => {
     setSortPriceDescActive(false);
     setSortDateDescActive(false);
 
-    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
+    dispatch(fetchProducts({ page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
 
 
 
@@ -30,7 +30,7 @@ const SortFilter = () => {
     setSortPriceDescActive(true);
     setSortDateDescActive(false);
 
-    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
+    dispatch(fetchProducts({ page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-unit_price&page=1&unit_price__gt=&unit_price__lt=` }))
 
 
 
@@ -43,7 +43,7 @@ const SortFilter = () => {
     setSortPriceDescActive(false);
     setSortDateDescActive(true);
 
-    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=&unit_price__lt=` }))
+    dispatch(fetchProducts({ page: `${STORE_PRODUCTS_API}?collection_id=${currentCollectionId}&ordering=-last_update&page=1&unit_price__gt=&unit_price__lt=` }))
 
 
 

@@ -2,10 +2,11 @@ import React from 'react'
 import {
     MDBDropdownItem,
 } from "mdb-react-ui-kit";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchProducts, setPaginationNumber } from '../../features/prodcuts/productSlice';
 import { NavLink } from 'react-router-dom';
 import {  setCurrentCollectionId } from '../../features/collections/collectionsSlice';
+import { STORE_PRODUCTS_API } from '../../apis';
 
 const CollectionLinkItem = ({ id, title }) => {
 
@@ -18,7 +19,7 @@ const CollectionLinkItem = ({ id, title }) => {
                 style={{ backgroundColor: "white" }}
 
                 onClick={() => {
-                    dispatch(fetchProducts({ page: `http://127.0.0.1:8000/store/products/?collection_id=${id}` }));
+                    dispatch(fetchProducts({ page: `${STORE_PRODUCTS_API}?collection_id=${id}` }));
                     dispatch(setCurrentCollectionId(id))
                     dispatch(setPaginationNumber(1))
                     

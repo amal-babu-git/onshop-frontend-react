@@ -1,6 +1,5 @@
 import {
   MDBBtn,
-  MDBCard,
   MDBCardBody,
 } from "mdb-react-ui-kit";
 import React from "react";

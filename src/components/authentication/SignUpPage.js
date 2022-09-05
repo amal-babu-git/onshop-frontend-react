@@ -5,7 +5,6 @@ import {
   MDBCard,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import login_image from "../../images/login-p.png";
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom'
 import { EMAIL_REGEXP, REGISTER_NEW_USER_API } from "../../apis";

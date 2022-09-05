@@ -4,7 +4,7 @@ import {
   MDBDropdownToggle,
   MDBDropdownMenu,
 } from "mdb-react-ui-kit";
-import { getCollectionsError, getCollectionsStatus, selectAllCollections, useGetCollectionsQuery } from "../../features/collections/collectionsSlice";
+import { getCollectionsError, getCollectionsStatus, selectAllCollections } from "../../features/collections/collectionsSlice";
 import CollectionLinkItem from "./CollectionLinkItem";
 import { useSelector } from "react-redux";
 

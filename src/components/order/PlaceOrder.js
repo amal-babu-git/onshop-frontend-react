@@ -20,11 +20,9 @@ import {
   setCartId,
 } from "../../features/cart/cartSlice";
 import {
-  getPaymentStatus,
   resetPaymentDetails,
   selectOrder,
   selectPaymentDetails,
-  setCart,
   setOrder,
 } from "../../features/order/orderSlice";
 import PopupMenu from "../subComponents/popupmenu/PopupMenu";

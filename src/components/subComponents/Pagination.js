@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MDBBtn, MDBPagination, MDBPaginationItem, MDBPaginationLink } from 'mdb-react-ui-kit';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementPaginationNum, fetchProducts, getNextProductPageLink, getPreviousProductPageLink, incrementPaginationNum, selectPaginationNum } from '../../features/prodcuts/productSlice';

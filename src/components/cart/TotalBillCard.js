@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MDBBtn, MDBCard, MDBCardBody } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

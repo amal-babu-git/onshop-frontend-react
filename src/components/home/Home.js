@@ -1,10 +1,8 @@
 import React from "react";
-// import logo from "../../images/logo.png";
 import Card from "./Card";
 import {motion} from "framer-motion"
 import { useState } from "react";
 import { useRef } from "react";
-import Footer from "../Footer";
 
 const Home = () => {
   const [rotate,setRotate]=useState(false)

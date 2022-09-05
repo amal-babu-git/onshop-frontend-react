@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MDBBtn, MDBCard, MDBInput } from "mdb-react-ui-kit";
-import { Link, useLocation } from "react-router-dom";
+import { MDBInput } from "mdb-react-ui-kit";
+import { useLocation } from "react-router-dom";
 import AddToCartBtn from "../cart/AddToCartBtn";
 import ReviewsList from "./reviews/ReviewsList";
 

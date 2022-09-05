@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { LOADING, SUCCESS, FAILED, API, CART_ID } from "../../apis"
+import { LOADING, SUCCESS, FAILED, API } from "../../apis"
 import jwt_decode from 'jwt-decode'
 import axiosInstance from './axios';
 
@@ -42,15 +42,6 @@ export const updateUserInfo = createAsyncThunk('auth/updateUser', async ({ first
     console.log('update', response.data)
     return response.data
 })
-
-// export const refreshTokenHandler=createAsyncThunk('auth/refresh', async ({refreshToken}) =>{
-//     const response =await axios.post(`${API}core/auth/token/refresh/`,
-//     {refresh : refreshToken })
-
-
-//     console.log(response.data)
-//     return response.data
-// })
 
 
 const initialState = {

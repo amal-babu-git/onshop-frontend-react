@@ -1,11 +1,10 @@
 import axios from "axios";
 import { MDBBtn } from "mdb-react-ui-kit";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { STORE_CARTS_API } from "../../apis";
-import { selectCartId, setCartId } from "../../features/cart/cartSlice";
-// import { addToCart } from "./cartApiCalls";
+import { selectCartId } from "../../features/cart/cartSlice";
 import { createCart } from "../../features/cart/cartSlice";
 import CartToast from "../subComponents/Toast/CartToast";
 

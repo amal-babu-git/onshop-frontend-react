@@ -1,16 +1,25 @@
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBCardTitle } from 'mdb-react-ui-kit';
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
-import {motion} from 'framer-motion'
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardFooter,
+  MDBCardHeader,
+  MDBCardTitle,
+} from "mdb-react-ui-kit";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const Card = ({title='title',description='description',link='/',dragCon}) => {
-
-    
-const navigate=useNavigate()
-const onClickCard=()=>{
-    navigate(link)
-}
-
+const Card = ({
+  title = "title",
+  description = "description",
+  link = "/",
+  dragCon,
+}) => {
+  const navigate = useNavigate();
+  const onClickCard = () => {
+    navigate(link);
+  };
 
   return (
     <motion.div
@@ -20,7 +29,6 @@ const onClickCard=()=>{
         background: "linear-gradient(to right, #1266F1, #B23CFD)",
         minHeight: "300px",
       }}
-      onClick={onClickCard}
       animate={{ y: -75, scale: 1 }}
       initial={{ scale: 1 }}
       transition={{ type: "tween", duration: 0.5 }}
@@ -35,8 +43,11 @@ const onClickCard=()=>{
       <MDBCardBody>
         <p className="fs-5">{description}</p>
       </MDBCardBody>
+      <MDBCardFooter>
+        <MDBBtn rounded outline color="white" onClick={onClickCard}>Go</MDBBtn>
+      </MDBCardFooter>
     </motion.div>
   );
-}
+};
 
-export default Card
+export default Card;

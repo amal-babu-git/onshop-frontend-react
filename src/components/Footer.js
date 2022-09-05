@@ -2,8 +2,6 @@ import React from 'react';
 import {
     MDBFooter,
     MDBContainer,
-    MDBCol,
-    MDBRow,
     MDBIcon
 } from 'mdb-react-ui-kit';
 import "./Footer.css"

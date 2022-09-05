@@ -3,7 +3,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut, selectUsername } from "../../features/auth/authUserSlice";
-import { setCartId } from "../../features/cart/cartSlice";
 
 const LoginLogoutNavBtns = () => {
   const dispatch = useDispatch();
