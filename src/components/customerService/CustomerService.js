@@ -14,6 +14,7 @@ const CustomerService = () => {
             <p className="fw-bolder">
               Email : <b className='text-primary email'>onshop.online.in@gmail.com</b>
             </p>
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTSeGKCXlAc8rVak4rI6hCTuc7j3tThwE9Ybmx-EARiS2CwFKP64t_T6Gj9lUSiI3HSweF4_I0SLIm2/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
           </MDBCardBody>
         </MDBCardHeader>
       </MDBCard>
