@@ -35,6 +35,10 @@ base architecture -->
 https://github.com/amal-babu-git/django-docker-nginx-uWSGI-ssl-test
 
 
+
+## Demo video
+https://youtu.be/oW4gJZlAHJw
+
 ## Docs
 ### Software Development Life Cycle
 
