@@ -30,8 +30,8 @@ const SignInPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("amal123");
+  const [password, setPassword] = useState("test12345");
   const [err, setErr] = useState("");
   // const [loading, setLoading] = useState(false);
 
