@@ -92,13 +92,14 @@ const ProductsPage = () => {
           <AdminProfileCard />
         </MDBCard> */}
           <FilterCard constrainRef={constrainRef} />
+          <Chatbot constrainRef={constrainRef} />
 
 
         </div>
         <div className="row justify-content-center mt-2">{content}</div>
         <div className="row justify-content-center">
           <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
-            <Chatbot constrainRef={constrainRef} />
+           
 
             <Pagination />
           </div>
