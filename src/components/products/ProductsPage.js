@@ -14,6 +14,7 @@ import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
+import Chatbot from "../chat/chatbot";
 
 
 const ProductsPage = () => {
@@ -31,34 +32,34 @@ const ProductsPage = () => {
     if (productsFetchStatus === "idle") {
 
       dispatch(fetchProducts({ page: nextPageApi }));
-      
+
     }
   }, [productsFetchStatus, dispatch]);
 
-  
+
 
   let content = "";
 
 
   switch (productsFetchStatus) {
     case LOADING:
-                      // content = <div className="spinner-border text-primary mt-4" />;
-                      content = <CartSpinner />;
-                      break;
-    case SUCCESS: 
-                      if (products.count == 0) {
-                        toast.error("No data found",{autoClose:1000})
-                      }else{
+      // content = <div className="spinner-border text-primary mt-4" />;
+      content = <CartSpinner />;
+      break;
+    case SUCCESS:
+      if (products.count == 0) {
+        toast.error("No data found", { autoClose: 1000 })
+      } else {
 
-                        content = products.results.map((product, index) => (
-                          <ProductCard key={index} data={product} />
-                        ));
+        content = products.results.map((product, index) => (
+          <ProductCard key={index} data={product} />
+        ));
 
-                      }
-                      console.log(products)
-                      break;
+      }
+      console.log(products)
+      break;
 
-    case FAILED :    content = <p className="fs-1">{productsFetchError}</p>;
+    case FAILED: content = <p className="fs-1">{productsFetchError}</p>;
 
       break;
     default: content = <p className="fs-1">{productsFetchError}</p>;
@@ -84,23 +85,26 @@ const ProductsPage = () => {
   return (
     <div className="container-fluid" ref={constrainRef}>
       <div className="container" >
-      {/* <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" /> */}
+        {/* <PopupMenu body={<EditAddressCard/> } title='Update Address' btnText="Edit Address" /> */}
 
-      <div className="row justify-content-center">
-        {/* <MDBCard className=" col-xl-6 badge-primary mt-2 mb-1" style={{minHeight:'320px'}}>
+        <div className="row justify-content-center">
+          {/* <MDBCard className=" col-xl-6 badge-primary mt-2 mb-1" style={{minHeight:'320px'}}>
           <AdminProfileCard />
         </MDBCard> */}
-        <FilterCard constrainRef={constrainRef} />
-      </div>
-      <div className="row justify-content-center mt-2">{content}</div>
-      <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
+          <FilterCard constrainRef={constrainRef} />
 
-          <Pagination />
+
         </div>
-      </div>
+        <div className="row justify-content-center mt-2">{content}</div>
+        <div className="row justify-content-center">
+          <div className="col-sm-12 col-md-4  col-xl-3 mt-2">
+            <Chatbot constrainRef={constrainRef} />
 
-    </div>
+            <Pagination />
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 };
