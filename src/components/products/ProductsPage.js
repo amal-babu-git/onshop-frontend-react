@@ -14,8 +14,6 @@ import FilterCard from "./filter/FilterCard"
 import { toast } from 'react-toastify';
 import { FAILED, LOADING, SUCCESS } from "../../apis";
 import CartSpinner from "../subComponents/customSpinners/CartSpinner";
-import Chatbot from "../chat/chatbot";
-
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -92,7 +90,7 @@ const ProductsPage = () => {
           <AdminProfileCard />
         </MDBCard> */}
           <FilterCard constrainRef={constrainRef} />
-          <Chatbot constrainRef={constrainRef} />
+         
 
 
         </div>
