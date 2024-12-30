@@ -14,7 +14,6 @@ const Card = ({
   title = "title",
   description = "description",
   link = "/",
-  dragCon,
 }) => {
   const navigate = useNavigate();
   const onClickCard = () => {
@@ -33,8 +32,8 @@ const Card = ({
       initial={{ scale: 1 }}
       transition={{ type: "tween", duration: 0.5 }}
       whileHover={{ scale: 1.1 }}
-      drag
-      dragConstraints={dragCon}
+      // drag
+      // dragConstraints={dragCon}
     >
       <MDBCardHeader>
         <MDBCardTitle>{title}</MDBCardTitle>

@@ -42,31 +42,31 @@ const Home = () => {
           title="Products"
           description="Start purchase"
           link="/products/"
-          dragCon={constrainRefCard}
+          // dragCon={constrainRefCard}
         />
         <Card
           title="My Profile"
           description="Go to your profile"
           link="/user/profile/"
-          dragCon={constrainRefCard}
+          // dragCon={constrainRefCard}
         />
         <Card
           title="My Orders"
           description="Check your orders"
           link="/user/orders/"
-          dragCon={constrainRefCard}
+          // dragCon={constrainRefCard}
         />
         <Card
           title="My Cart"
           description="Go to your cart"
           link="/cart/"
-          dragCon={constrainRefCard}
+          // dragCon={constrainRefCard}
         />
         <Card
           title="Customer service"
           description="Contact us"
           link="/contactus/"
-          dragCon={constrainRefCard}
+          // dragCon={constrainRefCard}
         />
       </div>
       
