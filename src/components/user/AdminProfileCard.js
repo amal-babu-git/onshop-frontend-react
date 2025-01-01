@@ -24,6 +24,9 @@ const AdminProfileCard = () => {
           <p className="text-darker">
             You are an admin user, you can login to admin dashboard
           </p>
+          <p>Use this sample username and password</p>
+          <p>Username: lucy123</p>
+          <p>Password: lucy123</p>
           <MDBBtn active={true} href={ADMIN} target="_blank">
             Go to admin dashboard
           </MDBBtn>
